@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NashikHomes Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#C9A84C;--gold-lt:#F0D98B;--gold-dk:#8B6914;
+  --dark:#080810;--dark2:#0F0F1A;--dark3:#151522;
+  --surf:#1A1A28;--surf2:#212130;--surf3:#28283A;
+  --text:#F0EBE0;--text2:#A89F92;--text3:#56524A;
+  --bdr:rgba(201,168,76,0.25);--bdr2:rgba(201,168,76,0.1);
+  --green:#27AE60;--red:#E74C3C;--blue:#4A90D9;
+  --r:12px;--rsm:8px;--rlg:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 60%);}
+.login-box{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--rlg);width:100%;max-width:400px;padding:2.5rem;}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:2rem;justify-content:center;}
+.login-logo-mark{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dk));display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.login-logo-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--gold);}
+.login-logo-name em{color:var(--text);font-style:normal;font-weight:500;}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--text);text-align:center;margin-bottom:.4rem;}
+.login-sub{font-size:.8rem;color:var(--text3);text-align:center;margin-bottom:1.75rem;}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+.fg label{font-size:.73rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;}
+.fg input{background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:10px 13px;border-radius:var(--rsm);outline:none;transition:border-color .2s;}
+.fg input:focus{border-color:var(--gold);}
+.err-box{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#E74C3C;font-size:.78rem;padding:8px 12px;border-radius:6px;margin-bottom:1rem;display:none;}
+.btn-login{background:linear-gradient(135deg,var(--gold),var(--gold-dk));color:var(--dark);font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:700;border:none;padding:11px;border-radius:var(--rsm);cursor:pointer;width:100%;transition:all .2s;margin-top:.5rem;}
+.btn-login:hover{filter:brightness(1.1);}
+.back-link{display:block;text-align:center;margin-top:1rem;font-size:.78rem;color:var(--text3);text-decoration:none;cursor:pointer;}
+.back-link:hover{color:var(--gold);}
+
+/* ADMIN PANEL */
+.adm-wrap{display:none;min-height:100vh;}
+.adm-nav{background:var(--dark2);border-bottom:1px solid var(--bdr);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:62px;}
+.adm-nav-logo{display:flex;align-items:center;gap:8px;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--gold);}
+.adm-nav-logo em{color:var(--text);font-style:normal;font-weight:500;}
+.adm-nav-right{display:flex;align-items:center;gap:.75rem;}
+.adm-user{font-size:.8rem;color:var(--text2);}
+.btn-logout{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#E74C3C;font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;}
+.btn-logout:hover{background:rgba(231,76,60,.2);}
+.btn-home{background:transparent;border:1px solid var(--bdr);color:var(--gold);font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;text-decoration:none;}
+.btn-home:hover{background:rgba(201,168,76,.1);}
+.adm-body{max-width:960px;margin:0 auto;padding:2rem 1.5rem;}
+.adm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card{background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--r);padding:1.25rem;text-align:center;}
+.stat-card-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-card-lbl{font-size:.72rem;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
+.adm-tabs{display:flex;border-bottom:1px solid var(--bdr2);margin-bottom:1.5rem;}
+.adm-tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;padding:10px 20px;cursor:pointer;transition:all .2s;}
+.adm-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-grid .full{grid-column:1/-1;}
+.fg2{display:flex;flex-direction:column;gap:6px;margin-bottom:.85rem;}
+.fg2 label{font-size:.73rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;}
+.fg2 input,.fg2 select,.fg2 textarea{background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:9px 13px;border-radius:var(--rsm);outline:none;transition:border-color .2s;}
+.fg2 input:focus,.fg2 select:focus,.fg2 textarea:focus{border-color:var(--gold);}
+.fg2 select option{background:var(--dark2);}
+.fg2 textarea{resize:vertical;min-height:80px;}
+.btn-add{background:linear-gradient(135deg,var(--gold),var(--gold-dk));color:var(--dark);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:700;border:none;padding:10px 26px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;}
+.btn-add:hover{filter:brightness(1.1);}
+.btn-can{background:transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;border:1px solid rgba(255,255,255,.1);padding:10px 24px;border-radius:var(--rsm);cursor:pointer;}
+.prop-list{display:flex;flex-direction:column;gap:.75rem;}
+.prop-item{background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s;}
+.prop-item:hover{border-color:var(--bdr);}
+.prop-img{width:60px;height:60px;border-radius:8px;object-fit:cover;background:var(--surf2);flex-shrink:0;}
+.prop-info{flex:1;}
+.prop-title{font-weight:600;font-size:.9rem;color:var(--text);}
+.prop-sub{font-size:.76rem;color:var(--text2);margin-top:3px;}
+.prop-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.badge-rent{background:rgba(10,35,20,.9);color:#2ECC71;border:1px solid rgba(46,204,113,.3);}
+.badge-sale{background:rgba(35,10,10,.9);color:#FF7675;border:1px solid rgba(255,118,117,.3);}
+.prop-actions{display:flex;gap:.5rem;flex-shrink:0;}
+.btn-edit{background:rgba(74,144,217,.1);border:1px solid rgba(74,144,217,.3);color:var(--blue);font-size:.75rem;font-weight:600;padding:5px 13px;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;}
+.btn-edit:hover{background:rgba(74,144,217,.2);}
+.btn-del{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#E74C3C;font-size:.75rem;font-weight:600;padding:5px 13px;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;}
+.btn-del:hover{background:rgba(231,76,60,.2);}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--surf);border:1px solid var(--bdr);color:var(--text);font-size:.875rem;padding:10px 20px;border-radius:var(--rsm);z-index:999;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);}
+.toast.show{display:block;animation:fiu .3s ease;}
+@keyframes fiu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.settings-wrap{max-width:480px;}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr;}.prop-item{flex-wrap:wrap;}}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN PAGE -->
+<div class="login-wrap" id="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-mark">🏠</div>
+      <div class="login-logo-name">Nashik<em>Homes</em></div>
+    </div>
+    <div class="login-title">Admin Panel</div>
+    <div class="login-sub">Sign in to manage your listings</div>
+    <div class="err-box" id="login-err"></div>
+    <div class="fg"><label>Email</label><input type="email" id="login-email" placeholder="admin@nashikhomes.in" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <div class="fg"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <button class="btn-login" onclick="doLogin()">Sign In to Admin</button>
+    <a class="back-link" href="/">← Back to NashikHomes</a>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="adm-wrap" id="adm-wrap">
+  <div class="adm-nav">
+    <div class="adm-nav-logo">🏠 Nashik<em>Homes</em> <span style="font-size:.7rem;color:var(--text3);margin-left:6px;font-family:'Outfit',sans-serif;">Admin</span></div>
+    <div class="adm-nav-right">
+      <span class="adm-user" id="adm-user-email"></span>
+      <a class="btn-home" href="/">← Website</a>
+      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="adm-body">
+    <!-- STATS -->
+    <div class="adm-stats">
+      <div class="stat-card"><div class="stat-card-num" id="s-total">0</div><div class="stat-card-lbl">Total</div></div>
+      <div class="stat-card"><div class="stat-card-num" id="s-rent">0</div><div class="stat-card-lbl">For Rent</div></div>
+      <div class="stat-card"><div class="stat-card-num" id="s-sale">0</div><div class="stat-card-lbl">For Sale</div></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="adm-tabs">
+      <button class="adm-tab active" onclick="aTab('add')" id="at-add">➕ Add Property</button>
+      <button class="adm-tab" onclick="aTab('listings')" id="at-listings">📋 Manage Listings</button>
+      <button class="adm-tab" onclick="aTab('settings')" id="at-settings">⚙️ Settings</button>
+    </div>
+
+    <!-- ADD PROPERTY -->
+    <div id="tab-add">
+      <div class="form-grid">
+        <div class="fg2 full"><label>Property Title</label><input type="text" id="f-title" placeholder="e.g. Spacious 2BHK in Nashik Road"/></div>
+        <div class="fg2"><label>Type</label><select id="f-type"><option value="rent">For Rent</option><option value="sale">For Sale</option></select></div>
+        <div class="fg2"><label>Price (₹)</label><input type="number" id="f-price" placeholder="12000"/></div>
+        <div class="fg2"><label>BHK</label><select id="f-bhk"><option value="1">1 BHK</option><option value="2">2 BHK</option><option value="3">3 BHK</option><option value="4">4+ BHK</option></select></div>
+        <div class="fg2"><label>Area (sq.ft)</label><input type="number" id="f-area" placeholder="850"/></div>
+        <div class="fg2"><label>Location</label><input type="text" id="f-location" placeholder="Nashik Road, Nashik"/></div>
+        <div class="fg2"><label>Bathrooms</label><select id="f-bath"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+        <div class="fg2"><label>Parking</label><select id="f-parking"><option>Yes</option><option>No</option></select></div>
+        <div class="fg2"><label>Furnishing</label><select id="f-furnish"><option>Fully Furnished</option><option>Semi Furnished</option><option>Unfurnished</option></select></div>
+        <div class="fg2"><label>Contact (WhatsApp)</label><input type="text" id="f-contact" placeholder="91XXXXXXXXXX"/></div>
+        <div class="fg2 full"><label>Image URL</label><input type="text" id="f-img" placeholder="https://images.unsplash.com/..."/></div>
+        <div class="fg2 full"><label>Description</label><textarea id="f-desc" placeholder="Describe the property in detail..."></textarea></div>
+      </div>
+      <div style="display:flex;gap:.75rem;margin-top:.5rem;">
+        <button class="btn-add" id="f-sub-btn" onclick="submitProp()">Add Property</button>
+        <button class="btn-can" id="f-can-btn" onclick="resetForm()" style="display:none;">Cancel Edit</button>
+      </div>
+    </div>
+
+    <!-- LISTINGS -->
+    <div id="tab-listings" style="display:none;">
+      <div class="prop-list" id="prop-list"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="tab-settings" style="display:none;">
+      <div class="settings-wrap">
+        <div class="fg2"><label>Default WhatsApp Number</label><input type="text" id="s-wa" placeholder="91XXXXXXXXXX"/></div>
+        <div class="fg2"><label>Brand Name</label><input type="text" id="s-brand" placeholder="NashikHomes"/></div>
+        <button class="btn-add" onclick="saveSettings()" style="margin-top:.5rem;">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCcC7bl2xSTYPgxGqeaA9p_LHN-jg_e-6s",
+  authDomain: "nashikhomes-7d9bc.firebaseapp.com",
+  projectId: "nashikhomes-7d9bc",
+  storageBucket: "nashikhomes-7d9bc.firebasestorage.app",
+  messagingSenderId: "203868961078",
+  appId: "1:203868961078:web:0f6f7cc80b87b1a11d5b97"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, user => {
+  if(user){
+    document.getElementById('login-page').style.display='none';
+    document.getElementById('adm-wrap').style.display='block';
+    document.getElementById('adm-user-email').textContent=user.email;
+    renderStats();
+    loadSettings();
+  } else {
+    document.getElementById('login-page').style.display='flex';
+    document.getElementById('adm-wrap').style.display='none';
+  }
+});
+
+window.doLogin = async function(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  const errEl=document.getElementById('login-err');
+  errEl.style.display='none';
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+  } catch(e){
+    errEl.textContent=e.code==='auth/invalid-credential'?'Incorrect email or password.':'Login failed. Try again.';
+    errEl.style.display='block';
+  }
+};
+
+window.doLogout = async function(){
+  await signOut(auth);
+  showToast('Signed out.');
+};
+</script>
+
+<script>
+const DEF=[
+  {id:1,title:'Spacious 2BHK Apartment',type:'rent',price:12000,bhk:'2',area:850,location:'Nashik Road, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75&auto=format',desc:'Beautiful 2BHK on 3rd floor with balcony.'},
+  {id:2,title:'3BHK Independent House',type:'sale',price:4500000,bhk:'3',area:1450,location:'Gangapur Road, Nashik',bath:3,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=75&auto=format',desc:'Prime 3BHK bungalow with garden.'},
+  {id:3,title:'1BHK Modern Flat',type:'rent',price:7500,bhk:'1',area:480,location:'Deolali Camp, Nashik',bath:1,parking:'No',furnish:'Fully Furnished',contact:'919999999999',img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=75&auto=format',desc:'Ready to move fully furnished 1BHK.'},
+  {id:4,title:'Commercial Shop Space',type:'rent',price:25000,bhk:'1',area:350,location:'Mahamarg, Nashik',bath:1,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&q=75&auto=format',desc:'Prime commercial space on main road.'},
+  {id:5,title:'Luxury 4BHK Villa',type:'sale',price:9800000,bhk:'4',area:2800,location:'Dindori Road, Nashik',bath:4,parking:'Yes',furnish:'Fully Furnished',contact:'919999999999',img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=75&auto=format',desc:'Luxurious 4BHK villa with swimming pool.'},
+  {id:6,title:'2BHK Society Flat',type:'sale',price:3200000,bhk:'2',area:960,location:'Satpur, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=75&auto=format',desc:'Well-maintained 2BHK in premium society.'},
+];
+let P=(()=>{try{const d=localStorage.getItem('nh2_props');return d?JSON.parse(d):DEF;}catch(e){return DEF;}})();
+let defWA='919999999999',editId=null;
+const save=()=>{try{localStorage.setItem('nh2_props',JSON.stringify(P));}catch(e){}};
+const fp=(p,type)=>{if(type==='rent')return'₹'+p.toLocaleString('en-IN')+'/mo';if(p>=10000000)return'₹'+(p/10000000).toFixed(2)+' Cr';if(p>=100000)return'₹'+(p/100000).toFixed(1)+' L';return'₹'+p.toLocaleString('en-IN');};
+
+function loadSettings(){
+  try{const d=localStorage.getItem('nh2_settings');if(d){const s=JSON.parse(d);defWA=s.wa||defWA;if(s.wa)document.getElementById('s-wa').value=s.wa;if(s.brand)document.getElementById('s-brand').value=s.brand;}}catch(e){}
+}
+
+function renderStats(){
+  const r=P.filter(p=>p.type==='rent').length,s=P.filter(p=>p.type==='sale').length;
+  document.getElementById('s-total').textContent=P.length;
+  document.getElementById('s-rent').textContent=r;
+  document.getElementById('s-sale').textContent=s;
+}
+
+function aTab(tab){
+  ['add','listings','settings'].forEach(tt=>{
+    document.getElementById('tab-'+tt).style.display=tt===tab?'block':'none';
+    document.getElementById('at-'+tt).classList.toggle('active',tt===tab);
+  });
+  if(tab==='listings')renderList();
+}
+
+function submitProp(){
+  const title=document.getElementById('f-title').value.trim(),price=parseInt(document.getElementById('f-price').value);
+  if(!title||!price){showToast('Fill required fields!');return;}
+  const p={id:editId||Date.now(),title,type:document.getElementById('f-type').value,price,bhk:document.getElementById('f-bhk').value,area:parseInt(document.getElementById('f-area').value)||0,location:document.getElementById('f-location').value.trim(),bath:parseInt(document.getElementById('f-bath').value),parking:document.getElementById('f-parking').value,furnish:document.getElementById('f-furnish').value,contact:document.getElementById('f-contact').value.trim()||defWA,img:document.getElementById('f-img').value.trim(),desc:document.getElementById('f-desc').value.trim()};
+  if(editId){const i=P.findIndex(x=>x.id===editId);if(i>=0)P[i]=p;showToast('Property updated! ✅');}
+  else{P.push(p);showToast('Property added! ✅');}
+  save();resetForm();renderStats();
+}
+
+function resetForm(){
+  ['f-title','f-price','f-area','f-location','f-contact','f-img','f-desc'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  editId=null;
+  document.getElementById('f-sub-btn').textContent='Add Property';
+  document.getElementById('f-can-btn').style.display='none';
+}
+
+function editProp(id){
+  const p=P.find(x=>x.id===id);if(!p)return;
+  editId=id;
+  document.getElementById('f-title').value=p.title;document.getElementById('f-type').value=p.type;document.getElementById('f-price').value=p.price;document.getElementById('f-bhk').value=p.bhk;document.getElementById('f-area').value=p.area;document.getElementById('f-location').value=p.location;document.getElementById('f-bath').value=p.bath;document.getElementById('f-parking').value=p.parking;document.getElementById('f-furnish').value=p.furnish;document.getElementById('f-contact').value=p.contact;document.getElementById('f-img').value=p.img||'';document.getElementById('f-desc').value=p.desc;
+  document.getElementById('f-sub-btn').textContent='Update Property';
+  document.getElementById('f-can-btn').style.display='inline-block';
+  aTab('add');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function delProp(id){
+  if(!confirm('Delete this property?'))return;
+  P=P.filter(p=>p.id!==id);save();renderList();renderStats();showToast('Deleted.');
+}
+
+function renderList(){
+  const el=document.getElementById('prop-list');
+  if(!P.length){el.innerHTML='<p style="color:var(--text2);text-align:center;padding:3rem;">No properties yet.</p>';return;}
+  el.innerHTML=P.map(p=>`<div class="prop-item">
+    <img class="prop-img" src="${p.img||''}" onerror="this.style.display='none'" alt="${p.title}"/>
+    <div class="prop-info">
+      <div class="prop-title">${p.title}</div>
+      <div class="prop-sub">📍 ${p.location} · ${fp(p.price,p.type)}</div>
+      <span class="prop-badge badge-${p.type}">${p.type==='rent'?'For Rent':'For Sale'}</span>
+    </div>
+    <div class="prop-actions">
+      <button class="btn-edit" onclick="editProp(${p.id})">✏️ Edit</button>
+      <button class="btn-del" onclick="delProp(${p.id})">🗑️ Delete</button>
+    </div>
+  </div>`).join('');
+}
+
+function saveSettings(){
+  const wa=document.getElementById('s-wa').value.trim(),brand=document.getElementById('s-brand').value.trim();
+  if(wa)defWA=wa;
+  localStorage.setItem('nh2_settings',JSON.stringify({wa:defWA,brand}));
+  showToast('Settings saved! ✅');
+}
+
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
+</script>
+</body>
+</html>
