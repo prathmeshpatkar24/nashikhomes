@@ -33,18 +33,18 @@ nav{position:sticky;top:0;z-index:200;background:rgba(8,8,16,0.94);backdrop-filt
 .lang-sw{display:flex;gap:3px;background:var(--surf2);border-radius:8px;padding:3px;}
 .lang-b{border:none;background:transparent;color:var(--text2);font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;letter-spacing:0.5px;}
 .lang-b.active{background:var(--gold);color:var(--dark);}
-.adm-btn{border:1px solid var(--bdr);background:transparent;color:var(--gold);font-size:0.78rem;font-weight:600;padding:7px 16px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;}
-.adm-btn:hover{background:rgba(201,168,76,0.1);}
+
+
 .hero{position:relative;min-height:90vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;z-index:0;}
-.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.45) saturate(0.85);}
-.hero-grad{position:absolute;inset:0;background:linear-gradient(110deg,rgba(8,8,16,0.88) 0%,rgba(8,8,16,0.55) 45%,rgba(8,8,16,0.15) 100%);}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.65) saturate(0.9);}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(110deg,rgba(8,8,16,0.82) 0%,rgba(8,8,16,0.42) 45%,rgba(8,8,16,0.08) 100%);}
 .hero-fade{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,var(--dark),transparent);z-index:1;}
 .hero-content{position:relative;z-index:2;max-width:1260px;margin:0 auto;padding:5rem 1.5rem 3rem;width:100%;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bdr);color:var(--gold);font-size:0.68rem;font-weight:700;letter-spacing:3px;padding:6px 16px 6px 10px;border-radius:30px;margin-bottom:1.5rem;text-transform:uppercase;background:rgba(201,168,76,0.06);}
 .hero-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7.5vw,5.8rem);font-weight:700;line-height:1.06;margin-bottom:1rem;color:var(--text);max-width:680px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:700;line-height:1.06;margin-bottom:1rem;color:var(--text);max-width:680px;}
 .hero h1 span{color:var(--gold);font-style:italic;}
 .hero-sub{font-size:1.05rem;color:var(--text2);max-width:460px;margin-bottom:2.5rem;line-height:1.75;font-weight:300;}
 .hero-nums{display:flex;gap:3rem;margin-bottom:3rem;flex-wrap:wrap;}
@@ -189,6 +189,35 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   .hero-nums{gap:1.75rem;}
   .foot-inner{flex-direction:column;text-align:center;}
 }
+
+.auth-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:700;align-items:center;justify-content:center;padding:1rem;}
+.auth-ov.open{display:flex;}
+.auth-box{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--rlg);width:100%;max-width:420px;overflow:hidden;}
+.auth-hdr{padding:1.25rem 1.5rem;border-bottom:1px solid var(--bdr2);display:flex;justify-content:space-between;align-items:center;}
+.auth-hdr h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);}
+.auth-tabs-wrap{display:flex;border-bottom:1px solid var(--bdr2);}
+.auth-tab{flex:1;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;padding:11px;cursor:pointer;transition:all .2s;}
+.auth-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.auth-body{padding:1.5rem;display:flex;flex-direction:column;gap:.85rem;}
+.auth-input{background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:10px 13px;border-radius:var(--rsm);outline:none;transition:border-color .2s;width:100%;}
+.auth-input:focus{border-color:var(--gold);}
+.auth-input::placeholder{color:var(--text3);}
+.auth-err{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#E74C3C;font-size:.78rem;padding:8px 12px;border-radius:6px;display:none;}
+.auth-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dk));color:var(--dark);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:700;border:none;padding:11px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;width:100%;margin-top:.25rem;}
+.auth-btn:hover{filter:brightness(1.1);}
+.signin-btn{border:1px solid var(--bdr);background:transparent;color:var(--gold);font-size:.78rem;font-weight:600;padding:7px 16px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;white-space:nowrap;}
+.signin-btn:hover{background:rgba(201,168,76,.1);}
+.user-wrap{position:relative;}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dk));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--dark);cursor:pointer;border:2px solid var(--bdr);}
+.user-dd{position:absolute;top:42px;right:0;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);min-width:200px;overflow:hidden;display:none;z-index:300;box-shadow:0 8px 30px rgba(0,0,0,.5);}
+.user-dd.open{display:block;}
+.user-dd-info{padding:.85rem 1rem;border-bottom:1px solid var(--bdr2);}
+.user-dd-name{font-size:.85rem;font-weight:600;color:var(--text);}
+.user-dd-email{font-size:.72rem;color:var(--text2);margin-top:2px;word-break:break-all;}
+.user-dd-btn{width:100%;background:transparent;border:none;color:var(--text2);font-family:'Outfit',sans-serif;font-size:.82rem;padding:.7rem 1rem;cursor:pointer;text-align:left;transition:all .2s;display:block;}
+.user-dd-btn:hover{background:var(--surf2);color:var(--text);}
+.user-dd-btn.logout{color:#E74C3C;}
+.user-dd-btn.logout:hover{background:rgba(231,76,60,.1);}
 </style>
 </head>
 <body>
@@ -211,7 +240,19 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
         <button class="lang-b" onclick="setLang('hi')">HI</button>
         <button class="lang-b" onclick="setLang('mr')">MR</button>
       </div>
-      <button class="adm-btn" onclick="showAdmin()" data-key="admin_btn">Admin</button>
+      <button id="nav-signin-btn" class="signin-btn" onclick="showAuth()">Sign In</button>
+      <div class="user-wrap" id="user-wrap" style="display:none;">
+        <div class="user-avatar" id="user-avatar" onclick="toggleUserDD()">U</div>
+        <div class="user-dd" id="user-dd">
+          <div class="user-dd-info">
+            <div class="user-dd-name" id="user-dd-name">User</div>
+            <div class="user-dd-email" id="user-dd-email"></div>
+          </div>
+          
+          <button class="user-dd-btn logout" onclick="signOutUser()">🚪 Sign Out</button>
+        </div>
+      </div>
+      <button class="adm-btn" id="nav-adm-btn" onclick="showAdmin()" style="display:none;">Admin</button>
     </div>
   </div>
 </nav>
@@ -398,11 +439,59 @@ const save=()=>{try{localStorage.setItem('nh2_props',JSON.stringify(P));}catch(e
 const t=k=>LANG[lang][k]||LANG.en[k]||k;
 const fp=(p,type)=>{if(type==='rent')return'₹'+p.toLocaleString('en-IN')+'/mo';if(p>=10000000)return'₹'+(p/10000000).toFixed(2)+' Cr';if(p>=100000)return'₹'+(p/100000).toFixed(1)+' L';return'₹'+p.toLocaleString('en-IN');};
 (()=>{try{const d=localStorage.getItem('nh2_settings');if(d){const s=JSON.parse(d);admPass=s.pass||admPass;defWA=s.wa||defWA;if(s.brand)document.getElementById('foot-brand').textContent='🏠 '+s.brand;}}catch(e){}})();
-function setLang(l){lang=l;document.querySelectorAll('.lang-b').forEach(b=>b.classList.remove('active'));document.querySelector(`.lang-b[onclick="setLang('${l}')"]`).classList.add('active');document.querySelectorAll('[data-key]').forEach(el=>{const k=el.getAttribute('data-key');if(el.tagName!=='INPUT'&&el.tagName!=='TEXTAREA'&&el.tagName!=='SELECT')el.innerHTML=t(k);});renderListings();}
+function setLang(l){lang=l;document.querySelectorAll('.lang-b').forEach(b=>b.classList.remove('active'));document.querySelector(`.lang-b[onclick="setLang('${l}')"]`).classList.add('active');document.querySelectorAll('[data-key]').forEach(el=>{const k=el.getAttribute('data-key');if(el.tagName!=='INPUT'&&el.tagName!=='TEXTAREA'&&el.tagName!=='SELECT')el.innerHTML=t(k);});
+window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
+window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
+window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
+window.switchAuthTab=function(tab){
+  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
+  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
+  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
+  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
+};
+window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
+// Admin via /admin URL
+if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
+  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
+}
+document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
+renderListings();}
 function showPage(pg){document.getElementById('page-home').style.display=pg==='home'?'block':'none';document.getElementById('page-contact').style.display=pg==='contact'?'block':'none';document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));if(pg==='home')document.getElementById('nav-home').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
 function sa(a){document.getElementById('search-input').value=a;showPage('home');filterListings();}
-function filterTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+tab)?.classList.add('active');document.getElementById('filter-type').value=tab;showPage('home');renderListings();}
-function filterListings(){renderListings();}
+function filterTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+tab)?.classList.add('active');document.getElementById('filter-type').value=tab;showPage('home');
+window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
+window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
+window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
+window.switchAuthTab=function(tab){
+  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
+  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
+  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
+  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
+};
+window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
+// Admin via /admin URL
+if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
+  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
+}
+document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
+renderListings();}
+function filterListings(){
+window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
+window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
+window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
+window.switchAuthTab=function(tab){
+  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
+  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
+  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
+  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
+};
+window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
+// Admin via /admin URL
+if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
+  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
+}
+document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
+renderListings();}
 function renderListings(){
   const q=document.getElementById('search-input')?.value.toLowerCase()||'';
   const ft=document.getElementById('filter-type')?.value||'all';
@@ -422,19 +511,129 @@ function renderListings(){
 function openModal(id){const p=P.find(x=>x.id===id);if(!p)return;document.getElementById('m-title').textContent=p.title;document.getElementById('m-price').textContent=fp(p.price,p.type);document.getElementById('m-img').innerHTML=p.img?`<img src="${p.img}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover"/>`:`<span style="font-size:4rem;opacity:.3">🏠</span>`;document.getElementById('m-grid').innerHTML=`<div class="mfield"><label>Type</label><span>${t('badge_'+p.type)}</span></div><div class="mfield"><label>BHK</label><span>${p.bhk} BHK</span></div><div class="mfield"><label>Area</label><span>${p.area} sq.ft</span></div><div class="mfield"><label>Bathrooms</label><span>${p.bath}</span></div><div class="mfield"><label>Parking</label><span>${p.parking}</span></div><div class="mfield"><label>Furnishing</label><span>${p.furnish}</span></div><div class="mfield" style="grid-column:1/-1"><label>Location</label><span>📍 ${p.location}</span></div>`;document.getElementById('m-desc').textContent=p.desc;const n=p.contact||defWA;document.getElementById('m-wa').onclick=()=>openWA(`Interested in: ${p.title} at ${p.location}`,id);document.getElementById('m-call').onclick=()=>window.open('tel:+'+n);document.getElementById('modal-ov').classList.add('open');}
 function closeModal(e){if(!e||e.target===document.getElementById('modal-ov'))document.getElementById('modal-ov').classList.remove('open');}
 function openWA(msg,id){let n=defWA;if(id){const p=P.find(x=>x.id===id);if(p&&p.contact)n=p.contact;}window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`,'_blank');}
-function showAdmin(){document.getElementById('adm-ov').classList.add('open');document.getElementById('adm-login').style.display='block';document.getElementById('adm-main').style.display='none';}
-function closeAdmin(){document.getElementById('adm-ov').classList.remove('open');editId=null;}
-function adminLogin(){const v=document.getElementById('adm-pass').value;if(v===admPass){document.getElementById('adm-login').style.display='none';document.getElementById('adm-main').style.display='block';document.getElementById('adm-pass').value='';renderAList();const s=JSON.parse(localStorage.getItem('nh2_settings')||'{}');if(s.wa)document.getElementById('s-wa').value=s.wa;if(s.brand)document.getElementById('s-brand').value=s.brand;}else document.getElementById('login-err').style.display='block';}
-function aTab(tab){['add','manage','settings'].forEach(tt=>{document.getElementById('adm-'+tt).style.display=tt===tab?'block':'none';document.getElementById('at-'+tt).classList.toggle('active',tt===tab);});if(tab==='manage')renderAList();}
-function submitProp(){const title=document.getElementById('f-title').value.trim(),price=parseInt(document.getElementById('f-price').value);if(!title||!price){showToast('Fill required fields!');return;}const p={id:editId||Date.now(),title,type:document.getElementById('f-type').value,price,bhk:document.getElementById('f-bhk').value,area:parseInt(document.getElementById('f-area').value)||0,location:document.getElementById('f-location').value.trim(),bath:parseInt(document.getElementById('f-bath').value),parking:document.getElementById('f-parking').value,furnish:document.getElementById('f-furnish').value,contact:document.getElementById('f-contact').value.trim()||defWA,img:document.getElementById('f-img').value.trim(),desc:document.getElementById('f-desc').value.trim()};if(editId){const i=P.findIndex(x=>x.id===editId);if(i>=0)P[i]=p;showToast('Updated!');}else{P.push(p);showToast('Added!');}save();resetForm();renderListings();}
-function resetForm(){['f-title','f-price','f-area','f-location','f-contact','f-img','f-desc'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});editId=null;document.getElementById('f-sub-btn').textContent='Add Property';document.getElementById('f-can-btn').style.display='none';}
-function editProp(id){const p=P.find(x=>x.id===id);if(!p)return;editId=id;document.getElementById('f-title').value=p.title;document.getElementById('f-type').value=p.type;document.getElementById('f-price').value=p.price;document.getElementById('f-bhk').value=p.bhk;document.getElementById('f-area').value=p.area;document.getElementById('f-location').value=p.location;document.getElementById('f-bath').value=p.bath;document.getElementById('f-parking').value=p.parking;document.getElementById('f-furnish').value=p.furnish;document.getElementById('f-contact').value=p.contact;document.getElementById('f-img').value=p.img||'';document.getElementById('f-desc').value=p.desc;document.getElementById('f-sub-btn').textContent='Update Property';document.getElementById('f-can-btn').style.display='inline-block';aTab('add');}
-function delProp(id){if(!confirm('Delete this property?'))return;P=P.filter(p=>p.id!==id);save();renderAList();renderListings();showToast('Deleted.');}
-function renderAList(){const el=document.getElementById('adm-list');if(!P.length){el.innerHTML='<p style="color:var(--text2);text-align:center;padding:2rem;">No properties.</p>';return;}el.innerHTML=P.map(p=>`<div class="ali"><span style="font-size:1.4rem;">${p.type==='rent'?'🏠':'🏢'}</span><div class="ali-info"><div class="ali-t">${p.title}</div><div class="ali-s">${p.location} · ${fp(p.price,p.type)}</div></div><div style="display:flex;gap:.4rem;"><button class="btn-ed" onclick="editProp(${p.id})">Edit</button><button class="btn-dl" onclick="delProp(${p.id})">Delete</button></div></div>`).join('');}
-function saveSettings(){const wa=document.getElementById('s-wa').value.trim(),brand=document.getElementById('s-brand').value.trim(),np=document.getElementById('s-pass').value;if(wa)defWA=wa;if(np)admPass=np;if(brand)document.getElementById('foot-brand').textContent='🏠 '+brand;localStorage.setItem('nh2_settings',JSON.stringify({wa:defWA,brand,pass:admPass}));showToast('Settings saved!');}
+);if(tab==='manage')renderAList();}
+));showToast('Settings saved!');}
 function sendContact(){const name=document.getElementById('c-name').value.trim(),msg=document.getElementById('c-msg').value.trim();if(!name||!msg){showToast('Fill all fields.');return;}openWA(`Hi! I'm ${name}. ${msg}`);showToast('Opening WhatsApp...');}
 function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
+
+window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
+window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
+window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
+window.switchAuthTab=function(tab){
+  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
+  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
+  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
+  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
+};
+window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
+// Admin via /admin URL
+if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
+  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
+}
+document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
 renderListings();
+</script>
+
+<!-- AUTH MODAL -->
+<div class="auth-ov" id="auth-ov" onclick="closeAuthOv(event)">
+  <div class="auth-box">
+    <div class="auth-hdr">
+      <h2>🏠 NashikHomes</h2>
+      <button class="mclose" onclick="closeAuth()">×</button>
+    </div>
+    <div class="auth-tabs-wrap">
+      <button class="auth-tab active" id="auth-tab-signin" onclick="switchAuthTab('signin')">Sign In</button>
+      <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+    <!-- SIGN IN -->
+    <div id="auth-signin" class="auth-body">
+      <div class="auth-err" id="signin-err"></div>
+      <input type="email" class="auth-input" id="signin-email" placeholder="Email address"/>
+      <input type="password" class="auth-input" id="signin-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doSignIn()"/>
+      <button class="auth-btn" onclick="doSignIn()">Sign In</button>
+      <p style="font-size:.75rem;color:var(--text3);text-align:center;">Don't have an account? <a onclick="switchAuthTab('signup')" style="color:var(--gold);cursor:pointer;">Sign Up</a></p>
+    </div>
+    <!-- SIGN UP -->
+    <div id="auth-signup" class="auth-body" style="display:none;">
+      <div class="auth-err" id="signup-err"></div>
+      <input type="text" class="auth-input" id="signup-name" placeholder="Full Name"/>
+      <input type="email" class="auth-input" id="signup-email" placeholder="Email address"/>
+      <input type="password" class="auth-input" id="signup-pass" placeholder="Password (min 6 chars)" onkeydown="if(event.key==='Enter')doSignUp()"/>
+      <button class="auth-btn" onclick="doSignUp()">Create Account</button>
+      <p style="font-size:.75rem;color:var(--text3);text-align:center;">Already have an account? <a onclick="switchAuthTab('signin')" style="color:var(--gold);cursor:pointer;">Sign In</a></p>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCcC7bl2xSTYPgxGqeaA9p_LHN-jg_e-6s",
+  authDomain: "nashikhomes-7d9bc.firebaseapp.com",
+  projectId: "nashikhomes-7d9bc",
+  storageBucket: "nashikhomes-7d9bc.firebasestorage.app",
+  messagingSenderId: "203868961078",
+  appId: "1:203868961078:web:0f6f7cc80b87b1a11d5b97"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, user => {
+  if(user){
+    document.getElementById('nav-signin-btn').style.display='none';
+    document.getElementById('nav-adm-btn').style.display='none';
+    document.getElementById('user-wrap').style.display='flex';
+    const initials = (user.displayName||user.email||'U').charAt(0).toUpperCase();
+    document.getElementById('user-avatar').textContent=initials;
+    document.getElementById('user-dd-name').textContent=user.displayName||'User';
+    document.getElementById('user-dd-email').textContent=user.email;
+  } else {
+    document.getElementById('nav-signin-btn').style.display='block';
+    document.getElementById('nav-adm-btn').style.display='block';
+    document.getElementById('user-wrap').style.display='none';
+  }
+});
+
+window.doSignIn = async function(){
+  const email=document.getElementById('signin-email').value.trim();
+  const pass=document.getElementById('signin-pass').value;
+  const errEl=document.getElementById('signin-err');
+  errEl.style.display='none';
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+    closeAuth();
+    showToast('Welcome back! 👋');
+  } catch(e){
+    errEl.textContent=e.code==='auth/invalid-credential'?'Incorrect email or password.':e.message;
+    errEl.style.display='block';
+  }
+};
+
+window.doSignUp = async function(){
+  const name=document.getElementById('signup-name').value.trim();
+  const email=document.getElementById('signup-email').value.trim();
+  const pass=document.getElementById('signup-pass').value;
+  const errEl=document.getElementById('signup-err');
+  errEl.style.display='none';
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pass);
+    if(name) await updateProfile(cred.user,{displayName:name});
+    closeAuth();
+    showToast('Account created! Welcome 🎉');
+  } catch(e){
+    errEl.textContent=e.code==='auth/email-already-in-use'?'Email already registered.':e.code==='auth/weak-password'?'Password must be at least 6 characters.':e.message;
+    errEl.style.display='block';
+  }
+};
+
+window.signOutUser = async function(){
+  await signOut(auth);
+  document.getElementById('user-dd').classList.remove('open');
+  showToast('Signed out successfully.');
+};
 </script>
 </body>
 </html>
