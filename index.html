@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GharBazaar – Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --gold:#C9A84C;--gold-light:#F0D98B;--gold-dark:#8B6914;
+    --dark:#0F0F0F;--dark2:#1A1A1A;--dark3:#242424;
+    --surface:#1E1E1E;--surface2:#2A2A2A;
+    --text:#F5F0E8;--text2:#B8AFA0;--text3:#7A7368;
+    --border:rgba(201,168,76,0.2);--border2:rgba(201,168,76,0.08);
+    --green:#2ECC71;--red:#E74C3C;--blue:#3498DB;
+    --radius:12px;--radius-sm:8px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(15,15,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem;}
+  .logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold);letter-spacing:1px;cursor:pointer;white-space:nowrap;}
+  .logo span{color:var(--text);font-weight:500;}
+  .nav-links{display:flex;gap:0.25rem;align-items:center;}
+  .nav-links a{color:var(--text2);font-size:0.875rem;font-weight:500;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .2s;text-decoration:none;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,168,76,0.08);}
+  .lang-switcher{display:flex;gap:4px;background:var(--surface2);border-radius:8px;padding:3px;}
+  .lang-btn{border:none;background:transparent;color:var(--text2);font-size:0.75rem;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .lang-btn.active{background:var(--gold);color:var(--dark);}
+  .admin-btn{border:1px solid var(--border);background:transparent;color:var(--gold);font-size:0.8rem;font-weight:600;padding:7px 16px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .admin-btn:hover{background:rgba(201,168,76,0.1);}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--dark2) 0%,var(--dark3) 100%);padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid var(--border2);}
+  .hero-tag{display:inline-block;background:rgba(201,168,76,0.12);border:1px solid var(--border);color:var(--gold);font-size:0.75rem;font-weight:600;letter-spacing:2px;padding:5px 14px;border-radius:20px;margin-bottom:1.25rem;text-transform:uppercase;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.15;margin-bottom:0.75rem;color:var(--text);}
+  .hero h1 span{color:var(--gold);}
+  .hero p{font-size:1rem;color:var(--text2);max-width:500px;margin:0 auto 2rem;}
+
+  /* SEARCH BAR */
+  .search-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;max-width:780px;margin:0 auto;}
+  .search-bar input,.search-bar select{background:var(--surface2);border:1px solid rgba(255,255,255,0.08);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.875rem;padding:9px 14px;border-radius:var(--radius-sm);outline:none;transition:border-color .2s;}
+  .search-bar input{flex:1;min-width:160px;}
+  .search-bar select{min-width:120px;}
+  .search-bar input:focus,.search-bar select:focus{border-color:var(--gold);}
+  .search-bar select option{background:var(--dark2);}
+  .search-btn{background:var(--gold);color:var(--dark);font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:700;border:none;padding:9px 22px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;white-space:nowrap;}
+  .search-btn:hover{background:var(--gold-light);}
+
+  /* TABS */
+  .section-tabs{display:flex;justify-content:center;gap:0.5rem;padding:2rem 2rem 1rem;flex-wrap:wrap;}
+  .tab-btn{background:transparent;border:1px solid var(--border);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:600;padding:9px 24px;border-radius:20px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+  .tab-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+  .tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+  .count-badge{background:rgba(255,255,255,0.15);color:inherit;font-size:0.7rem;padding:2px 7px;border-radius:10px;}
+  .tab-btn.active .count-badge{background:rgba(0,0,0,0.2);}
+
+  /* LISTINGS */
+  .listings-section{max-width:1200px;margin:0 auto;padding:0 2rem 4rem;}
+  .listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:1.5rem;}
+  .property-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:all .3s;cursor:pointer;}
+  .property-card:hover{border-color:var(--border);transform:translateY(-3px);}
+  .card-img{height:190px;background:var(--surface2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .card-img img{width:100%;height:100%;object-fit:cover;}
+  .card-img-placeholder{font-size:3rem;color:var(--text3);}
+  .card-badge{position:absolute;top:12px;left:12px;padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+  .badge-rent{background:#1A4D2E;color:#2ECC71;border:1px solid rgba(46,204,113,0.3);}
+  .badge-sale{background:#4D1A1A;color:#E74C3C;border:1px solid rgba(231,76,60,0.3);}
+  .card-price{position:absolute;bottom:12px;right:12px;background:rgba(15,15,15,0.9);color:var(--gold);font-weight:700;font-size:0.9rem;padding:4px 12px;border-radius:20px;border:1px solid var(--border);}
+  .card-body{padding:1rem 1.25rem;}
+  .card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3;}
+  .card-location{font-size:0.8rem;color:var(--text2);display:flex;align-items:center;gap:4px;margin-bottom:0.75rem;}
+  .card-features{display:flex;gap:1rem;font-size:0.78rem;color:var(--text2);border-top:1px solid var(--border2);padding-top:0.75rem;margin-top:0.5rem;}
+  .card-feature{display:flex;align-items:center;gap:4px;}
+  .card-actions{display:flex;gap:0.5rem;margin-top:0.75rem;}
+  .btn-details{flex:1;background:rgba(201,168,76,0.1);border:1px solid var(--border);color:var(--gold);font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;padding:7px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+  .btn-details:hover{background:rgba(201,168,76,0.2);}
+  .btn-wa{background:#1B5E20;border:1px solid rgba(46,204,113,0.3);color:#2ECC71;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;padding:7px 14px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+  .btn-wa:hover{background:#2E7D32;}
+  .no-results{text-align:center;padding:4rem;color:var(--text2);}
+  .no-results .icon{font-size:3rem;margin-bottom:1rem;color:var(--text3);}
+
+  /* MODAL – PROPERTY DETAILS */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);max-width:600px;width:100%;max-height:90vh;overflow-y:auto;}
+  .modal-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
+  .modal-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text);}
+  .close-btn{background:transparent;border:none;color:var(--text2);font-size:1.5rem;cursor:pointer;line-height:1;padding:2px 6px;border-radius:4px;}
+  .close-btn:hover{color:var(--text);background:var(--surface2);}
+  .modal-img{height:240px;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .modal-img img{width:100%;height:100%;object-fit:cover;}
+  .modal-body{padding:1.5rem;}
+  .modal-price{font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:1rem;}
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem;}
+  .modal-field{background:var(--surface2);padding:0.75rem;border-radius:var(--radius-sm);}
+  .modal-field label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--text3);display:block;margin-bottom:3px;}
+  .modal-field span{font-size:0.9rem;color:var(--text);font-weight:500;}
+  .modal-desc{font-size:0.875rem;color:var(--text2);line-height:1.7;margin-bottom:1.25rem;}
+  .modal-footer{display:flex;gap:0.75rem;padding:1rem 1.5rem;border-top:1px solid var(--border2);}
+  .btn-contact-wa{flex:1;background:#1B5E20;border:1px solid rgba(46,204,113,0.3);color:#2ECC71;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:600;padding:10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+  .btn-contact-wa:hover{background:#2E7D32;}
+  .btn-contact-call{flex:1;background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.3);color:#3498DB;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:600;padding:10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+  .btn-contact-call:hover{background:rgba(52,152,219,0.2);}
+
+  /* ADMIN PANEL */
+  .admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:600;overflow-y:auto;}
+  .admin-overlay.open{display:block;}
+  .admin-panel{max-width:900px;margin:2rem auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .admin-header{background:var(--dark2);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+  .admin-header h2{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.25rem;}
+  .admin-tabs{display:flex;gap:0;border-bottom:1px solid var(--border2);}
+  .admin-tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:600;padding:12px 20px;cursor:pointer;transition:all .2s;}
+  .admin-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+  .admin-content{padding:1.5rem;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .form-group{display:flex;flex-direction:column;gap:6px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-group label{font-size:0.78rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;}
+  .form-group input,.form-group select,.form-group textarea{background:var(--surface2);border:1px solid rgba(255,255,255,0.08);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.875rem;padding:9px 13px;border-radius:var(--radius-sm);outline:none;transition:border-color .2s;}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+  .form-group select option{background:var(--dark2);}
+  .form-group textarea{resize:vertical;min-height:80px;}
+  .form-actions{display:flex;gap:0.75rem;margin-top:1.25rem;}
+  .btn-submit{background:var(--gold);color:var(--dark);font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:700;border:none;padding:10px 24px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+  .btn-submit:hover{background:var(--gold-light);}
+  .btn-cancel{background:transparent;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:600;border:1px solid rgba(255,255,255,0.1);padding:10px 24px;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;}
+  .btn-cancel:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
+  .admin-list{display:flex;flex-direction:column;gap:0.75rem;}
+  .admin-list-item{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:0.875rem 1rem;display:flex;align-items:center;gap:1rem;}
+  .admin-list-item:hover{border-color:var(--border);}
+  .ali-info{flex:1;}
+  .ali-title{font-weight:600;font-size:0.9rem;color:var(--text);}
+  .ali-sub{font-size:0.78rem;color:var(--text2);margin-top:2px;}
+  .ali-actions{display:flex;gap:0.5rem;}
+  .btn-edit{background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.3);color:#3498DB;font-size:0.78rem;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+  .btn-edit:hover{background:rgba(52,152,219,0.2);}
+  .btn-delete{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:#E74C3C;font-size:0.78rem;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+  .btn-delete:hover{background:rgba(231,76,60,0.2);}
+
+  /* ADMIN LOGIN */
+  .login-box{max-width:380px;margin:4rem auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;}
+  .login-box h2{font-family:'Playfair Display',serif;color:var(--gold);text-align:center;margin-bottom:1.5rem;}
+  .login-err{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:#E74C3C;font-size:0.8rem;padding:8px 12px;border-radius:6px;margin-bottom:1rem;display:none;}
+
+  /* STATS BAR */
+  .stats-bar{max-width:1200px;margin:0 auto;padding:1.5rem 2rem 0;display:flex;gap:1rem;flex-wrap:wrap;}
+  .stat-pill{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:6px 16px;font-size:0.8rem;color:var(--text2);}
+  .stat-pill strong{color:var(--gold);}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:0.875rem;padding:10px 18px;border-radius:var(--radius-sm);z-index:999;display:none;box-shadow:0 8px 30px rgba(0,0,0,0.5);}
+  .toast.show{display:block;animation:fadeInUp .3s ease;}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  /* FOOTER */
+  footer{background:var(--dark2);border-top:1px solid var(--border2);text-align:center;padding:1.5rem;color:var(--text3);font-size:0.8rem;}
+
+  /* RESPONSIVE */
+  @media(max-width:640px){
+    .form-grid{grid-template-columns:1fr;}
+    .modal-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .search-bar{flex-direction:column;}
+    .search-bar input,.search-bar select{min-width:unset;width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')">GharBazaar <span>Realty</span></div>
+    <div class="nav-links">
+      <a id="nav-home" class="active" onclick="showPage('home')" data-key="nav_home">Home</a>
+      <a id="nav-rent" onclick="filterTab('rent')" data-key="nav_rent">For Rent</a>
+      <a id="nav-sale" onclick="filterTab('sale')" data-key="nav_sale">For Sale</a>
+      <a id="nav-contact" onclick="showPage('contact')" data-key="nav_contact">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.75rem;flex-shrink:0;">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('hi')">HI</button>
+        <button class="lang-btn" onclick="setLang('mr')">MR</button>
+      </div>
+      <button class="admin-btn" onclick="showAdmin()" data-key="admin_btn">Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN PAGES -->
+<div id="page-home">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag" data-key="hero_tag">Premium Real Estate</div>
+    <h1 data-key="hero_h1">Find Your <span>Dream Home</span></h1>
+    <p data-key="hero_sub">Browse thousands of verified properties for rent and sale across the city.</p>
+    <div class="search-bar">
+      <input type="text" id="search-input" data-key-placeholder="search_ph" placeholder="Search by location, title..." oninput="filterListings()"/>
+      <select id="filter-type" onchange="filterListings()">
+        <option value="all" data-key="filter_all">All Types</option>
+        <option value="rent" data-key="filter_rent">For Rent</option>
+        <option value="sale" data-key="filter_sale">For Sale</option>
+      </select>
+      <select id="filter-bhk" onchange="filterListings()">
+        <option value="all" data-key="filter_bhk_all">Any BHK</option>
+        <option value="1">1 BHK</option>
+        <option value="2">2 BHK</option>
+        <option value="3">3 BHK</option>
+        <option value="4">4+ BHK</option>
+      </select>
+      <select id="filter-budget" onchange="filterListings()">
+        <option value="all" data-key="filter_budget_all">Any Budget</option>
+        <option value="low" data-key="filter_budget_low">Under ₹10K/mo</option>
+        <option value="mid" data-key="filter_budget_mid">₹10K–₹30K</option>
+        <option value="high" data-key="filter_budget_high">Above ₹30K</option>
+      </select>
+      <button class="search-btn" onclick="filterListings()" data-key="search_btn">Search</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar" id="stats-bar"></div>
+
+  <!-- TABS -->
+  <div class="section-tabs">
+    <button class="tab-btn active" id="tab-all" onclick="filterTab('all')" data-key="tab_all">All Properties <span class="count-badge" id="cnt-all">0</span></button>
+    <button class="tab-btn" id="tab-rent" onclick="filterTab('rent')" data-key="tab_rent">For Rent <span class="count-badge" id="cnt-rent">0</span></button>
+    <button class="tab-btn" id="tab-sale" onclick="filterTab('sale')" data-key="tab_sale">For Sale <span class="count-badge" id="cnt-sale">0</span></button>
+  </div>
+
+  <!-- LISTINGS -->
+  <div class="listings-section">
+    <div class="listings-grid" id="listings-grid"></div>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="page-contact" style="display:none;max-width:600px;margin:3rem auto;padding:0 2rem 4rem;">
+  <h2 style="font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:0.5rem;" data-key="contact_h">Get In Touch</h2>
+  <p style="color:var(--text2);margin-bottom:2rem;" data-key="contact_sub">We'll get back to you as soon as possible.</p>
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:1.75rem;display:flex;flex-direction:column;gap:1rem;">
+    <input type="text" id="c-name" data-key-placeholder="c_name_ph" placeholder="Your Name" style="background:var(--surface2);border:1px solid rgba(255,255,255,0.08);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.875rem;padding:10px 14px;border-radius:var(--radius-sm);outline:none;"/>
+    <input type="tel" id="c-phone" placeholder="Phone Number" style="background:var(--surface2);border:1px solid rgba(255,255,255,0.08);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.875rem;padding:10px 14px;border-radius:var(--radius-sm);outline:none;"/>
+    <textarea id="c-msg" data-key-placeholder="c_msg_ph" placeholder="Your message..." rows="4" style="background:var(--surface2);border:1px solid rgba(255,255,255,0.08);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.875rem;padding:10px 14px;border-radius:var(--radius-sm);outline:none;resize:vertical;"></textarea>
+    <button class="search-btn" onclick="sendContact()" style="align-self:flex-start;" data-key="contact_send">Send Message</button>
+  </div>
+  <div style="margin-top:1.5rem;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
+    <span style="font-size:2rem;">💬</span>
+    <div>
+      <div style="font-weight:600;font-size:0.9rem;" data-key="contact_wa_title">WhatsApp Us</div>
+      <div style="font-size:0.8rem;color:var(--text2);margin-bottom:0.5rem;" data-key="contact_wa_sub">Quick response on WhatsApp</div>
+      <button class="btn-wa" onclick="openWhatsApp('Hello, I am interested in a property on GharBazaar!')" data-key="contact_wa_btn">Open WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTY DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="m-title"></span>
+      <button class="close-btn" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-img" id="m-img-wrap">
+      <span style="font-size:4rem;color:var(--text3);">🏠</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-price" id="m-price"></div>
+      <div class="modal-grid" id="m-grid"></div>
+      <p class="modal-desc" id="m-desc"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-contact-wa" id="m-wa" data-key="modal_wa">💬 WhatsApp</button>
+      <button class="btn-contact-call" id="m-call" data-key="modal_call">📞 Call Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="admin-overlay">
+
+  <!-- LOGIN -->
+  <div id="admin-login" class="login-box">
+    <h2>Admin Login</h2>
+    <div class="login-err" id="login-err">Incorrect password. Try again.</div>
+    <div class="form-group" style="margin-bottom:1rem;">
+      <label>Password</label>
+      <input type="password" id="admin-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')adminLogin()"/>
+    </div>
+    <div style="display:flex;gap:0.75rem;">
+      <button class="btn-submit" onclick="adminLogin()">Login</button>
+      <button class="btn-cancel" onclick="closeAdmin()">Cancel</button>
+    </div>
+    <p style="font-size:0.75rem;color:var(--text3);margin-top:1rem;text-align:center;">Default password: <strong style="color:var(--gold);">admin123</strong></p>
+  </div>
+
+  <!-- PANEL -->
+  <div id="admin-panel-main" class="admin-panel" style="display:none;">
+    <div class="admin-header">
+      <h2>Admin Panel</h2>
+      <div style="display:flex;gap:0.75rem;align-items:center;">
+        <span style="font-size:0.8rem;color:var(--text2);">GharBazaar Realty</span>
+        <button class="btn-cancel" onclick="closeAdmin()">Close</button>
+      </div>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('add')" id="at-add">Add Property</button>
+      <button class="admin-tab" onclick="switchAdminTab('manage')" id="at-manage">Manage Listings</button>
+      <button class="admin-tab" onclick="switchAdminTab('settings')" id="at-settings">Settings</button>
+    </div>
+    <div class="admin-content">
+
+      <!-- ADD FORM -->
+      <div id="admin-add">
+        <div class="form-grid" id="admin-form-grid">
+          <div class="form-group full">
+            <label>Property Title</label>
+            <input type="text" id="f-title" placeholder="e.g. Spacious 2BHK in Nashik Road"/>
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select id="f-type">
+              <option value="rent">For Rent</option>
+              <option value="sale">For Sale</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price (₹)</label>
+            <input type="number" id="f-price" placeholder="e.g. 12000"/>
+          </div>
+          <div class="form-group">
+            <label>BHK</label>
+            <select id="f-bhk">
+              <option value="1">1 BHK</option>
+              <option value="2">2 BHK</option>
+              <option value="3">3 BHK</option>
+              <option value="4">4+ BHK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Area (sq.ft)</label>
+            <input type="number" id="f-area" placeholder="e.g. 850"/>
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="f-location" placeholder="e.g. Nashik Road, Nashik"/>
+          </div>
+          <div class="form-group">
+            <label>Bathrooms</label>
+            <select id="f-bath">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Parking</label>
+            <select id="f-parking">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Furnishing</label>
+            <select id="f-furnish">
+              <option value="Fully Furnished">Fully Furnished</option>
+              <option value="Semi Furnished">Semi Furnished</option>
+              <option value="Unfurnished">Unfurnished</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Contact (WhatsApp)</label>
+            <input type="text" id="f-contact" placeholder="91XXXXXXXXXX"/>
+          </div>
+          <div class="form-group full">
+            <label>Image URL (optional)</label>
+            <input type="text" id="f-img" placeholder="https://..."/>
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="f-desc" placeholder="Describe the property in detail..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-submit" id="form-submit-btn" onclick="submitProperty()">Add Property</button>
+          <button class="btn-cancel" id="form-cancel-btn" onclick="resetForm()" style="display:none;">Cancel Edit</button>
+        </div>
+      </div>
+
+      <!-- MANAGE -->
+      <div id="admin-manage" style="display:none;">
+        <div class="admin-list" id="admin-list"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div id="admin-settings" style="display:none;">
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label>WhatsApp Number (Default)</label>
+          <input type="text" id="s-wa" placeholder="91XXXXXXXXXX"/>
+        </div>
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label>Agency / Brand Name</label>
+          <input type="text" id="s-brand" placeholder="GharBazaar Realty"/>
+        </div>
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label>Change Admin Password</label>
+          <input type="password" id="s-newpass" placeholder="New password"/>
+        </div>
+        <button class="btn-submit" onclick="saveSettings()">Save Settings</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span id="footer-brand">GharBazaar Realty</span> &mdash; <span data-key="footer_txt">Premium Real Estate Platform</span>
+</footer>
+
+<script>
+// ========== LANGUAGE STRINGS ==========
+const LANG = {
+  en:{
+    nav_home:'Home',nav_rent:'For Rent',nav_sale:'For Sale',nav_contact:'Contact',
+    admin_btn:'Admin',hero_tag:'Premium Real Estate',
+    hero_h1:'Find Your <span>Dream Home</span>',
+    hero_sub:'Browse thousands of verified properties for rent and sale.',
+    search_ph:'Search by location, title...',filter_all:'All Types',filter_rent:'For Rent',
+    filter_sale:'For Sale',filter_bhk_all:'Any BHK',filter_budget_all:'Any Budget',
+    filter_budget_low:'Under ₹10K/mo',filter_budget_mid:'₹10K–₹30K',filter_budget_high:'Above ₹30K',
+    search_btn:'Search',tab_all:'All Properties',tab_rent:'For Rent',tab_sale:'For Sale',
+    contact_h:'Get In Touch',contact_sub:"We'll get back to you as soon as possible.",
+    c_name_ph:'Your Name',c_msg_ph:'Your message...',contact_send:'Send Message',
+    contact_wa_title:'WhatsApp Us',contact_wa_sub:'Quick response on WhatsApp',contact_wa_btn:'Open WhatsApp',
+    modal_wa:'💬 WhatsApp',modal_call:'📞 Call Now',footer_txt:'Premium Real Estate Platform',
+    badge_rent:'For Rent',badge_sale:'For Sale',btn_details:'View Details',btn_wa:'WhatsApp'
+  },
+  hi:{
+    nav_home:'होम',nav_rent:'किराये पर',nav_sale:'बिक्री हेतु',nav_contact:'संपर्क',
+    admin_btn:'एडमिन',hero_tag:'प्रीमियम रियल एस्टेट',
+    hero_h1:'अपना <span>सपनों का घर</span> खोजें',
+    hero_sub:'किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',
+    search_ph:'लोकेशन या नाम से खोजें...',filter_all:'सभी प्रकार',filter_rent:'किराये पर',
+    filter_sale:'बिक्री हेतु',filter_bhk_all:'कोई भी BHK',filter_budget_all:'कोई भी बजट',
+    filter_budget_low:'₹10K/माह से कम',filter_budget_mid:'₹10K–₹30K',filter_budget_high:'₹30K से अधिक',
+    search_btn:'खोजें',tab_all:'सभी प्रॉपर्टी',tab_rent:'किराये पर',tab_sale:'बिक्री हेतु',
+    contact_h:'संपर्क करें',contact_sub:'हम जल्द से जल्द जवाब देंगे।',
+    c_name_ph:'आपका नाम',c_msg_ph:'आपका संदेश...',contact_send:'संदेश भेजें',
+    contact_wa_title:'WhatsApp करें',contact_wa_sub:'WhatsApp पर तुरंत जवाब',contact_wa_btn:'WhatsApp खोलें',
+    modal_wa:'💬 WhatsApp',modal_call:'📞 अभी कॉल करें',footer_txt:'प्रीमियम रियल एस्टेट प्लेटफॉर्म',
+    badge_rent:'किराये पर',badge_sale:'बिक्री हेतु',btn_details:'विवरण देखें',btn_wa:'WhatsApp'
+  },
+  mr:{
+    nav_home:'मुखपृष्ठ',nav_rent:'भाड्याने',nav_sale:'विक्रीसाठी',nav_contact:'संपर्क',
+    admin_btn:'ॲडमिन',hero_tag:'प्रीमियम रिअल इस्टेट',
+    hero_h1:'तुमचे <span>स्वप्नातील घर</span> शोधा',
+    hero_sub:'भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',
+    search_ph:'ठिकाण किंवा नावाने शोधा...',filter_all:'सर्व प्रकार',filter_rent:'भाड्याने',
+    filter_sale:'विक्रीसाठी',filter_bhk_all:'कोणतेही BHK',filter_budget_all:'कोणताही बजेट',
+    filter_budget_low:'₹10K/महिन्यापेक्षा कमी',filter_budget_mid:'₹10K–₹30K',filter_budget_high:'₹30K पेक्षा जास्त',
+    search_btn:'शोधा',tab_all:'सर्व मालमत्ता',tab_rent:'भाड्याने',tab_sale:'विक्रीसाठी',
+    contact_h:'संपर्क साधा',contact_sub:'आम्ही लवकरात लवकर उत्तर देऊ.',
+    c_name_ph:'तुमचे नाव',c_msg_ph:'तुमचा संदेश...',contact_send:'संदेश पाठवा',
+    contact_wa_title:'WhatsApp करा',contact_wa_sub:'WhatsApp वर तत्काळ प्रतिसाद',contact_wa_btn:'WhatsApp उघडा',
+    modal_wa:'💬 WhatsApp',modal_call:'📞 आता कॉल करा',footer_txt:'प्रीमियम रिअल इस्टेट प्लॅटफॉर्म',
+    badge_rent:'भाड्याने',badge_sale:'विक्रीसाठी',btn_details:'तपशील पहा',btn_wa:'WhatsApp'
+  }
+};
+let currentLang='en';
+let adminPassword='admin123';
+let defaultWA='919999999999';
+let editingId=null;
+let activeTab='all';
+
+// ========== DATA ==========
+const DEFAULT_PROPERTIES = [
+  {id:1,title:'Spacious 2BHK Apartment',type:'rent',price:12000,bhk:'2',area:850,location:'Nashik Road, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:'',desc:'Beautiful 2BHK apartment on 3rd floor with balcony. Society has gym, security & parking. Near railway station.'},
+  {id:2,title:'3BHK Independent House',type:'sale',price:4500000,bhk:'3',area:1450,location:'Gangapur Road, Nashik',bath:3,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:'',desc:'Prime location 3BHK bungalow with garden. Clear title, vastu compliant. Near schools & hospitals.'},
+  {id:3,title:'1BHK Modern Flat',type:'rent',price:7500,bhk:'1',area:480,location:'Deolali Camp, Nashik',bath:1,parking:'No',furnish:'Fully Furnished',contact:'919999999999',img:'',desc:'Ready to move fully furnished 1BHK. Ideal for working professionals. 24/7 water & power backup.'},
+  {id:4,title:'Commercial Shop Space',type:'rent',price:25000,bhk:'1',area:350,location:'Mahamarg, Nashik',bath:1,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:'',desc:'Prime commercial space on main road. High footfall area. Ground floor with signage rights.'},
+  {id:5,title:'Luxury 4BHK Villa',type:'sale',price:9800000,bhk:'4',area:2800,location:'Dindori Road, Nashik',bath:4,parking:'Yes',furnish:'Fully Furnished',contact:'919999999999',img:'',desc:'Luxurious 4BHK villa with swimming pool, terrace garden and modular kitchen. Premium fittings throughout.'},
+  {id:6,title:'2BHK Society Flat',type:'sale',price:3200000,bhk:'2',area:960,location:'Satpur, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:'',desc:'Well-maintained 2BHK in premium society. Lift, clubhouse, 24hr security. Close to IT park.'},
+];
+
+function loadProperties(){
+  try{const d=localStorage.getItem('gb_props');return d?JSON.parse(d):DEFAULT_PROPERTIES;}
+  catch(e){return DEFAULT_PROPERTIES;}
+}
+function saveProperties(props){
+  try{localStorage.setItem('gb_props',JSON.stringify(props));}catch(e){}
+}
+let properties=loadProperties();
+
+function loadSettings(){
+  try{
+    const d=localStorage.getItem('gb_settings');
+    if(d){const s=JSON.parse(d);adminPassword=s.pass||adminPassword;defaultWA=s.wa||defaultWA;
+    if(s.brand){document.getElementById('footer-brand').textContent=s.brand;document.querySelector('.logo').innerHTML=s.brand+' <span>Realty</span>';}}
+  }catch(e){}
+}
+loadSettings();
+
+// ========== LANGUAGE ==========
+function setLang(lang){
+  currentLang=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  applyLang();
+  renderListings();
+}
+function t(key){return LANG[currentLang][key]||LANG['en'][key]||key;}
+function applyLang(){
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const k=el.getAttribute('data-key');const v=t(k);
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.tagName==='SELECT'){}
+    else{el.innerHTML=v;}
+  });
+  document.querySelectorAll('[data-key-placeholder]').forEach(el=>{
+    el.placeholder=t(el.getAttribute('data-key-placeholder'));
+  });
+}
+
+// ========== PAGES ==========
+function showPage(page){
+  document.getElementById('page-home').style.display=page==='home'?'block':'none';
+  document.getElementById('page-contact').style.display=page==='contact'?'block':'none';
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(page==='home')document.getElementById('nav-home').classList.add('active');
+  if(page==='contact')document.getElementById('nav-contact').classList.add('active');
+}
+
+// ========== TABS ==========
+function filterTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab)?.classList.add('active');
+  document.getElementById('filter-type').value=tab;
+  showPage('home');
+  renderListings();
+}
+
+// ========== RENDER LISTINGS ==========
+function formatPrice(p,type){
+  if(type==='rent')return'₹'+p.toLocaleString('en-IN')+'/mo';
+  return'₹'+p.toLocaleString('en-IN');
+}
+function filterListings(){renderListings();}
+function renderListings(){
+  const q=document.getElementById('search-input')?.value.toLowerCase()||'';
+  const ft=document.getElementById('filter-type')?.value||'all';
+  const fb=document.getElementById('filter-bhk')?.value||'all';
+  const fbu=document.getElementById('filter-budget')?.value||'all';
+  let filtered=properties.filter(p=>{
+    const mt=ft==='all'||p.type===ft;
+    const mq=!q||p.title.toLowerCase().includes(q)||p.location.toLowerCase().includes(q);
+    const mb=fb==='all'||(fb==='4'?parseInt(p.bhk)>=4:p.bhk===fb);
+    let mbu=true;
+    if(fbu==='low'&&p.type==='rent')mbu=p.price<10000;
+    else if(fbu==='mid'&&p.type==='rent')mbu=p.price>=10000&&p.price<=30000;
+    else if(fbu==='high'&&p.type==='rent')mbu=p.price>30000;
+    return mt&&mq&&mb&&mbu;
+  });
+  updateCounts();
+  const grid=document.getElementById('listings-grid');
+  if(!filtered.length){grid.innerHTML=`<div class="no-results" style="grid-column:1/-1"><div class="icon">🔍</div><p>${currentLang==='hi'?'कोई प्रॉपर्टी नहीं मिली':currentLang==='mr'?'कोणतीही मालमत्ता आढळली नाही':'No properties found'}</p></div>`;return;}
+  grid.innerHTML=filtered.map(p=>cardHTML(p)).join('');
+}
+function updateCounts(){
+  const rent=properties.filter(p=>p.type==='rent').length;
+  const sale=properties.filter(p=>p.type==='sale').length;
+  document.getElementById('cnt-all').textContent=properties.length;
+  document.getElementById('cnt-rent').textContent=rent;
+  document.getElementById('cnt-sale').textContent=sale;
+  document.getElementById('stats-bar').innerHTML=`
+    <div class="stat-pill">${currentLang==='hi'?'कुल':currentLang==='mr'?'एकूण':'Total'}: <strong>${properties.length}</strong></div>
+    <div class="stat-pill">${t('badge_rent')}: <strong>${rent}</strong></div>
+    <div class="stat-pill">${t('badge_sale')}: <strong>${sale}</strong></div>`;
+}
+function cardHTML(p){
+  const badgeCls=p.type==='rent'?'badge-rent':'badge-sale';
+  const badgeTxt=t('badge_'+p.type);
+  const imgHTML=p.img?`<img src="${p.img}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><span class="card-img-placeholder" style="display:none">🏠</span>`:`<span class="card-img-placeholder">🏠</span>`;
+  return`<div class="property-card" onclick="openModal(${p.id})">
+    <div class="card-img">${imgHTML}<span class="card-badge ${badgeCls}">${badgeTxt}</span><span class="card-price">${formatPrice(p.price,p.type)}</span></div>
+    <div class="card-body">
+      <div class="card-title">${p.title}</div>
+      <div class="card-location">📍 ${p.location}</div>
+      <div class="card-features">
+        <span class="card-feature">🛏 ${p.bhk} BHK</span>
+        <span class="card-feature">🚿 ${p.bath} Bath</span>
+        <span class="card-feature">📐 ${p.area} sq.ft</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn-details" onclick="event.stopPropagation();openModal(${p.id})">${t('btn_details')}</button>
+        <button class="btn-wa" onclick="event.stopPropagation();openWhatsApp('I am interested in: ${p.title.replace(/'/g,"\\'")} at ${p.location}',${p.id})">${t('btn_wa')}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ========== MODAL ==========
+function openModal(id){
+  const p=properties.find(x=>x.id===id);if(!p)return;
+  document.getElementById('m-title').textContent=p.title;
+  document.getElementById('m-price').textContent=formatPrice(p.price,p.type);
+  const imgWrap=document.getElementById('m-img-wrap');
+  imgWrap.innerHTML=p.img?`<img src="${p.img}" alt="${p.title}"/>`:`<span style="font-size:4rem;color:var(--text3)">🏠</span>`;
+  document.getElementById('m-grid').innerHTML=`
+    <div class="modal-field"><label>${currentLang==='hi'?'प्रकार':currentLang==='mr'?'प्रकार':'Type'}</label><span>${t('badge_'+p.type)}</span></div>
+    <div class="modal-field"><label>BHK</label><span>${p.bhk} BHK</span></div>
+    <div class="modal-field"><label>${currentLang==='hi'?'क्षेत्रफल':currentLang==='mr'?'क्षेत्रफळ':'Area'}</label><span>${p.area} sq.ft</span></div>
+    <div class="modal-field"><label>${currentLang==='hi'?'बाथरूम':currentLang==='mr'?'बाथरूम':'Bathrooms'}</label><span>${p.bath}</span></div>
+    <div class="modal-field"><label>${currentLang==='hi'?'पार्किंग':currentLang==='mr'?'पार्किंग':'Parking'}</label><span>${p.parking}</span></div>
+    <div class="modal-field"><label>${currentLang==='hi'?'फर्निशिंग':currentLang==='mr'?'फर्निशिंग':'Furnishing'}</label><span>${p.furnish}</span></div>
+    <div class="modal-field" style="grid-column:1/-1"><label>${currentLang==='hi'?'स्थान':currentLang==='mr'?'ठिकाण':'Location'}</label><span>${p.location}</span></div>`;
+  document.getElementById('m-desc').textContent=p.desc;
+  const wa=p.contact||defaultWA;
+  document.getElementById('m-wa').onclick=()=>openWhatsApp(`I am interested in: ${p.title} at ${p.location}`,id);
+  document.getElementById('m-call').onclick=()=>window.open('tel:+'+wa);
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(e){
+  if(!e||e.target===document.getElementById('modal-overlay'))
+    document.getElementById('modal-overlay').classList.remove('open');
+}
+function openWhatsApp(msg,id){
+  let num=defaultWA;
+  if(id){const p=properties.find(x=>x.id===id);if(p&&p.contact)num=p.contact;}
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ========== ADMIN ==========
+function showAdmin(){
+  document.getElementById('admin-overlay').classList.add('open');
+  document.getElementById('admin-login').style.display='block';
+  document.getElementById('admin-panel-main').style.display='none';
+}
+function closeAdmin(){document.getElementById('admin-overlay').classList.remove('open');editingId=null;}
+function adminLogin(){
+  const pass=document.getElementById('admin-pass').value;
+  if(pass===adminPassword){
+    document.getElementById('admin-login').style.display='none';
+    document.getElementById('admin-panel-main').style.display='block';
+    document.getElementById('admin-pass').value='';
+    renderAdminList();
+    const s=JSON.parse(localStorage.getItem('gb_settings')||'{}');
+    if(s.wa)document.getElementById('s-wa').value=s.wa;
+    if(s.brand)document.getElementById('s-brand').value=s.brand;
+  }else{
+    document.getElementById('login-err').style.display='block';
+  }
+}
+function switchAdminTab(tab){
+  ['add','manage','settings'].forEach(t=>{
+    document.getElementById('admin-'+t).style.display=t===tab?'block':'none';
+    document.getElementById('at-'+t).classList.toggle('active',t===tab);
+  });
+  if(tab==='manage')renderAdminList();
+}
+function submitProperty(){
+  const title=document.getElementById('f-title').value.trim();
+  const price=parseInt(document.getElementById('f-price').value);
+  if(!title||!price){showToast('Please fill required fields!');return;}
+  const prop={
+    id:editingId||Date.now(),
+    title,type:document.getElementById('f-type').value,price,
+    bhk:document.getElementById('f-bhk').value,
+    area:parseInt(document.getElementById('f-area').value)||0,
+    location:document.getElementById('f-location').value.trim(),
+    bath:parseInt(document.getElementById('f-bath').value),
+    parking:document.getElementById('f-parking').value,
+    furnish:document.getElementById('f-furnish').value,
+    contact:document.getElementById('f-contact').value.trim()||defaultWA,
+    img:document.getElementById('f-img').value.trim(),
+    desc:document.getElementById('f-desc').value.trim()
+  };
+  if(editingId){
+    const idx=properties.findIndex(p=>p.id===editingId);
+    if(idx>=0)properties[idx]=prop;
+    showToast('Property updated!');
+  }else{
+    properties.push(prop);
+    showToast('Property added!');
+  }
+  saveProperties(properties);
+  resetForm();
+  renderListings();
+}
+function resetForm(){
+  ['f-title','f-price','f-area','f-location','f-contact','f-img','f-desc'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  editingId=null;
+  document.getElementById('form-submit-btn').textContent='Add Property';
+  document.getElementById('form-cancel-btn').style.display='none';
+}
+function editProperty(id){
+  const p=properties.find(x=>x.id===id);if(!p)return;
+  editingId=id;
+  document.getElementById('f-title').value=p.title;
+  document.getElementById('f-type').value=p.type;
+  document.getElementById('f-price').value=p.price;
+  document.getElementById('f-bhk').value=p.bhk;
+  document.getElementById('f-area').value=p.area;
+  document.getElementById('f-location').value=p.location;
+  document.getElementById('f-bath').value=p.bath;
+  document.getElementById('f-parking').value=p.parking;
+  document.getElementById('f-furnish').value=p.furnish;
+  document.getElementById('f-contact').value=p.contact;
+  document.getElementById('f-img').value=p.img||'';
+  document.getElementById('f-desc').value=p.desc;
+  document.getElementById('form-submit-btn').textContent='Update Property';
+  document.getElementById('form-cancel-btn').style.display='inline-block';
+  switchAdminTab('add');
+}
+function deleteProperty(id){
+  if(!confirm('Delete this property?'))return;
+  properties=properties.filter(p=>p.id!==id);
+  saveProperties(properties);
+  renderAdminList();
+  renderListings();
+  showToast('Property deleted.');
+}
+function renderAdminList(){
+  const list=document.getElementById('admin-list');
+  if(!properties.length){list.innerHTML='<p style="color:var(--text2);text-align:center;padding:2rem;">No properties yet.</p>';return;}
+  list.innerHTML=properties.map(p=>`
+    <div class="admin-list-item">
+      <span style="font-size:1.5rem;">${p.type==='rent'?'🏠':'🏢'}</span>
+      <div class="ali-info">
+        <div class="ali-title">${p.title}</div>
+        <div class="ali-sub">${p.location} &bull; ${formatPrice(p.price,p.type)} &bull; <span style="color:${p.type==='rent'?'var(--green)':'var(--red)'}">${p.type.toUpperCase()}</span></div>
+      </div>
+      <div class="ali-actions">
+        <button class="btn-edit" onclick="editProperty(${p.id})">Edit</button>
+        <button class="btn-delete" onclick="deleteProperty(${p.id})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+function saveSettings(){
+  const wa=document.getElementById('s-wa').value.trim();
+  const brand=document.getElementById('s-brand').value.trim();
+  const np=document.getElementById('s-newpass').value;
+  if(wa)defaultWA=wa;
+  if(np)adminPassword=np;
+  if(brand){
+    document.getElementById('footer-brand').textContent=brand;
+    document.querySelector('.logo').innerHTML=brand+' <span>Realty</span>';
+  }
+  localStorage.setItem('gb_settings',JSON.stringify({wa:defaultWA,brand,pass:adminPassword}));
+  showToast('Settings saved!');
+}
+
+// ========== CONTACT ==========
+function sendContact(){
+  const name=document.getElementById('c-name').value.trim();
+  const msg=document.getElementById('c-msg').value.trim();
+  if(!name||!msg){showToast('Please fill all fields.');return;}
+  openWhatsApp(`Hi! I'm ${name}. ${msg}`);
+  showToast('Opening WhatsApp...');
+}
+
+// ========== TOAST ==========
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ========== INIT ==========
+applyLang();
+renderListings();
+</script>
+</body>
+</html>
