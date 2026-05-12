@@ -393,7 +393,23 @@ const LANG = {
     hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',
     hero_sub:'Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.',
     contact_h:'Get In Touch', contact_sub:"We'll get back to you as soon as possible.",
-    badge_rent:'For Rent', badge_sale:'For Sale', btn_det:'View Details', btn_wa:'WhatsApp'
+    badge_rent:'For Rent', badge_sale:'For Sale', btn_det:'View Details', btn_wa:'WhatsApp',
+    verify_msg:'Your email {email} is not verified yet. Please check your inbox.',
+    verify_resend:'Resend Email', verify_done:'✓ I Verified',
+    toast_verify_sent:'📧 Verification email sent! Please verify first.',
+    toast_welcome:'Welcome back! 👋',
+    toast_account_created:'🎉 Account created! Please verify your email.',
+    toast_resent:'📧 Verification email sent again!',
+    toast_limit:'Please wait a moment before trying again.',
+    toast_verified:'✅ Email verified! Welcome',
+    toast_not_verified:'❌ Not verified yet. Please check your email.',
+    toast_signout:'Signed out successfully.',
+    toast_wa:'Opening WhatsApp...',
+    toast_fill:'Please fill all fields.',
+    err_invalid:'Incorrect email or password.',
+    err_email_used:'This email is already registered.',
+    err_weak_pass:'Password must be at least 6 characters.',
+    no_results:'No properties found'
   },
   hi: {
     nav_home:'होम', nav_rent:'किराये पर', nav_sale:'बिक्री हेतु', nav_contact:'संपर्क',
@@ -401,7 +417,23 @@ const LANG = {
     hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',
     hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',
     contact_h:'संपर्क करें', contact_sub:'हम जल्द से जल्द आपसे संपर्क करेंगे।',
-    badge_rent:'किराये पर', badge_sale:'बिक्री हेतु', btn_det:'विवरण देखें', btn_wa:'WhatsApp'
+    badge_rent:'किराये पर', badge_sale:'बिक्री हेतु', btn_det:'विवरण देखें', btn_wa:'WhatsApp',
+    verify_msg:'आपकी email {email} अभी verify नहीं हुई। कृपया inbox देखें।',
+    verify_resend:'Email दोबारा भेजें', verify_done:'✓ मैंने Verify किया',
+    toast_verify_sent:'📧 Verification email भेजा गया! पहले verify करें।',
+    toast_welcome:'वापस आने पर स्वागत है! 👋',
+    toast_account_created:'🎉 Account बना! कृपया email verify करें।',
+    toast_resent:'📧 Verification email दोबारा भेजा गया!',
+    toast_limit:'कृपया थोड़ी देर बाद try करें।',
+    toast_verified:'✅ Email verify हो गई! स्वागत है',
+    toast_not_verified:'❌ अभी तक verify नहीं हुई। Email check करें।',
+    toast_signout:'Successfully sign out हो गए।',
+    toast_wa:'WhatsApp खुल रहा है...',
+    toast_fill:'कृपया सभी fields भरें।',
+    err_invalid:'गलत email या password।',
+    err_email_used:'यह email पहले से registered है।',
+    err_weak_pass:'Password कम से कम 6 characters का होना चाहिए।',
+    no_results:'कोई property नहीं मिली'
   },
   mr: {
     nav_home:'मुखपृष्ठ', nav_rent:'भाड्याने', nav_sale:'विक्रीसाठी', nav_contact:'संपर्क',
@@ -409,7 +441,23 @@ const LANG = {
     hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',
     hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',
     contact_h:'संपर्क करा', contact_sub:'आम्ही लवकरात लवकर तुमच्याशी संपर्क साधू.',
-    badge_rent:'भाड्याने', badge_sale:'विक्रीसाठी', btn_det:'तपशील पहा', btn_wa:'WhatsApp'
+    badge_rent:'भाड्याने', badge_sale:'विक्रीसाठी', btn_det:'तपशील पहा', btn_wa:'WhatsApp',
+    verify_msg:'तुमची email {email} अजून verify झाली नाही. कृपया inbox तपासा.',
+    verify_resend:'Email पुन्हा पाठवा', verify_done:'✓ मी Verify केले',
+    toast_verify_sent:'📧 Verification email पाठवला! आधी verify करा.',
+    toast_welcome:'पुन्हा स्वागत आहे! 👋',
+    toast_account_created:'🎉 Account तयार झाले! कृपया email verify करा.',
+    toast_resent:'📧 Verification email पुन्हा पाठवला!',
+    toast_limit:'कृपया थोड्या वेळाने पुन्हा try करा.',
+    toast_verified:'✅ Email verify झाली! स्वागत आहे',
+    toast_not_verified:'❌ अजून verify झाली नाही. Email तपासा.',
+    toast_signout:'यशस्वीरित्या sign out झालात.',
+    toast_wa:'WhatsApp उघडत आहे...',
+    toast_fill:'कृपया सर्व fields भरा.',
+    err_invalid:'चुकीची email किंवा password.',
+    err_email_used:'ही email आधीच registered आहे.',
+    err_weak_pass:'Password किमान 6 characters असणे आवश्यक आहे.',
+    no_results:'कोणतीही property सापडली नाही'
   }
 };
 
@@ -437,6 +485,7 @@ let P = (()=>{ try{ const d=localStorage.getItem('nh2_props'); return d ? JSON.p
 
 const save = () => { try{ localStorage.setItem('nh2_props', JSON.stringify(P)); } catch(e){} };
 const t = k => (LANG[lang] && LANG[lang][k]) ? LANG[lang][k] : (LANG.en[k] || k);
+window.t = t; // expose globally for Firebase module
 const fp = (p, type) => {
   if(type==='rent') return '₹'+p.toLocaleString('en-IN')+'/mo';
   if(p>=10000000) return '₹'+(p/10000000).toFixed(2)+' Cr';
@@ -466,8 +515,29 @@ function setLang(l) {
       el.innerHTML = t(k);
     }
   });
+  // Update verify banner language if visible
+  const banner = document.getElementById('verify-banner');
+  if(banner && banner.style.display !== 'none') {
+    const emailEl = banner.querySelector('strong');
+    const email = emailEl ? emailEl.textContent : '';
+    updateBannerText(email);
+  }
   // Re-render listings to update badge/button labels
   renderListings();
+}
+
+// ---- Update verify banner text based on current language ----
+window.updateBannerText = function updateBannerText(email) {
+  const banner = document.getElementById('verify-banner');
+  if(!banner) return;
+  const msg = t('verify_msg').replace('{email}', '<strong>' + email + '</strong>');
+  banner.innerHTML = `
+    <span>📧 ${msg}</span>
+    <div style="display:flex;gap:.5rem;">
+      <button onclick="resendVerification()" style="background:rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.3);color:#080810;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;">${t('verify_resend')}</button>
+      <button onclick="checkVerified()" style="background:rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.3);color:#080810;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;">${t('verify_done')}</button>
+    </div>
+  `;
 }
 
 // ---- Page Navigation ----
@@ -525,7 +595,7 @@ function renderListings() {
 
   const g = document.getElementById('listings-grid');
   if(!f.length) {
-    g.innerHTML = `<div class="no-res"><div style="font-size:3rem;margin-bottom:1rem;opacity:.4">🔍</div><p>No properties found</p></div>`;
+    g.innerHTML = `<div class="no-res"><div style="font-size:3rem;margin-bottom:1rem;opacity:.4">🔍</div><p>${t('no_results')}</p></div>`;
     return;
   }
   g.innerHTML = f.map(p => `
@@ -589,9 +659,9 @@ function openWA(msg, id) {
 function sendContact() {
   const name = document.getElementById('c-name').value.trim();
   const msg = document.getElementById('c-msg').value.trim();
-  if(!name || !msg){ showToast('Fill all fields.'); return; }
+  if(!name || !msg){ showToast(t('toast_fill')); return; }
   openWA(`Hi! I'm ${name}. ${msg}`);
-  showToast('Opening WhatsApp...');
+  showToast(t('toast_wa'));
 }
 
 function showToast(msg) {
@@ -694,15 +764,10 @@ function showVerifyBanner(user) {
       display:flex; align-items:center; justify-content:center; gap:1rem;
       flex-wrap:wrap; text-align:center;
     `;
-    banner.innerHTML = `
-      <span>📧 Aapki email <strong>${user.email}</strong> abhi verify nahi hui hai. Please inbox check karo.</span>
-      <div style="display:flex;gap:.5rem;">
-        <button onclick="resendVerification()" style="background:rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.3);color:#080810;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;">Resend Email</button>
-        <button onclick="checkVerified()" style="background:rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.3);color:#080810;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;">✓ I Verified</button>
-      </div>
-    `;
+    // Content will be set by updateBannerText
     document.body.insertBefore(banner, document.body.firstChild);
   }
+  updateBannerText(user.email);
   banner.style.display = 'flex';
 }
 
@@ -718,14 +783,14 @@ window.doSignIn = async function() {
       // Email not verified — send verification mail again and warn
       await sendEmailVerification(cred.user);
       closeAuth();
-      showToast('📧 Verification email bheja gaya! Pehle verify karo.');
+      showToast(t('toast_verify_sent'));
       showVerifyBanner(cred.user);
     } else {
       closeAuth();
-      showToast('Welcome back! 👋');
+      showToast(t('toast_welcome'));
     }
   } catch(e) {
-    errEl.textContent = e.code === 'auth/invalid-credential' ? 'Galat email ya password.' : e.message;
+    errEl.textContent = e.code === 'auth/invalid-credential' ? t('err_invalid') : e.message;
     errEl.style.display = 'block';
   }
 };
@@ -743,11 +808,11 @@ window.doSignUp = async function() {
     // Send verification email
     await sendEmailVerification(cred.user);
     closeAuth();
-    showToast('🎉 Account bana! Ab apni email verify karo.');
+    showToast(t('toast_account_created'));
     showVerifyBanner(cred.user);
   } catch(e) {
-    errEl.textContent = e.code === 'auth/email-already-in-use' ? 'Yeh email already registered hai.'
-      : e.code === 'auth/weak-password' ? 'Password kam se kam 6 characters ka hona chahiye.'
+    errEl.textContent = e.code === 'auth/email-already-in-use' ? t('err_email_used')
+      : e.code === 'auth/weak-password' ? t('err_weak_pass')
       : e.message;
     errEl.style.display = 'block';
   }
@@ -759,9 +824,9 @@ window.resendVerification = async function() {
   if(user) {
     try {
       await sendEmailVerification(user);
-      showToast('📧 Verification email phir se bheja gaya!');
+      showToast(t('toast_resent'));
     } catch(e) {
-      showToast('Thodi der baad try karo (limit reached).');
+      showToast(t('toast_limit'));
     }
   }
 };
@@ -774,9 +839,9 @@ window.checkVerified = async function() {
     if(user.emailVerified) {
       const banner = document.getElementById('verify-banner');
       if(banner) banner.style.display = 'none';
-      showToast('✅ Email verify ho gayi! Welcome ' + (user.displayName || '') + ' 🎉');
+      showToast(t('toast_verified') + ' ' + (user.displayName || '') + ' 🎉');
     } else {
-      showToast('❌ Abhi tak verify nahi hui. Email check karo.');
+      showToast(t('toast_not_verified'));
     }
   }
 };
@@ -787,7 +852,7 @@ window.signOutUser = async function() {
   document.getElementById('user-dd').classList.remove('open');
   const banner = document.getElementById('verify-banner');
   if(banner) banner.style.display = 'none';
-  showToast('Signed out successfully.');
+  showToast(t('toast_signout'));
 };
 </script>
 </body>
