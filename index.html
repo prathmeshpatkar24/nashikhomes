@@ -634,7 +634,7 @@ renderListings();
 <!-- ===== FIREBASE AUTH ===== -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendEmailVerification, reload } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcC7bl2xSTYPgxGqeaA9p_LHN-jg_e-6s",
@@ -648,57 +648,145 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// ---- Auth State ----
 onAuthStateChanged(auth, user => {
-  if(user){
+  if(user && user.emailVerified) {
+    // ✅ Logged in + Email verified
     document.getElementById('nav-signin-btn').style.display = 'none';
     document.getElementById('user-wrap').style.display = 'flex';
     const initials = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
     document.getElementById('user-avatar').textContent = initials;
     document.getElementById('user-dd-name').textContent = user.displayName || 'User';
     document.getElementById('user-dd-email').textContent = user.email;
+    // Hide verification banner if showing
+    const banner = document.getElementById('verify-banner');
+    if(banner) banner.style.display = 'none';
+  } else if(user && !user.emailVerified) {
+    // ⚠️ Logged in but email NOT verified — show verification banner
+    document.getElementById('nav-signin-btn').style.display = 'none';
+    document.getElementById('user-wrap').style.display = 'flex';
+    const initials = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
+    document.getElementById('user-avatar').textContent = initials;
+    document.getElementById('user-dd-name').textContent = user.displayName || 'User';
+    document.getElementById('user-dd-email').textContent = user.email;
+    showVerifyBanner(user);
   } else {
+    // Logged out
     document.getElementById('nav-signin-btn').style.display = 'block';
     document.getElementById('user-wrap').style.display = 'none';
+    const banner = document.getElementById('verify-banner');
+    if(banner) banner.style.display = 'none';
   }
 });
 
+// ---- Show Verification Banner ----
+function showVerifyBanner(user) {
+  let banner = document.getElementById('verify-banner');
+  if(!banner) {
+    banner = document.createElement('div');
+    banner.id = 'verify-banner';
+    banner.style.cssText = `
+      position:fixed; top:66px; left:0; right:0; z-index:190;
+      background:linear-gradient(135deg,#8B6914,#C9A84C);
+      color:#080810; font-family:'Outfit',sans-serif;
+      font-size:.82rem; font-weight:600;
+      padding:10px 1.5rem;
+      display:flex; align-items:center; justify-content:center; gap:1rem;
+      flex-wrap:wrap; text-align:center;
+    `;
+    banner.innerHTML = `
+      <span>📧 Aapki email <strong>${user.email}</strong> abhi verify nahi hui hai. Please inbox check karo.</span>
+      <div style="display:flex;gap:.5rem;">
+        <button onclick="resendVerification()" style="background:rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.3);color:#080810;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;">Resend Email</button>
+        <button onclick="checkVerified()" style="background:rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.3);color:#080810;font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;padding:5px 14px;border-radius:6px;cursor:pointer;">✓ I Verified</button>
+      </div>
+    `;
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+  banner.style.display = 'flex';
+}
+
+// ---- Sign In ----
 window.doSignIn = async function() {
   const email = document.getElementById('signin-email').value.trim();
-  const pass = document.getElementById('signin-pass').value;
+  const pass  = document.getElementById('signin-pass').value;
   const errEl = document.getElementById('signin-err');
   errEl.style.display = 'none';
   try {
-    await signInWithEmailAndPassword(auth, email, pass);
-    closeAuth();
-    showToast('Welcome back! 👋');
+    const cred = await signInWithEmailAndPassword(auth, email, pass);
+    if(!cred.user.emailVerified) {
+      // Email not verified — send verification mail again and warn
+      await sendEmailVerification(cred.user);
+      closeAuth();
+      showToast('📧 Verification email bheja gaya! Pehle verify karo.');
+      showVerifyBanner(cred.user);
+    } else {
+      closeAuth();
+      showToast('Welcome back! 👋');
+    }
   } catch(e) {
-    errEl.textContent = e.code === 'auth/invalid-credential' ? 'Incorrect email or password.' : e.message;
+    errEl.textContent = e.code === 'auth/invalid-credential' ? 'Galat email ya password.' : e.message;
     errEl.style.display = 'block';
   }
 };
 
+// ---- Sign Up ----
 window.doSignUp = async function() {
-  const name = document.getElementById('signup-name').value.trim();
+  const name  = document.getElementById('signup-name').value.trim();
   const email = document.getElementById('signup-email').value.trim();
-  const pass = document.getElementById('signup-pass').value;
+  const pass  = document.getElementById('signup-pass').value;
   const errEl = document.getElementById('signup-err');
   errEl.style.display = 'none';
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
     if(name) await updateProfile(cred.user, {displayName: name});
+    // Send verification email
+    await sendEmailVerification(cred.user);
     closeAuth();
-    showToast('Account created! Welcome 🎉');
+    showToast('🎉 Account bana! Ab apni email verify karo.');
+    showVerifyBanner(cred.user);
   } catch(e) {
-    errEl.textContent = e.code === 'auth/email-already-in-use' ? 'Email already registered.'
-      : e.code === 'auth/weak-password' ? 'Password must be at least 6 characters.'
+    errEl.textContent = e.code === 'auth/email-already-in-use' ? 'Yeh email already registered hai.'
+      : e.code === 'auth/weak-password' ? 'Password kam se kam 6 characters ka hona chahiye.'
       : e.message;
     errEl.style.display = 'block';
   }
 };
 
+// ---- Resend Verification Email ----
+window.resendVerification = async function() {
+  const user = auth.currentUser;
+  if(user) {
+    try {
+      await sendEmailVerification(user);
+      showToast('📧 Verification email phir se bheja gaya!');
+    } catch(e) {
+      showToast('Thodi der baad try karo (limit reached).');
+    }
+  }
+};
+
+// ---- Check if user verified (after clicking link in email) ----
+window.checkVerified = async function() {
+  const user = auth.currentUser;
+  if(user) {
+    await reload(user); // Firebase se fresh data lo
+    if(user.emailVerified) {
+      const banner = document.getElementById('verify-banner');
+      if(banner) banner.style.display = 'none';
+      showToast('✅ Email verify ho gayi! Welcome ' + (user.displayName || '') + ' 🎉');
+    } else {
+      showToast('❌ Abhi tak verify nahi hui. Email check karo.');
+    }
+  }
+};
+
+// ---- Sign Out ----
 window.signOutUser = async function() {
   await signOut(auth);
   document.getElementById('user-dd').classList.remove('open');
+  const banner = document.getElementById('verify-banner');
+  if(banner) banner.style.display = 'none';
   showToast('Signed out successfully.');
 };
 </script>
