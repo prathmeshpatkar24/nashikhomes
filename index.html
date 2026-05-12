@@ -34,7 +34,6 @@ nav{position:sticky;top:0;z-index:200;background:rgba(8,8,16,0.94);backdrop-filt
 .lang-b{border:none;background:transparent;color:var(--text2);font-size:0.7rem;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;letter-spacing:0.5px;}
 .lang-b.active{background:var(--gold);color:var(--dark);}
 
-
 .hero{position:relative;min-height:90vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;z-index:0;}
 .hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.65) saturate(0.9);}
@@ -135,40 +134,6 @@ nav{position:sticky;top:0;z-index:200;background:rgba(8,8,16,0.94);backdrop-filt
 .mwa:hover{background:rgba(39,174,96,.2);}
 .mcall{flex:1;background:rgba(74,144,217,.1);border:1px solid rgba(74,144,217,.3);color:var(--blue);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;padding:10px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;}
 .mcall:hover{background:rgba(74,144,217,.2);}
-.adm-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;overflow-y:auto;}
-.adm-ov.open{display:block;}
-.adm-panel{max-width:920px;margin:2rem auto;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--rlg);overflow:hidden;}
-.adm-hdr{background:var(--dark2);padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bdr);}
-.adm-hdr h2{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.25rem;}
-.adm-tabs{display:flex;border-bottom:1px solid var(--bdr2);}
-.adm-tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;padding:12px 20px;cursor:pointer;transition:all .2s;}
-.adm-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-.adm-body{padding:1.5rem;}
-.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:.85rem;}
-.fgg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.fgf{grid-column:1/-1;}
-.fg label{font-size:.73rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;}
-.fg input,.fg select,.fg textarea{background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:9px 13px;border-radius:var(--rsm);outline:none;transition:border-color .2s;}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);}
-.fg select option{background:var(--dark2);}
-.fg textarea{resize:vertical;min-height:80px;}
-.btn-sub{background:linear-gradient(135deg,var(--gold),var(--gold-dk));color:var(--dark);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:700;border:none;padding:10px 26px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;}
-.btn-sub:hover{filter:brightness(1.1);}
-.btn-can{background:transparent;color:var(--text2);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:600;border:1px solid rgba(255,255,255,.1);padding:10px 24px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;}
-.btn-can:hover{color:var(--text);}
-.ali{background:var(--surf2);border:1px solid var(--bdr2);border-radius:var(--rsm);padding:.9rem 1rem;display:flex;align-items:center;gap:1rem;margin-bottom:.65rem;}
-.ali:hover{border-color:var(--bdr);}
-.ali-info{flex:1;}
-.ali-t{font-weight:600;font-size:.875rem;color:var(--text);}
-.ali-s{font-size:.76rem;color:var(--text2);margin-top:2px;}
-.btn-ed{background:rgba(74,144,217,.1);border:1px solid rgba(74,144,217,.3);color:var(--blue);font-size:.75rem;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;}
-.btn-ed:hover{background:rgba(74,144,217,.2);}
-.btn-dl{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#E74C3C;font-size:.75rem;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Outfit',sans-serif;}
-.btn-dl:hover{background:rgba(231,76,60,.2);}
-.login-box{max-width:380px;margin:4rem auto;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--rlg);padding:2rem;}
-.login-box h2{font-family:'Cormorant Garamond',serif;color:var(--gold);text-align:center;margin-bottom:1.5rem;font-size:1.5rem;}
-.login-err{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#E74C3C;font-size:.8rem;padding:8px 12px;border-radius:6px;margin-bottom:1rem;display:none;}
-#page-contact{max-width:640px;margin:3rem auto;padding:0 1.5rem 5rem;}
 .toast{position:fixed;bottom:2rem;right:2rem;background:var(--surf);border:1px solid var(--bdr);color:var(--text);font-size:.875rem;padding:10px 20px;border-radius:var(--rsm);z-index:999;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);}
 .toast.show{display:block;animation:fiu .3s ease;}
 @keyframes fiu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -180,7 +145,6 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 .foot-links a{font-size:.76rem;color:var(--text3);cursor:pointer;text-decoration:none;transition:color .2s;}
 .foot-links a:hover{color:var(--gold);}
 @media(max-width:680px){
-  .fgg{grid-template-columns:1fr;}
   .mgrid{grid-template-columns:1fr;}
   .nav-links{display:none;}
   .search-wrap{flex-direction:column;}
@@ -189,7 +153,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   .hero-nums{gap:1.75rem;}
   .foot-inner{flex-direction:column;text-align:center;}
 }
-
+/* AUTH MODAL */
 .auth-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:700;align-items:center;justify-content:center;padding:1rem;}
 .auth-ov.open{display:flex;}
 .auth-box{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--rlg);width:100%;max-width:420px;overflow:hidden;}
@@ -218,10 +182,12 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 .user-dd-btn:hover{background:var(--surf2);color:var(--text);}
 .user-dd-btn.logout{color:#E74C3C;}
 .user-dd-btn.logout:hover{background:rgba(231,76,60,.1);}
+#page-contact{max-width:640px;margin:3rem auto;padding:0 1.5rem 5rem;}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
+
 <nav>
   <div class="nav-inner">
     <a class="logo" onclick="showPage('home')">
@@ -240,7 +206,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
         <button class="lang-b" onclick="setLang('hi')">HI</button>
         <button class="lang-b" onclick="setLang('mr')">MR</button>
       </div>
+      <!-- Sign In Button (shown when logged out) -->
       <button id="nav-signin-btn" class="signin-btn" onclick="showAuth()">Sign In</button>
+      <!-- User Avatar (shown when logged in) -->
       <div class="user-wrap" id="user-wrap" style="display:none;">
         <div class="user-avatar" id="user-avatar" onclick="toggleUserDD()">U</div>
         <div class="user-dd" id="user-dd">
@@ -248,14 +216,45 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
             <div class="user-dd-name" id="user-dd-name">User</div>
             <div class="user-dd-email" id="user-dd-email"></div>
           </div>
-          
           <button class="user-dd-btn logout" onclick="signOutUser()">🚪 Sign Out</button>
         </div>
       </div>
-      <button class="adm-btn" id="nav-adm-btn" onclick="showAdmin()" style="display:none;">Admin</button>
+      <!-- NOTE: Admin button removed from here. Admin page is at /admin.php -->
     </div>
   </div>
 </nav>
+
+<!-- AUTH MODAL -->
+<div class="auth-ov" id="auth-ov" onclick="closeAuthOv(event)">
+  <div class="auth-box">
+    <div class="auth-hdr">
+      <h2>🏠 NashikHomes</h2>
+      <button class="mclose" onclick="closeAuth()">×</button>
+    </div>
+    <div class="auth-tabs-wrap">
+      <button class="auth-tab active" id="auth-tab-signin" onclick="switchAuthTab('signin')">Sign In</button>
+      <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+    <!-- SIGN IN -->
+    <div id="auth-signin" class="auth-body">
+      <div class="auth-err" id="signin-err"></div>
+      <input type="email" class="auth-input" id="signin-email" placeholder="Email address"/>
+      <input type="password" class="auth-input" id="signin-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doSignIn()"/>
+      <button class="auth-btn" onclick="doSignIn()">Sign In</button>
+      <p style="font-size:.75rem;color:var(--text3);text-align:center;">Don't have an account? <a onclick="switchAuthTab('signup')" style="color:var(--gold);cursor:pointer;">Sign Up</a></p>
+    </div>
+    <!-- SIGN UP -->
+    <div id="auth-signup" class="auth-body" style="display:none;">
+      <div class="auth-err" id="signup-err"></div>
+      <input type="text" class="auth-input" id="signup-name" placeholder="Full Name"/>
+      <input type="email" class="auth-input" id="signup-email" placeholder="Email address"/>
+      <input type="password" class="auth-input" id="signup-pass" placeholder="Password (min 6 chars)" onkeydown="if(event.key==='Enter')doSignUp()"/>
+      <button class="auth-btn" onclick="doSignUp()">Create Account</button>
+      <p style="font-size:.75rem;color:var(--text3);text-align:center;">Already have an account? <a onclick="switchAuthTab('signin')" style="color:var(--gold);cursor:pointer;">Sign In</a></p>
+    </div>
+  </div>
+</div>
+
 <div id="page-home">
 <section class="hero">
   <div class="hero-bg">
@@ -290,6 +289,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </div>
   </div>
 </section>
+
 <div class="loc-strip">
   <div class="loc-inner">
     <span class="loc-label">Popular Areas</span>
@@ -304,6 +304,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     <span class="loc-chip" onclick="sa('Mahamarg')">📍 Mahamarg</span>
   </div>
 </div>
+
 <div class="stats-bar" id="stats-bar"></div>
 <div class="sec-head"><h2>Available <span>Properties</span></h2></div>
 <div class="tabs">
@@ -314,6 +315,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 <div class="grid-wrap">
   <div class="listings" id="listings-grid"></div>
 </div>
+
 <div class="why">
   <div class="why-inner">
     <div class="why-hd">
@@ -328,7 +330,8 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </div>
   </div>
 </div>
-</div>
+</div><!-- end page-home -->
+
 <div id="page-contact" style="display:none;">
   <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:.5rem;" data-key="contact_h">Get In Touch</h2>
   <p style="color:var(--text2);margin-bottom:1.75rem;" data-key="contact_sub">We'll get back to you as soon as possible.</p>
@@ -347,6 +350,8 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </div>
   </div>
 </div>
+
+<!-- Property Detail Modal -->
 <div class="modal-ov" id="modal-ov" onclick="closeModal(event)">
   <div class="modal">
     <div class="mhdr"><span class="mtitle" id="m-title"></span><button class="mclose" onclick="closeModal()">×</button></div>
@@ -362,55 +367,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </div>
   </div>
 </div>
-<div class="adm-ov" id="adm-ov">
-  <div id="adm-login" class="login-box">
-    <h2>Admin Login</h2>
-    <div class="login-err" id="login-err">Incorrect password.</div>
-    <div class="fg"><label>Password</label><input type="password" id="adm-pass" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()"/></div>
-    <div style="display:flex;gap:.75rem;margin-top:.5rem;">
-      <button class="btn-sub" onclick="adminLogin()">Login</button>
-      <button class="btn-can" onclick="closeAdmin()">Cancel</button>
-    </div>
-    <p style="font-size:.73rem;color:var(--text3);margin-top:1rem;text-align:center;">Default: <strong style="color:var(--gold);">admin123</strong></p>
-  </div>
-  <div id="adm-main" class="adm-panel" style="display:none;">
-    <div class="adm-hdr"><h2>Admin Panel — NashikHomes</h2><button class="btn-can" onclick="closeAdmin()">Close</button></div>
-    <div class="adm-tabs">
-      <button class="adm-tab active" onclick="aTab('add')" id="at-add">Add Property</button>
-      <button class="adm-tab" onclick="aTab('manage')" id="at-manage">Manage</button>
-      <button class="adm-tab" onclick="aTab('settings')" id="at-settings">Settings</button>
-    </div>
-    <div class="adm-body">
-      <div id="adm-add">
-        <div class="fgg">
-          <div class="fg fgf"><label>Property Title</label><input type="text" id="f-title" placeholder="e.g. Spacious 2BHK in Nashik Road"/></div>
-          <div class="fg"><label>Type</label><select id="f-type"><option value="rent">For Rent</option><option value="sale">For Sale</option></select></div>
-          <div class="fg"><label>Price (₹)</label><input type="number" id="f-price" placeholder="12000"/></div>
-          <div class="fg"><label>BHK</label><select id="f-bhk"><option value="1">1 BHK</option><option value="2">2 BHK</option><option value="3">3 BHK</option><option value="4">4+ BHK</option></select></div>
-          <div class="fg"><label>Area (sq.ft)</label><input type="number" id="f-area" placeholder="850"/></div>
-          <div class="fg"><label>Location</label><input type="text" id="f-location" placeholder="Nashik Road, Nashik"/></div>
-          <div class="fg"><label>Bathrooms</label><select id="f-bath"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
-          <div class="fg"><label>Parking</label><select id="f-parking"><option>Yes</option><option>No</option></select></div>
-          <div class="fg"><label>Furnishing</label><select id="f-furnish"><option>Fully Furnished</option><option>Semi Furnished</option><option>Unfurnished</option></select></div>
-          <div class="fg"><label>Contact (WhatsApp)</label><input type="text" id="f-contact" placeholder="91XXXXXXXXXX"/></div>
-          <div class="fg fgf"><label>Image URL (optional)</label><input type="text" id="f-img" placeholder="https://..."/></div>
-          <div class="fg fgf"><label>Description</label><textarea id="f-desc" placeholder="Describe the property..."></textarea></div>
-        </div>
-        <div style="display:flex;gap:.75rem;margin-top:.5rem;">
-          <button class="btn-sub" id="f-sub-btn" onclick="submitProp()">Add Property</button>
-          <button class="btn-can" id="f-can-btn" onclick="resetForm()" style="display:none;">Cancel Edit</button>
-        </div>
-      </div>
-      <div id="adm-manage" style="display:none;"><div id="adm-list"></div></div>
-      <div id="adm-settings" style="display:none;">
-        <div class="fg"><label>WhatsApp Number</label><input type="text" id="s-wa" placeholder="91XXXXXXXXXX"/></div>
-        <div class="fg"><label>Brand Name</label><input type="text" id="s-brand" placeholder="NashikHomes"/></div>
-        <div class="fg"><label>Change Password</label><input type="password" id="s-pass" placeholder="New password"/></div>
-        <button class="btn-sub" onclick="saveSettings()" style="margin-top:.5rem;">Save Settings</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 <footer>
   <div class="foot-inner">
     <div>
@@ -425,146 +382,256 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </div>
   </div>
 </footer>
-<script>
-const LANG={
-  en:{nav_home:'Home',nav_rent:'For Rent',nav_sale:'For Sale',nav_contact:'Contact',admin_btn:'Admin',hero_tag:'Premium Real Estate · Nashik',hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',hero_sub:'Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.',badge_rent:'For Rent',badge_sale:'For Sale',btn_det:'View Details',btn_wa:'WhatsApp'},
-  hi:{nav_home:'होम',nav_rent:'किराये पर',nav_sale:'बिक्री हेतु',nav_contact:'संपर्क',admin_btn:'एडमिन',hero_tag:'प्रीमियम रियल एस्टेट · नाशिक',hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',badge_rent:'किराये पर',badge_sale:'बिक्री हेतु',btn_det:'विवरण देखें',btn_wa:'WhatsApp'},
-  mr:{nav_home:'मुखपृष्ठ',nav_rent:'भाड्याने',nav_sale:'विक्रीसाठी',nav_contact:'संपर्क',admin_btn:'ॲडमिन',hero_tag:'प्रीमियम रिअल इस्टेट · नाशिक',hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',badge_rent:'भाड्याने',badge_sale:'विक्रीसाठी',btn_det:'तपशील पहा',btn_wa:'WhatsApp'}
-};
-const IMGS=['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75&auto=format','https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=75&auto=format','https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=75&auto=format','https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&q=75&auto=format','https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=75&auto=format','https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=75&auto=format'];
-const DEF=[{id:1,title:'Spacious 2BHK Apartment',type:'rent',price:12000,bhk:'2',area:850,location:'Nashik Road, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:IMGS[0],desc:'Beautiful 2BHK on 3rd floor with balcony. Gym, security & parking. Near railway station.'},{id:2,title:'3BHK Independent House',type:'sale',price:4500000,bhk:'3',area:1450,location:'Gangapur Road, Nashik',bath:3,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:IMGS[1],desc:'Prime 3BHK bungalow with garden. Clear title, vastu compliant.'},{id:3,title:'1BHK Modern Flat',type:'rent',price:7500,bhk:'1',area:480,location:'Deolali Camp, Nashik',bath:1,parking:'No',furnish:'Fully Furnished',contact:'919999999999',img:IMGS[2],desc:'Ready to move fully furnished 1BHK. Ideal for working professionals.'},{id:4,title:'Commercial Shop Space',type:'rent',price:25000,bhk:'1',area:350,location:'Mahamarg, Nashik',bath:1,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:IMGS[3],desc:'Prime commercial space on main road. High footfall area.'},{id:5,title:'Luxury 4BHK Villa',type:'sale',price:9800000,bhk:'4',area:2800,location:'Dindori Road, Nashik',bath:4,parking:'Yes',furnish:'Fully Furnished',contact:'919999999999',img:IMGS[4],desc:'Luxurious 4BHK villa with swimming pool, terrace garden and modular kitchen.'},{id:6,title:'2BHK Society Flat',type:'sale',price:3200000,bhk:'2',area:960,location:'Satpur, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:IMGS[5],desc:'Well-maintained 2BHK in premium society. Lift, clubhouse, 24hr security.'}];
-let lang='en',admPass='admin123',defWA='919999999999',editId=null;
-let P=(()=>{try{const d=localStorage.getItem('nh2_props');return d?JSON.parse(d):DEF;}catch(e){return DEF;}})();
-const save=()=>{try{localStorage.setItem('nh2_props',JSON.stringify(P));}catch(e){}};
-const t=k=>LANG[lang][k]||LANG.en[k]||k;
-const fp=(p,type)=>{if(type==='rent')return'₹'+p.toLocaleString('en-IN')+'/mo';if(p>=10000000)return'₹'+(p/10000000).toFixed(2)+' Cr';if(p>=100000)return'₹'+(p/100000).toFixed(1)+' L';return'₹'+p.toLocaleString('en-IN');};
-(()=>{try{const d=localStorage.getItem('nh2_settings');if(d){const s=JSON.parse(d);admPass=s.pass||admPass;defWA=s.wa||defWA;if(s.brand)document.getElementById('foot-brand').textContent='🏠 '+s.brand;}}catch(e){}})();
-function setLang(l){lang=l;document.querySelectorAll('.lang-b').forEach(b=>b.classList.remove('active'));document.querySelector(`.lang-b[onclick="setLang('${l}')"]`).classList.add('active');document.querySelectorAll('[data-key]').forEach(el=>{const k=el.getAttribute('data-key');if(el.tagName!=='INPUT'&&el.tagName!=='TEXTAREA'&&el.tagName!=='SELECT')el.innerHTML=t(k);});
-window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
-window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
-window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
-window.switchAuthTab=function(tab){
-  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
-  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
-  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
-  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
-};
-window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
-// Admin via /admin URL
-if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
-  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
-}
-document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
-renderListings();}
-function showPage(pg){document.getElementById('page-home').style.display=pg==='home'?'block':'none';document.getElementById('page-contact').style.display=pg==='contact'?'block':'none';document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));if(pg==='home')document.getElementById('nav-home').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-function sa(a){document.getElementById('search-input').value=a;showPage('home');filterListings();}
-function filterTab(tab){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+tab)?.classList.add('active');document.getElementById('filter-type').value=tab;showPage('home');
-window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
-window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
-window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
-window.switchAuthTab=function(tab){
-  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
-  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
-  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
-  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
-};
-window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
-// Admin via /admin URL
-if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
-  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
-}
-document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
-renderListings();}
-function filterListings(){
-window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
-window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
-window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
-window.switchAuthTab=function(tab){
-  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
-  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
-  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
-  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
-};
-window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
-// Admin via /admin URL
-if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
-  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
-}
-document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
-renderListings();}
-function renderListings(){
-  const q=document.getElementById('search-input')?.value.toLowerCase()||'';
-  const ft=document.getElementById('filter-type')?.value||'all';
-  const fb=document.getElementById('filter-bhk')?.value||'all';
-  const f=P.filter(p=>(ft==='all'||p.type===ft)&&(!q||p.title.toLowerCase().includes(q)||p.location.toLowerCase().includes(q))&&(fb==='all'||(fb==='4'?parseInt(p.bhk)>=4:p.bhk===fb)));
-  const r=P.filter(p=>p.type==='rent').length,s=P.filter(p=>p.type==='sale').length;
-  ['cnt-all','cnt-rent','cnt-sale'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[P.length,r,s][i];});
-  ['stat-t','stat-r','stat-s'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[P.length,r,s][i];});
-  document.getElementById('stats-bar').innerHTML=`<div class="stat-pill">Total: <strong>${P.length}</strong></div><div class="stat-pill">Rent: <strong>${r}</strong></div><div class="stat-pill">Sale: <strong>${s}</strong></div>`;
-  const g=document.getElementById('listings-grid');
-  if(!f.length){g.innerHTML=`<div class="no-res"><div style="font-size:3rem;margin-bottom:1rem;opacity:.4">🔍</div><p>No properties found</p></div>`;return;}
-  g.innerHTML=f.map(p=>`<div class="card" onclick="openModal(${p.id})">
-    <div class="card-img">${p.img?`<img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-ph\\'>🏠</div>'">`:`<div class="card-ph">🏠</div>`}<span class="cbadge cbadge-${p.type}">${t('badge_'+p.type)}</span><span class="cprice">${fp(p.price,p.type)}</span><span class="cfav" onclick="event.stopPropagation()">🤍</span></div>
-    <div class="card-body"><div class="ctitle">${p.title}</div><div class="cloc">📍 ${p.location}</div><div class="cfeats"><span class="cfeat">🛏 ${p.bhk} BHK</span><span class="cfeat">🚿 ${p.bath} Bath</span><span class="cfeat">📐 ${p.area} sq.ft</span></div><div class="cacts"><button class="btn-det" onclick="event.stopPropagation();openModal(${p.id})">${t('btn_det')}</button><button class="btn-wa" onclick="event.stopPropagation();openWA('Interested in: ${p.title.replace(/'/g,"\\'")}',${p.id})">${t('btn_wa')}</button></div></div>
-  </div>`).join('');
-}
-function openModal(id){const p=P.find(x=>x.id===id);if(!p)return;document.getElementById('m-title').textContent=p.title;document.getElementById('m-price').textContent=fp(p.price,p.type);document.getElementById('m-img').innerHTML=p.img?`<img src="${p.img}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover"/>`:`<span style="font-size:4rem;opacity:.3">🏠</span>`;document.getElementById('m-grid').innerHTML=`<div class="mfield"><label>Type</label><span>${t('badge_'+p.type)}</span></div><div class="mfield"><label>BHK</label><span>${p.bhk} BHK</span></div><div class="mfield"><label>Area</label><span>${p.area} sq.ft</span></div><div class="mfield"><label>Bathrooms</label><span>${p.bath}</span></div><div class="mfield"><label>Parking</label><span>${p.parking}</span></div><div class="mfield"><label>Furnishing</label><span>${p.furnish}</span></div><div class="mfield" style="grid-column:1/-1"><label>Location</label><span>📍 ${p.location}</span></div>`;document.getElementById('m-desc').textContent=p.desc;const n=p.contact||defWA;document.getElementById('m-wa').onclick=()=>openWA(`Interested in: ${p.title} at ${p.location}`,id);document.getElementById('m-call').onclick=()=>window.open('tel:+'+n);document.getElementById('modal-ov').classList.add('open');}
-function closeModal(e){if(!e||e.target===document.getElementById('modal-ov'))document.getElementById('modal-ov').classList.remove('open');}
-function openWA(msg,id){let n=defWA;if(id){const p=P.find(x=>x.id===id);if(p&&p.contact)n=p.contact;}window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`,'_blank');}
-);if(tab==='manage')renderAList();}
-));showToast('Settings saved!');}
-function sendContact(){const name=document.getElementById('c-name').value.trim(),msg=document.getElementById('c-msg').value.trim();if(!name||!msg){showToast('Fill all fields.');return;}openWA(`Hi! I'm ${name}. ${msg}`);showToast('Opening WhatsApp...');}
-function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);}
 
-window.showAuth=function(){document.getElementById('auth-ov').classList.add('open');}
-window.closeAuth=function(){document.getElementById('auth-ov').classList.remove('open');}
-window.closeAuthOv=function(e){if(e.target===document.getElementById('auth-ov'))closeAuth();}
-window.switchAuthTab=function(tab){
-  document.getElementById('auth-signin').style.display=tab==='signin'?'flex':'none';
-  document.getElementById('auth-signup').style.display=tab==='signup'?'flex':'none';
-  document.getElementById('auth-tab-signin').classList.toggle('active',tab==='signin');
-  document.getElementById('auth-tab-signup').classList.toggle('active',tab==='signup');
+<!-- ===== MAIN JS ===== -->
+<script>
+// ---- Language Data ----
+const LANG = {
+  en: {
+    nav_home:'Home', nav_rent:'For Rent', nav_sale:'For Sale', nav_contact:'Contact',
+    hero_tag:'Premium Real Estate · Nashik',
+    hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',
+    hero_sub:'Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.',
+    contact_h:'Get In Touch', contact_sub:"We'll get back to you as soon as possible.",
+    badge_rent:'For Rent', badge_sale:'For Sale', btn_det:'View Details', btn_wa:'WhatsApp'
+  },
+  hi: {
+    nav_home:'होम', nav_rent:'किराये पर', nav_sale:'बिक्री हेतु', nav_contact:'संपर्क',
+    hero_tag:'प्रीमियम रियल एस्टेट · नाशिक',
+    hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',
+    hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',
+    contact_h:'संपर्क करें', contact_sub:'हम जल्द से जल्द आपसे संपर्क करेंगे।',
+    badge_rent:'किराये पर', badge_sale:'बिक्री हेतु', btn_det:'विवरण देखें', btn_wa:'WhatsApp'
+  },
+  mr: {
+    nav_home:'मुखपृष्ठ', nav_rent:'भाड्याने', nav_sale:'विक्रीसाठी', nav_contact:'संपर्क',
+    hero_tag:'प्रीमियम रिअल इस्टेट · नाशिक',
+    hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',
+    hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',
+    contact_h:'संपर्क करा', contact_sub:'आम्ही लवकरात लवकर तुमच्याशी संपर्क साधू.',
+    badge_rent:'भाड्याने', badge_sale:'विक्रीसाठी', btn_det:'तपशील पहा', btn_wa:'WhatsApp'
+  }
 };
-window.toggleUserDD=function(){document.getElementById('user-dd').classList.toggle('open');}
-// Admin via /admin URL
-if(window.location.pathname==='/admin'||window.location.pathname==='/admin/'){
-  window.addEventListener('DOMContentLoaded',function(){showAdmin();});
+
+const IMGS = [
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75&auto=format',
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=75&auto=format',
+  'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=75&auto=format',
+  'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&q=75&auto=format',
+  'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=75&auto=format',
+  'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=75&auto=format'
+];
+
+const DEF = [
+  {id:1,title:'Spacious 2BHK Apartment',type:'rent',price:12000,bhk:'2',area:850,location:'Nashik Road, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:IMGS[0],desc:'Beautiful 2BHK on 3rd floor with balcony. Gym, security & parking. Near railway station.'},
+  {id:2,title:'3BHK Independent House',type:'sale',price:4500000,bhk:'3',area:1450,location:'Gangapur Road, Nashik',bath:3,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:IMGS[1],desc:'Prime 3BHK bungalow with garden. Clear title, vastu compliant.'},
+  {id:3,title:'1BHK Modern Flat',type:'rent',price:7500,bhk:'1',area:480,location:'Deolali Camp, Nashik',bath:1,parking:'No',furnish:'Fully Furnished',contact:'919999999999',img:IMGS[2],desc:'Ready to move fully furnished 1BHK. Ideal for working professionals.'},
+  {id:4,title:'Commercial Shop Space',type:'rent',price:25000,bhk:'1',area:350,location:'Mahamarg, Nashik',bath:1,parking:'Yes',furnish:'Unfurnished',contact:'919999999999',img:IMGS[3],desc:'Prime commercial space on main road. High footfall area.'},
+  {id:5,title:'Luxury 4BHK Villa',type:'sale',price:9800000,bhk:'4',area:2800,location:'Dindori Road, Nashik',bath:4,parking:'Yes',furnish:'Fully Furnished',contact:'919999999999',img:IMGS[4],desc:'Luxurious 4BHK villa with swimming pool, terrace garden and modular kitchen.'},
+  {id:6,title:'2BHK Society Flat',type:'sale',price:3200000,bhk:'2',area:960,location:'Satpur, Nashik',bath:2,parking:'Yes',furnish:'Semi Furnished',contact:'919999999999',img:IMGS[5],desc:'Well-maintained 2BHK in premium society. Lift, clubhouse, 24hr security.'}
+];
+
+let lang = 'en';
+let defWA = '919999999999';
+let P = (()=>{ try{ const d=localStorage.getItem('nh2_props'); return d ? JSON.parse(d) : DEF; } catch(e){ return DEF; } })();
+
+const save = () => { try{ localStorage.setItem('nh2_props', JSON.stringify(P)); } catch(e){} };
+const t = k => (LANG[lang] && LANG[lang][k]) ? LANG[lang][k] : (LANG.en[k] || k);
+const fp = (p, type) => {
+  if(type==='rent') return '₹'+p.toLocaleString('en-IN')+'/mo';
+  if(p>=10000000) return '₹'+(p/10000000).toFixed(2)+' Cr';
+  if(p>=100000) return '₹'+(p/100000).toFixed(1)+' L';
+  return '₹'+p.toLocaleString('en-IN');
+};
+
+// Load settings
+(()=>{
+  try{
+    const d = localStorage.getItem('nh2_settings');
+    if(d){ const s=JSON.parse(d); defWA=s.wa||defWA; if(s.brand) document.getElementById('foot-brand').textContent='🏠 '+s.brand; }
+  } catch(e){}
+})();
+
+// ---- Language Switcher ----
+function setLang(l) {
+  lang = l;
+  // Update active button
+  document.querySelectorAll('.lang-b').forEach(b => b.classList.remove('active'));
+  const btn = document.querySelector(`.lang-b[onclick="setLang('${l}')"]`);
+  if(btn) btn.classList.add('active');
+  // Update all data-key elements
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const k = el.getAttribute('data-key');
+    if(el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA' && el.tagName !== 'SELECT') {
+      el.innerHTML = t(k);
+    }
+  });
+  // Re-render listings to update badge/button labels
+  renderListings();
 }
-document.addEventListener('click',function(e){const w=document.getElementById('user-wrap');if(w&&!w.contains(e.target))document.getElementById('user-dd').classList.remove('open');});
+
+// ---- Page Navigation ----
+function showPage(pg) {
+  document.getElementById('page-home').style.display = pg === 'home' ? 'block' : 'none';
+  document.getElementById('page-contact').style.display = pg === 'contact' ? 'block' : 'none';
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if(pg === 'home') document.getElementById('nav-home').classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function sa(area) {
+  document.getElementById('search-input').value = area;
+  showPage('home');
+  filterListings();
+}
+
+function filterTab(tab) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  const tabEl = document.getElementById('tab-'+tab);
+  if(tabEl) tabEl.classList.add('active');
+  document.getElementById('filter-type').value = tab;
+  showPage('home');
+  renderListings();
+}
+
+function filterListings() {
+  renderListings();
+}
+
+function renderListings() {
+  const q = (document.getElementById('search-input')?.value || '').toLowerCase();
+  const ft = document.getElementById('filter-type')?.value || 'all';
+  const fb = document.getElementById('filter-bhk')?.value || 'all';
+  const f = P.filter(p =>
+    (ft === 'all' || p.type === ft) &&
+    (!q || p.title.toLowerCase().includes(q) || p.location.toLowerCase().includes(q)) &&
+    (fb === 'all' || (fb === '4' ? parseInt(p.bhk) >= 4 : p.bhk === fb))
+  );
+  const r = P.filter(p => p.type === 'rent').length;
+  const s = P.filter(p => p.type === 'sale').length;
+
+  ['cnt-all','cnt-rent','cnt-sale'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = [P.length, r, s][i];
+  });
+  ['stat-t','stat-r','stat-s'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = [P.length, r, s][i];
+  });
+  document.getElementById('stats-bar').innerHTML =
+    `<div class="stat-pill">Total: <strong>${P.length}</strong></div>
+     <div class="stat-pill">Rent: <strong>${r}</strong></div>
+     <div class="stat-pill">Sale: <strong>${s}</strong></div>`;
+
+  const g = document.getElementById('listings-grid');
+  if(!f.length) {
+    g.innerHTML = `<div class="no-res"><div style="font-size:3rem;margin-bottom:1rem;opacity:.4">🔍</div><p>No properties found</p></div>`;
+    return;
+  }
+  g.innerHTML = f.map(p => `
+    <div class="card" onclick="openModal(${p.id})">
+      <div class="card-img">
+        ${p.img ? `<img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-ph\\'>🏠</div>'">` : `<div class="card-ph">🏠</div>`}
+        <span class="cbadge cbadge-${p.type}">${t('badge_'+p.type)}</span>
+        <span class="cprice">${fp(p.price, p.type)}</span>
+        <span class="cfav" onclick="event.stopPropagation()">🤍</span>
+      </div>
+      <div class="card-body">
+        <div class="ctitle">${p.title}</div>
+        <div class="cloc">📍 ${p.location}</div>
+        <div class="cfeats">
+          <span class="cfeat">🛏 ${p.bhk} BHK</span>
+          <span class="cfeat">🚿 ${p.bath} Bath</span>
+          <span class="cfeat">📐 ${p.area} sq.ft</span>
+        </div>
+        <div class="cacts">
+          <button class="btn-det" onclick="event.stopPropagation();openModal(${p.id})">${t('btn_det')}</button>
+          <button class="btn-wa" onclick="event.stopPropagation();openWA('Interested in: ${p.title.replace(/'/g,"\\'")}',${p.id})">${t('btn_wa')}</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openModal(id) {
+  const p = P.find(x => x.id === id);
+  if(!p) return;
+  document.getElementById('m-title').textContent = p.title;
+  document.getElementById('m-price').textContent = fp(p.price, p.type);
+  document.getElementById('m-img').innerHTML = p.img
+    ? `<img src="${p.img}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover"/>`
+    : `<span style="font-size:4rem;opacity:.3">🏠</span>`;
+  document.getElementById('m-grid').innerHTML = `
+    <div class="mfield"><label>Type</label><span>${t('badge_'+p.type)}</span></div>
+    <div class="mfield"><label>BHK</label><span>${p.bhk} BHK</span></div>
+    <div class="mfield"><label>Area</label><span>${p.area} sq.ft</span></div>
+    <div class="mfield"><label>Bathrooms</label><span>${p.bath}</span></div>
+    <div class="mfield"><label>Parking</label><span>${p.parking}</span></div>
+    <div class="mfield"><label>Furnishing</label><span>${p.furnish}</span></div>
+    <div class="mfield" style="grid-column:1/-1"><label>Location</label><span>📍 ${p.location}</span></div>`;
+  document.getElementById('m-desc').textContent = p.desc;
+  const n = p.contact || defWA;
+  document.getElementById('m-wa').onclick = () => openWA(`Interested in: ${p.title} at ${p.location}`, id);
+  document.getElementById('m-call').onclick = () => window.open('tel:+'+n);
+  document.getElementById('modal-ov').classList.add('open');
+}
+
+function closeModal(e) {
+  if(!e || e.target === document.getElementById('modal-ov'))
+    document.getElementById('modal-ov').classList.remove('open');
+}
+
+function openWA(msg, id) {
+  let n = defWA;
+  if(id){ const p = P.find(x => x.id === id); if(p && p.contact) n = p.contact; }
+  window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function sendContact() {
+  const name = document.getElementById('c-name').value.trim();
+  const msg = document.getElementById('c-msg').value.trim();
+  if(!name || !msg){ showToast('Fill all fields.'); return; }
+  openWA(`Hi! I'm ${name}. ${msg}`);
+  showToast('Opening WhatsApp...');
+}
+
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ---- Auth Modal ----
+function showAuth() {
+  document.getElementById('auth-ov').classList.add('open');
+}
+function closeAuth() {
+  document.getElementById('auth-ov').classList.remove('open');
+}
+function closeAuthOv(e) {
+  if(e.target === document.getElementById('auth-ov')) closeAuth();
+}
+function switchAuthTab(tab) {
+  document.getElementById('auth-signin').style.display = tab === 'signin' ? 'flex' : 'none';
+  document.getElementById('auth-signup').style.display = tab === 'signup' ? 'flex' : 'none';
+  document.getElementById('auth-tab-signin').classList.toggle('active', tab === 'signin');
+  document.getElementById('auth-tab-signup').classList.toggle('active', tab === 'signup');
+}
+function toggleUserDD() {
+  document.getElementById('user-dd').classList.toggle('open');
+}
+
+// Close user dropdown on outside click
+document.addEventListener('click', function(e) {
+  const w = document.getElementById('user-wrap');
+  if(w && !w.contains(e.target)) document.getElementById('user-dd').classList.remove('open');
+});
+
+// Initial render
 renderListings();
 </script>
 
-<!-- AUTH MODAL -->
-<div class="auth-ov" id="auth-ov" onclick="closeAuthOv(event)">
-  <div class="auth-box">
-    <div class="auth-hdr">
-      <h2>🏠 NashikHomes</h2>
-      <button class="mclose" onclick="closeAuth()">×</button>
-    </div>
-    <div class="auth-tabs-wrap">
-      <button class="auth-tab active" id="auth-tab-signin" onclick="switchAuthTab('signin')">Sign In</button>
-      <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
-    </div>
-    <!-- SIGN IN -->
-    <div id="auth-signin" class="auth-body">
-      <div class="auth-err" id="signin-err"></div>
-      <input type="email" class="auth-input" id="signin-email" placeholder="Email address"/>
-      <input type="password" class="auth-input" id="signin-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doSignIn()"/>
-      <button class="auth-btn" onclick="doSignIn()">Sign In</button>
-      <p style="font-size:.75rem;color:var(--text3);text-align:center;">Don't have an account? <a onclick="switchAuthTab('signup')" style="color:var(--gold);cursor:pointer;">Sign Up</a></p>
-    </div>
-    <!-- SIGN UP -->
-    <div id="auth-signup" class="auth-body" style="display:none;">
-      <div class="auth-err" id="signup-err"></div>
-      <input type="text" class="auth-input" id="signup-name" placeholder="Full Name"/>
-      <input type="email" class="auth-input" id="signup-email" placeholder="Email address"/>
-      <input type="password" class="auth-input" id="signup-pass" placeholder="Password (min 6 chars)" onkeydown="if(event.key==='Enter')doSignUp()"/>
-      <button class="auth-btn" onclick="doSignUp()">Create Account</button>
-      <p style="font-size:.75rem;color:var(--text3);text-align:center;">Already have an account? <a onclick="switchAuthTab('signin')" style="color:var(--gold);cursor:pointer;">Sign In</a></p>
-    </div>
-  </div>
-</div>
-
+<!-- ===== FIREBASE AUTH ===== -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
@@ -583,53 +650,53 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, user => {
   if(user){
-    document.getElementById('nav-signin-btn').style.display='none';
-    document.getElementById('nav-adm-btn').style.display='none';
-    document.getElementById('user-wrap').style.display='flex';
-    const initials = (user.displayName||user.email||'U').charAt(0).toUpperCase();
-    document.getElementById('user-avatar').textContent=initials;
-    document.getElementById('user-dd-name').textContent=user.displayName||'User';
-    document.getElementById('user-dd-email').textContent=user.email;
+    document.getElementById('nav-signin-btn').style.display = 'none';
+    document.getElementById('user-wrap').style.display = 'flex';
+    const initials = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
+    document.getElementById('user-avatar').textContent = initials;
+    document.getElementById('user-dd-name').textContent = user.displayName || 'User';
+    document.getElementById('user-dd-email').textContent = user.email;
   } else {
-    document.getElementById('nav-signin-btn').style.display='block';
-    document.getElementById('nav-adm-btn').style.display='block';
-    document.getElementById('user-wrap').style.display='none';
+    document.getElementById('nav-signin-btn').style.display = 'block';
+    document.getElementById('user-wrap').style.display = 'none';
   }
 });
 
-window.doSignIn = async function(){
-  const email=document.getElementById('signin-email').value.trim();
-  const pass=document.getElementById('signin-pass').value;
-  const errEl=document.getElementById('signin-err');
-  errEl.style.display='none';
-  try{
-    await signInWithEmailAndPassword(auth,email,pass);
+window.doSignIn = async function() {
+  const email = document.getElementById('signin-email').value.trim();
+  const pass = document.getElementById('signin-pass').value;
+  const errEl = document.getElementById('signin-err');
+  errEl.style.display = 'none';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
     closeAuth();
     showToast('Welcome back! 👋');
-  } catch(e){
-    errEl.textContent=e.code==='auth/invalid-credential'?'Incorrect email or password.':e.message;
-    errEl.style.display='block';
+  } catch(e) {
+    errEl.textContent = e.code === 'auth/invalid-credential' ? 'Incorrect email or password.' : e.message;
+    errEl.style.display = 'block';
   }
 };
 
-window.doSignUp = async function(){
-  const name=document.getElementById('signup-name').value.trim();
-  const email=document.getElementById('signup-email').value.trim();
-  const pass=document.getElementById('signup-pass').value;
-  const errEl=document.getElementById('signup-err');
-  errEl.style.display='none';
-  try{
-    const cred=await createUserWithEmailAndPassword(auth,email,pass);
-    if(name) await updateProfile(cred.user,{displayName:name});
+window.doSignUp = async function() {
+  const name = document.getElementById('signup-name').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass = document.getElementById('signup-pass').value;
+  const errEl = document.getElementById('signup-err');
+  errEl.style.display = 'none';
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    if(name) await updateProfile(cred.user, {displayName: name});
     closeAuth();
     showToast('Account created! Welcome 🎉');
-  } catch(e){
-    errEl.textContent=e.code==='auth/email-already-in-use'?'Email already registered.':e.code==='auth/weak-password'?'Password must be at least 6 characters.':e.message;
-    errEl.style.display='block';
+  } catch(e) {
+    errEl.textContent = e.code === 'auth/email-already-in-use' ? 'Email already registered.'
+      : e.code === 'auth/weak-password' ? 'Password must be at least 6 characters.'
+      : e.message;
+    errEl.style.display = 'block';
   }
 };
 
-window.signOutUser = async function(){
+window.signOutUser = async function() {
   await signOut(auth);
   document.getElementById('user-dd').classList.remove('open');
   showToast('Signed out successfully.');
