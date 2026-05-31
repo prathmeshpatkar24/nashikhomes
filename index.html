@@ -590,7 +590,7 @@ const LANG = {
     hero_badge:'Premium Real Estate · Nashik',
     hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',
     hero_sub:'Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.',
-    nav_home:'Home', nav_rent:'For Rent', nav_sale:'For Sale', nav_contact:'Contact',
+    nav_home:'Home', nav_rent:'For Rent', nav_sale:'For Sale', nav_about:'About Us', nav_contact:'Contact',
     search_ph:'Search by location, title...',
     all_types:'All Types', for_rent:'For Rent', for_sale:'For Sale',
     any_bhk:'Any BHK',
@@ -633,7 +633,7 @@ const LANG = {
     hero_badge:'प्रीमियम रियल एस्टेट · नाशिक',
     hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',
     hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',
-    nav_home:'होम', nav_rent:'किराये पर', nav_sale:'बिक्री हेतु', nav_contact:'संपर्क',
+    nav_home:'होम', nav_rent:'किराये पर', nav_sale:'बिक्री हेतु', nav_about:'हमारे बारे में', nav_contact:'संपर्क',
     search_ph:'लोकेशन या नाम से खोजें...',
     all_types:'सभी प्रकार', for_rent:'किराये पर', for_sale:'बिक्री हेतु',
     any_bhk:'कोई BHK',
@@ -676,7 +676,7 @@ const LANG = {
     hero_badge:'प्रीमियम रिअल इस्टेट · नाशिक',
     hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',
     hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',
-    nav_home:'मुखपृष्ठ', nav_rent:'भाड्याने', nav_sale:'विक्रीसाठी', nav_contact:'संपर्क',
+    nav_home:'मुखपृष्ठ', nav_rent:'भाड्याने', nav_sale:'विक्रीसाठी', nav_about:'आमच्याबद्दल', nav_contact:'संपर्क',
     search_ph:'स्थान किंवा नावाने शोधा...',
     all_types:'सर्व प्रकार', for_rent:'भाड्याने', for_sale:'विक्रीसाठी',
     any_bhk:'कोणताही BHK',
@@ -738,7 +738,8 @@ function applyLang(){
   const navLinks = document.querySelectorAll('.nav-links a');
   if(navLinks[1]) navLinks[1].textContent = t('nav_rent');
   if(navLinks[2]) navLinks[2].textContent = t('nav_sale');
-  if(navLinks[3]) navLinks[3].textContent = t('nav_contact');
+  if(navLinks[3]) navLinks[3].textContent = t('nav_about');
+  if(navLinks[4]) navLinks[4].textContent = t('nav_contact');
   const si = document.getElementById('search-input');
   if(si) si.placeholder = t('search_ph');
   const srchBtn = document.querySelector('.srch-btn');
