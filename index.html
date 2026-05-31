@@ -253,7 +253,13 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 <nav>
   <div class="nav-inner">
     <a class="logo" onclick="showPage('home')">
-      <div class="logo-mark">🏠</div>
+      <svg width="38" height="38" viewBox="0 0 80 80" style="flex-shrink:0">
+        <rect width="80" height="80" rx="16" fill="#1A1A28" stroke="#C9A84C" stroke-width="1.5" stroke-opacity="0.5"/>
+        <polygon points="12,38 40,10 68,38" fill="#C9A84C" opacity="0.15"/>
+        <polyline points="12,38 40,10 68,38" fill="none" stroke="#C9A84C" stroke-width="3" stroke-linejoin="round"/>
+        <rect x="18" y="37" width="44" height="34" rx="2" fill="#1A1A28"/>
+        <text x="40" y="62" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#C9A84C" text-anchor="middle" letter-spacing="-1">NH</text>
+      </svg>
       <div class="logo-name">Nashik<em>Homes</em></div>
     </a>
     <div class="nav-links">
@@ -287,7 +293,10 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 <div class="auth-ov" id="auth-ov" onclick="closeAuthOv(event)">
   <div class="auth-box">
     <div class="auth-hdr">
-      <h2>🏠 NashikHomes</h2>
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        <svg width="28" height="28" viewBox="0 0 80 80"><rect width="80" height="80" rx="16" fill="#1A1A28" stroke="#C9A84C" stroke-width="2" stroke-opacity="0.5"/><polygon points="12,38 40,10 68,38" fill="#C9A84C" opacity="0.15"/><polyline points="12,38 40,10 68,38" fill="none" stroke="#C9A84C" stroke-width="3.5" stroke-linejoin="round"/><rect x="18" y="37" width="44" height="34" rx="2" fill="#1A1A28"/><text x="40" y="62" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#C9A84C" text-anchor="middle" letter-spacing="-1">NH</text></svg>
+        NashikHomes
+      </h2>
       <button class="mclose" onclick="closeAuth()">×</button>
     </div>
     <div class="auth-tabs-wrap">
@@ -321,7 +330,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   </div>
   <div class="intent-content">
     <div class="intent-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
-    <h1 class="intent-h1">Welcome to <span>NashikHomes</span></h1>
+    <h1 class="intent-h1">Welcome to <span>Nashik<em style="font-style:normal;font-weight:300;color:var(--text)">Homes</em></span></h1>
     <p class="intent-sub">Nashik's most trusted property portal. Tell us what you're looking for.</p>
     <div class="intent-question">What are you looking for?</div>
     <div class="intent-cards">
@@ -466,10 +475,13 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 
 <footer>
   <div class="foot-inner">
-    <div>
-      <div class="foot-brand" id="foot-brand">🏠 NashikHomes</div>
-      <div class="foot-txt">Premium Real Estate Platform · Nashik, Maharashtra</div>
-    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="32" height="32" viewBox="0 0 80 80"><rect width="80" height="80" rx="16" fill="#1A1A28" stroke="#C9A84C" stroke-width="2" stroke-opacity="0.5"/><polygon points="12,38 40,10 68,38" fill="#C9A84C" opacity="0.15"/><polyline points="12,38 40,10 68,38" fill="none" stroke="#C9A84C" stroke-width="3.5" stroke-linejoin="round"/><rect x="18" y="37" width="44" height="34" rx="2" fill="#1A1A28"/><text x="40" y="62" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#C9A84C" text-anchor="middle" letter-spacing="-1">NH</text></svg>
+        <div>
+          <div class="foot-brand" id="foot-brand">NashikHomes</div>
+          <div class="foot-txt">Premium Real Estate Platform · Nashik, Maharashtra</div>
+        </div>
+      </div>
     <div class="foot-links">
       <a onclick="showPage('home')">Home</a>
       <a onclick="filterTab('rent')">Rent</a>
