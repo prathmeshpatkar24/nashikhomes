@@ -414,9 +414,194 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 
 <!-- ===== MAIN JS ===== -->
 <script>
-let allProps = [];       // Firestore se aane wala data yahan store hoga
+let allProps = [];
 let defWA = '919999999999';
 let currentFilter = 'all';
+let lang = 'en';
+
+// ---- Language Data ----
+const LANG = {
+  en:{
+    hero_badge:'Premium Real Estate · Nashik',
+    hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',
+    hero_sub:'Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.',
+    nav_home:'Home', nav_rent:'For Rent', nav_sale:'For Sale', nav_contact:'Contact',
+    search_ph:'Search by location, title...',
+    all_types:'All Types', for_rent:'For Rent', for_sale:'For Sale',
+    any_bhk:'Any BHK',
+    srch_btn:'🔍 Search',
+    pop_areas:'Popular Areas',
+    avail:'Available', properties:'Properties',
+    tab_all:'All', tab_rent:'For Rent', tab_sale:'For Sale',
+    why_h:'Why Choose', why_sub:'Trusted by thousands of families across Nashik',
+    why1_h:'Verified Listings', why1_p:'Every property personally verified before listing.',
+    why2_h:'Instant Connect', why2_p:'Direct WhatsApp — zero middlemen.',
+    why3_h:'Best Prices', why3_p:'Competitive pricing across all areas of Nashik.',
+    why4_h:'Safe & Secure', why4_p:'Your privacy protected. We never share your data.',
+    contact_h:'Get In Touch', contact_sub:"We'll get back to you as soon as possible.",
+    contact_name:'Your Name', contact_phone:'Phone Number', contact_msg:'Your message...',
+    send_msg:'Send Message', wa_us:'WhatsApp Us', wa_quick:'Quick response on WhatsApp',
+    open_wa:'Open WhatsApp',
+    badge_rent:'For Rent', badge_sale:'For Sale', badge_rented:'Rented', badge_sold:'Sold',
+    view_det:'View Details', wa_btn:'WhatsApp',
+    no_results:'No properties found',
+    foot_txt:'Premium Real Estate Platform · Nashik, Maharashtra',
+    signin:'Sign In', signout:'Sign Out', welcome:'Welcome back! 👋',
+    err_invalid:'Incorrect email or password.',
+    err_email_used:'This email is already registered.',
+    err_weak_pass:'Password must be at least 6 characters.',
+    fill_fields:'Please fill all fields.'
+  },
+  hi:{
+    hero_badge:'प्रीमियम रियल एस्टेट · नाशिक',
+    hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',
+    hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',
+    nav_home:'होम', nav_rent:'किराये पर', nav_sale:'बिक्री हेतु', nav_contact:'संपर्क',
+    search_ph:'लोकेशन या नाम से खोजें...',
+    all_types:'सभी प्रकार', for_rent:'किराये पर', for_sale:'बिक्री हेतु',
+    any_bhk:'कोई BHK',
+    srch_btn:'🔍 खोजें',
+    pop_areas:'लोकप्रिय क्षेत्र',
+    avail:'उपलब्ध', properties:'प्रॉपर्टी',
+    tab_all:'सभी', tab_rent:'किराये पर', tab_sale:'बिक्री हेतु',
+    why_h:'क्यों चुनें', why_sub:'नाशिक के हजारों परिवारों का भरोसा',
+    why1_h:'वेरिफाइड लिस्टिंग', why1_p:'हर प्रॉपर्टी लिस्ट करने से पहले जांची जाती है।',
+    why2_h:'तुरंत संपर्क', why2_p:'सीधे WhatsApp — कोई बिचौलिया नहीं।',
+    why3_h:'सर्वोत्तम कीमत', why3_p:'नाशिक के सभी क्षेत्रों में प्रतिस्पर्धी कीमतें।',
+    why4_h:'सुरक्षित', why4_p:'आपकी प्राइवेसी सुरक्षित। हम कभी डेटा साझा नहीं करते।',
+    contact_h:'संपर्क करें', contact_sub:'हम जल्द से जल्द आपसे संपर्क करेंगे।',
+    contact_name:'आपका नाम', contact_phone:'फोन नंबर', contact_msg:'आपका संदेश...',
+    send_msg:'संदेश भेजें', wa_us:'WhatsApp करें', wa_quick:'WhatsApp पर त्वरित जवाब',
+    open_wa:'WhatsApp खोलें',
+    badge_rent:'किराये पर', badge_sale:'बिक्री हेतु', badge_rented:'किराया हो गया', badge_sold:'बिक गया',
+    view_det:'विवरण देखें', wa_btn:'WhatsApp',
+    no_results:'कोई प्रॉपर्टी नहीं मिली',
+    foot_txt:'प्रीमियम रियल एस्टेट प्लेटफॉर्म · नाशिक, महाराष्ट्र',
+    signin:'साइन इन', signout:'साइन आउट', welcome:'वापस स्वागत है! 👋',
+    err_invalid:'गलत ईमेल या पासवर्ड।',
+    err_email_used:'यह ईमेल पहले से रजिस्टर है।',
+    err_weak_pass:'पासवर्ड कम से कम 6 अक्षर का होना चाहिए।',
+    fill_fields:'कृपया सभी फील्ड भरें।'
+  },
+  mr:{
+    hero_badge:'प्रीमियम रिअल इस्टेट · नाशिक',
+    hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',
+    hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',
+    nav_home:'मुखपृष्ठ', nav_rent:'भाड्याने', nav_sale:'विक्रीसाठी', nav_contact:'संपर्क',
+    search_ph:'स्थान किंवा नावाने शोधा...',
+    all_types:'सर्व प्रकार', for_rent:'भाड्याने', for_sale:'विक्रीसाठी',
+    any_bhk:'कोणताही BHK',
+    srch_btn:'🔍 शोधा',
+    pop_areas:'लोकप्रिय भाग',
+    avail:'उपलब्ध', properties:'मालमत्ता',
+    tab_all:'सर्व', tab_rent:'भाड्याने', tab_sale:'विक्रीसाठी',
+    why_h:'का निवडावे', why_sub:'नाशिकमधील हजारो कुटुंबांचा विश्वास',
+    why1_h:'सत्यापित यादी', why1_p:'प्रत्येक मालमत्ता यादी करण्यापूर्वी तपासली जाते.',
+    why2_h:'त्वरित संपर्क', why2_p:'थेट WhatsApp — कोणताही मध्यस्थ नाही.',
+    why3_h:'सर्वोत्तम किंमती', why3_p:'नाशिकच्या सर्व भागात स्पर्धात्मक किंमती.',
+    why4_h:'सुरक्षित', why4_p:'तुमची गोपनीयता सुरक्षित. आम्ही कधीही डेटा शेअर करत नाही.',
+    contact_h:'संपर्क करा', contact_sub:'आम्ही लवकरात लवकर तुमच्याशी संपर्क साधू.',
+    contact_name:'तुमचे नाव', contact_phone:'फोन नंबर', contact_msg:'तुमचा संदेश...',
+    send_msg:'संदेश पाठवा', wa_us:'WhatsApp करा', wa_quick:'WhatsApp वर त्वरित प्रतिसाद',
+    open_wa:'WhatsApp उघडा',
+    badge_rent:'भाड्याने', badge_sale:'विक्रीसाठी', badge_rented:'भाडे झाले', badge_sold:'विकले',
+    view_det:'तपशील पहा', wa_btn:'WhatsApp',
+    no_results:'कोणतीही मालमत्ता सापडली नाही',
+    foot_txt:'प्रीमियम रिअल इस्टेट प्लॅटफॉर्म · नाशिक, महाराष्ट्र',
+    signin:'साइन इन', signout:'साइन आउट', welcome:'पुन्हा स्वागत आहे! 👋',
+    err_invalid:'चुकीची ईमेल किंवा पासवर्ड.',
+    err_email_used:'ही ईमेल आधीच नोंदणीकृत आहे.',
+    err_weak_pass:'पासवर्ड किमान 6 अक्षरे असणे आवश्यक आहे.',
+    fill_fields:'कृपया सर्व फील्ड भरा.'
+  }
+};
+const t = k => (LANG[lang]&&LANG[lang][k]) ? LANG[lang][k] : (LANG.en[k]||k);
+window.t = t;
+
+function setLang(l){
+  lang = l;
+  // Active button update
+  document.querySelectorAll('.lang-b').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-b[onclick="setLang('${l}')"]`)?.classList.add('active');
+  applyLang();
+  renderListings();
+}
+
+function applyLang(){
+  // Hero
+  const badge = document.querySelector('.hero-badge');
+  if(badge) badge.innerHTML = `<span class="hero-dot"></span>${t('hero_badge')}`;
+  const h1 = document.querySelector('.hero h1');
+  if(h1) h1.innerHTML = t('hero_h1');
+  const sub = document.querySelector('.hero-sub');
+  if(sub) sub.textContent = t('hero_sub');
+
+  // Nav links
+  document.getElementById('nav-home').textContent = t('nav_home');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  if(navLinks[1]) navLinks[1].textContent = t('nav_rent');
+  if(navLinks[2]) navLinks[2].textContent = t('nav_sale');
+  if(navLinks[3]) navLinks[3].textContent = t('nav_contact');
+
+  // Search bar
+  const si = document.getElementById('search-input');
+  if(si) si.placeholder = t('search_ph');
+  const srchBtn = document.querySelector('.srch-btn');
+  if(srchBtn) srchBtn.textContent = t('srch_btn');
+
+  // Filter options
+  const ft = document.getElementById('filter-type');
+  if(ft){ ft.options[0].text=t('all_types'); ft.options[1].text=t('for_rent'); ft.options[2].text=t('for_sale'); }
+  const fb = document.getElementById('filter-bhk');
+  if(fb){ fb.options[0].text=t('any_bhk'); }
+
+  // Loc strip
+  const ll = document.querySelector('.loc-label');
+  if(ll) ll.textContent = t('pop_areas');
+
+  // Section head
+  const sh = document.querySelector('.sec-head h2');
+  if(sh) sh.innerHTML = `${t('avail')} <span>${t('properties')}</span>`;
+
+  // Tabs
+  const ta=document.getElementById('tab-all'), tr=document.getElementById('tab-rent'), ts=document.getElementById('tab-sale');
+  if(ta){ const c=ta.querySelector('.cnt'); ta.childNodes[0].textContent=t('tab_all')+' '; if(c) ta.insertBefore(document.createTextNode(''),c); }
+  // simpler approach:
+  const cntAll=document.getElementById('cnt-all')?.textContent||'0';
+  const cntRent=document.getElementById('cnt-rent')?.textContent||'0';
+  const cntSale=document.getElementById('cnt-sale')?.textContent||'0';
+  if(ta) ta.innerHTML = `${t('tab_all')} <span class="cnt" id="cnt-all">${cntAll}</span>`;
+  if(tr) tr.innerHTML = `${t('tab_rent')} <span class="cnt" id="cnt-rent">${cntRent}</span>`;
+  if(ts) ts.innerHTML = `${t('tab_sale')} <span class="cnt" id="cnt-sale">${cntSale}</span>`;
+
+  // Why section
+  const wh = document.querySelector('.why-hd h2');
+  if(wh) wh.innerHTML = `${t('why_h')} <em>NashikHomes?</em>`;
+  const wp = document.querySelector('.why-hd p');
+  if(wp) wp.textContent = t('why_sub');
+  const whyCards = document.querySelectorAll('.why-card');
+  const whyData = [['why1_h','why1_p'],['why2_h','why2_p'],['why3_h','why3_p'],['why4_h','why4_p']];
+  whyCards.forEach((c,i)=>{
+    const h=c.querySelector('h3'), p=c.querySelector('p');
+    if(h&&whyData[i]) h.textContent=t(whyData[i][0]);
+    if(p&&whyData[i]) p.textContent=t(whyData[i][1]);
+  });
+
+  // Contact page
+  const ch=document.querySelector('#page-contact h2');
+  if(ch) ch.textContent=t('contact_h');
+  const cs=document.querySelector('#page-contact > p');
+  if(cs) cs.textContent=t('contact_sub');
+  const cn=document.getElementById('c-name'); if(cn) cn.placeholder=t('contact_name');
+  const cp=document.getElementById('c-phone'); if(cp) cp.placeholder=t('contact_phone');
+  const cm=document.getElementById('c-msg'); if(cm) cm.placeholder=t('contact_msg');
+
+  // Footer
+  const ft2=document.querySelector('.foot-txt'); if(ft2) ft2.textContent=t('foot_txt');
+
+  // Sign in button
+  const sib=document.getElementById('nav-signin-btn'); if(sib) sib.textContent=t('signin');
+}
 
 const fp = (p, type) => {
   if(type==='rent') return '₹'+p.toLocaleString('en-IN')+'/mo';
@@ -489,7 +674,7 @@ function renderListings(){
     <div class="card" onclick="openModal('${p.id}')">
       <div class="card-img">
         ${p.img?`<img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=&quot;card-ph&quot;>🏠</div>'">`:`<div class="card-ph">🏠</div>`}
-        <span class="cbadge cbadge-${p.status==='sold'||p.status==='rented'?'sold':p.type}">${p.status==='sold'?'Sold':p.status==='rented'?'Rented':p.type==='rent'?'For Rent':'For Sale'}</span>
+        <span class="cbadge cbadge-${p.status==='sold'||p.status==='rented'?'sold':p.type}">${p.status==='sold'?t('badge_sold'):p.status==='rented'?t('badge_rented'):p.type==='rent'?t('badge_rent'):t('badge_sale')}</span>
         <span class="cprice">${fp(p.price,p.type)}</span>
         <span class="cfav" onclick="event.stopPropagation()">🤍</span>
       </div>
@@ -502,8 +687,8 @@ function renderListings(){
           <span class="cfeat">📐 ${p.area} sq.ft</span>
         </div>
         <div class="cacts">
-          <button class="btn-det" onclick="event.stopPropagation();openModal('${p.id}')">View Details</button>
-          <button class="btn-wa" onclick="event.stopPropagation();openWA('Interested in: ${p.title.replace(/'/g,"\\'")}','${p.id}')">WhatsApp</button>
+          <button class="btn-det" onclick="event.stopPropagation();openModal('${p.id}')">${t('view_det')}</button>
+          <button class="btn-wa" onclick="event.stopPropagation();openWA('Interested in: ${p.title.replace(/'/g,"\\'")}','${p.id}')">${t('wa_btn')}</button>
         </div>
       </div>
     </div>`).join('');
@@ -541,7 +726,7 @@ function openWA(msg,id){
 function sendContact(){
   const name=document.getElementById('c-name').value.trim();
   const msg=document.getElementById('c-msg').value.trim();
-  if(!name||!msg){ showToast('Please fill all fields.'); return; }
+  if(!name||!msg){ showToast(t('fill_fields')); return; }
   openWA(`Hi! I'm ${name}. ${msg}`);
 }
 function showToast(msg){
@@ -565,9 +750,10 @@ document.addEventListener('click',function(e){
   if(w&&!w.contains(e.target)) document.getElementById('user-dd').classList.remove('open');
 });
 
-// Expose for Firebase module
+// Expose for Firebase module and HTML onclick
 window.renderListings = renderListings;
 window.showToast = showToast;
+window.setLang = setLang;
 </script>
 
 <!-- ===== FIREBASE (Auth + Firestore) ===== -->
