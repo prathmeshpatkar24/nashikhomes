@@ -704,13 +704,16 @@ function openModal(id){
   document.getElementById('m-title').textContent=p.title;
   document.getElementById('m-price').textContent=fp(p.price,p.type);
   document.getElementById('m-img').innerHTML=p.img?`<img src="${p.img}" alt="${p.title}"/>`:`<span style="font-size:4rem;opacity:.3">🏠</span>`;
+  const _catIcon = {'shop':'🏪','office':'🏬','warehouse':'🏭','plot':'🌿','villa':'🏡','bunglow':'🏠','rowhouse':'🏘️','flat':'🏢'}[p.category]||'🏢';
+  const _catLabel = p.category ? p.category.charAt(0).toUpperCase()+p.category.slice(1) : 'Property';
   document.getElementById('m-grid').innerHTML=`
     <div class="mfield"><label>Type</label><span>${p.type==='rent'?'For Rent':'For Sale'}</span></div>
-    <div class="mfield"><label>BHK</label><span>${p.bhk} BHK</span></div>
-    <div class="mfield"><label>Area</label><span>${p.area} sq.ft</span></div>
-    <div class="mfield"><label>Bathrooms</label><span>${p.bath}</span></div>
-    <div class="mfield"><label>Parking</label><span>${p.parking}</span></div>
-    <div class="mfield"><label>Furnishing</label><span>${p.furnish}</span></div>
+    <div class="mfield"><label>Category</label><span>${_catIcon} ${_catLabel}</span></div>
+    ${p.bhk && p.bhk !== 'null' && p.bhk !== null ? `<div class="mfield"><label>BHK</label><span>${p.bhk} BHK</span></div>` : ''}
+    ${p.area ? `<div class="mfield"><label>Area</label><span>${p.area} sq.ft</span></div>` : ''}
+    ${p.bath ? `<div class="mfield"><label>Bathrooms</label><span>${p.bath}</span></div>` : ''}
+    <div class="mfield"><label>Parking</label><span>${p.parking||'—'}</span></div>
+    ${p.furnish && p.furnish !== 'null' && p.furnish !== null ? `<div class="mfield"><label>Furnishing</label><span>${p.furnish}</span></div>` : ''}
     <div class="mfield" style="grid-column:1/-1"><label>Location</label><span>📍 ${p.location}</span></div>`;
   document.getElementById('m-desc').textContent=p.desc;
   const n=p.contact||defWA;
