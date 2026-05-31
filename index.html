@@ -63,9 +63,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(8,8,16,0.94);backdrop-filt
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:700;line-height:1.06;margin-bottom:1rem;color:var(--text);max-width:680px;}
 .hero h1 span{color:var(--gold);font-style:italic;}
 .hero-sub{font-size:1.05rem;color:var(--text2);max-width:460px;margin-bottom:2.5rem;line-height:1.75;font-weight:300;}
-.hero-nums{display:flex;gap:3rem;margin-bottom:3rem;flex-wrap:wrap;}
-.hnv{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1;display:block;}
-.hnl{font-size:.7rem;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;}
+.hero-nums{display:flex;gap:2.5rem;margin-bottom:3rem;flex-wrap:wrap;}
+.hero-nums > div{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
+.hnv{font-size:1.6rem;line-height:1;display:block;}
+.hnl{font-size:.68rem;color:var(--text2);letter-spacing:1px;text-transform:uppercase;}
 .search-wrap{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;background:rgba(21,21,34,.95);border:1px solid var(--bdr);border-radius:var(--r);padding:1rem 1.1rem;max-width:860px;backdrop-filter:blur(10px);}
 .search-wrap input,.search-wrap select{background:var(--surf3);border:1px solid rgba(255,255,255,.07);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:9px 13px;border-radius:var(--rsm);outline:none;transition:border-color .2s;}
 .search-wrap input{flex:1;min-width:170px;}
@@ -291,11 +292,15 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     <div class="hero-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
     <h1>Find Your <span>Dream Home</span><br/>in Nashik</h1>
     <p class="hero-sub">Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.</p>
+
+    <!-- ✅ USP Badges — numbers ki jagah -->
     <div class="hero-nums">
-      <div><span class="hnv" id="stat-t">—</span><span class="hnl">Properties</span></div>
-      <div><span class="hnv" id="stat-r">—</span><span class="hnl">For Rent</span></div>
-      <div><span class="hnv" id="stat-s">—</span><span class="hnl">For Sale</span></div>
+      <div><span class="hnv">✅</span><span class="hnl">Verified Listings</span></div>
+      <div><span class="hnv">⚡</span><span class="hnl">Direct WhatsApp</span></div>
+      <div><span class="hnv">🏆</span><span class="hnl">Nashik's #1 Portal</span></div>
+      <div><span class="hnv">📍</span><span class="hnl">All Areas Covered</span></div>
     </div>
+
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="Search by location, title..." oninput="renderListings()"/>
       <select id="filter-type" onchange="renderListings()">
@@ -423,7 +428,6 @@ let defWA = '919999999999';
 let currentFilter = 'all';
 let lang = 'en';
 
-// ---- Language Data ----
 const LANG = {
   en:{
     hero_badge:'Premium Real Estate · Nashik',
@@ -524,7 +528,6 @@ window.t = t;
 
 function setLang(l){
   lang = l;
-  // Active button update
   document.querySelectorAll('.lang-b').forEach(b=>b.classList.remove('active'));
   document.querySelector(`.lang-b[onclick="setLang('${l}')"]`)?.classList.add('active');
   applyLang();
@@ -532,53 +535,38 @@ function setLang(l){
 }
 
 function applyLang(){
-  // Hero
   const badge = document.querySelector('.hero-badge');
   if(badge) badge.innerHTML = `<span class="hero-dot"></span>${t('hero_badge')}`;
   const h1 = document.querySelector('.hero h1');
   if(h1) h1.innerHTML = t('hero_h1');
   const sub = document.querySelector('.hero-sub');
   if(sub) sub.textContent = t('hero_sub');
-
-  // Nav links
   document.getElementById('nav-home').textContent = t('nav_home');
   const navLinks = document.querySelectorAll('.nav-links a');
   if(navLinks[1]) navLinks[1].textContent = t('nav_rent');
   if(navLinks[2]) navLinks[2].textContent = t('nav_sale');
   if(navLinks[3]) navLinks[3].textContent = t('nav_contact');
-
-  // Search bar
   const si = document.getElementById('search-input');
   if(si) si.placeholder = t('search_ph');
   const srchBtn = document.querySelector('.srch-btn');
   if(srchBtn) srchBtn.textContent = t('srch_btn');
-
-  // Filter options
   const ft = document.getElementById('filter-type');
   if(ft){ ft.options[0].text=t('all_types'); ft.options[1].text=t('for_rent'); ft.options[2].text=t('for_sale'); }
   const fb = document.getElementById('filter-bhk');
   if(fb){ fb.options[0].text=t('any_bhk'); }
-
-  // Loc strip
   const ll = document.querySelector('.loc-label');
   if(ll) ll.textContent = t('pop_areas');
-
-  // Section head
   const sh = document.querySelector('.sec-head h2');
   if(sh) sh.innerHTML = `${t('avail')} <span>${t('properties')}</span>`;
-
-  // Tabs
-  const ta=document.getElementById('tab-all'), tr=document.getElementById('tab-rent'), ts=document.getElementById('tab-sale');
-  if(ta){ const c=ta.querySelector('.cnt'); ta.childNodes[0].textContent=t('tab_all')+' '; if(c) ta.insertBefore(document.createTextNode(''),c); }
-  // simpler approach:
   const cntAll=document.getElementById('cnt-all')?.textContent||'0';
   const cntRent=document.getElementById('cnt-rent')?.textContent||'0';
   const cntSale=document.getElementById('cnt-sale')?.textContent||'0';
+  const ta=document.getElementById('tab-all');
+  const tr=document.getElementById('tab-rent');
+  const ts=document.getElementById('tab-sale');
   if(ta) ta.innerHTML = `${t('tab_all')} <span class="cnt" id="cnt-all">${cntAll}</span>`;
   if(tr) tr.innerHTML = `${t('tab_rent')} <span class="cnt" id="cnt-rent">${cntRent}</span>`;
   if(ts) ts.innerHTML = `${t('tab_sale')} <span class="cnt" id="cnt-sale">${cntSale}</span>`;
-
-  // Why section
   const wh = document.querySelector('.why-hd h2');
   if(wh) wh.innerHTML = `${t('why_h')} <em>NashikHomes?</em>`;
   const wp = document.querySelector('.why-hd p');
@@ -590,8 +578,6 @@ function applyLang(){
     if(h&&whyData[i]) h.textContent=t(whyData[i][0]);
     if(p&&whyData[i]) p.textContent=t(whyData[i][1]);
   });
-
-  // Contact page
   const ch=document.querySelector('#page-contact h2');
   if(ch) ch.textContent=t('contact_h');
   const cs=document.querySelector('#page-contact > p');
@@ -599,11 +585,7 @@ function applyLang(){
   const cn=document.getElementById('c-name'); if(cn) cn.placeholder=t('contact_name');
   const cp=document.getElementById('c-phone'); if(cp) cp.placeholder=t('contact_phone');
   const cm=document.getElementById('c-msg'); if(cm) cm.placeholder=t('contact_msg');
-
-  // Footer
   const ft2=document.querySelector('.foot-txt'); if(ft2) ft2.textContent=t('foot_txt');
-
-  // Sign in button
   const sib=document.getElementById('nav-signin-btn'); if(sib) sib.textContent=t('signin');
 }
 
@@ -614,7 +596,6 @@ const fp = (p, type) => {
   return '₹'+p.toLocaleString('en-IN');
 };
 
-// Settings load karo (WhatsApp number etc)
 (()=>{
   try{
     const d=localStorage.getItem('nh2_settings');
@@ -643,32 +624,24 @@ function filterTab(tab){
   renderListings();
 }
 
-// ---- Firestore se data aane ke baad render karo ----
 function renderListings(){
   const q=(document.getElementById('search-input')?.value||'').toLowerCase();
   const ft=document.getElementById('filter-type')?.value||'all';
   const fb=document.getElementById('filter-bhk')?.value||'all';
-
   const filtered=allProps.filter(p=>
     (ft==='all'||p.type===ft)&&
     (!q||p.title.toLowerCase().includes(q)||p.location.toLowerCase().includes(q))&&
     (fb==='all'||(fb==='4'?parseInt(p.bhk)>=4:p.bhk===fb))
   );
-
   const r=allProps.filter(p=>p.type==='rent').length;
   const s=allProps.filter(p=>p.type==='sale').length;
-
   document.getElementById('cnt-all').textContent=allProps.length;
   document.getElementById('cnt-rent').textContent=r;
   document.getElementById('cnt-sale').textContent=s;
-  document.getElementById('stat-t').textContent=allProps.length;
-  document.getElementById('stat-r').textContent=r;
-  document.getElementById('stat-s').textContent=s;
   document.getElementById('stats-bar').innerHTML=`
     <div class="stat-pill">Total: <strong>${allProps.length}</strong></div>
     <div class="stat-pill">Rent: <strong>${r}</strong></div>
     <div class="stat-pill">Sale: <strong>${s}</strong></div>`;
-
   const g=document.getElementById('listings-grid');
   if(!filtered.length){
     g.innerHTML=`<div class="no-res"><div style="font-size:3rem;margin-bottom:1rem;opacity:.4">🔍</div><p>No properties found</p></div>`;
@@ -757,16 +730,15 @@ document.addEventListener('click',function(e){
   if(w&&!w.contains(e.target)) document.getElementById('user-dd').classList.remove('open');
 });
 
-// Expose for Firebase module and HTML onclick
 window.renderListings = renderListings;
 window.showToast = showToast;
 window.setLang = setLang;
 </script>
 
-<!-- ===== FIREBASE (Auth + Firestore) ===== -->
+<!-- ===== FIREBASE ===== -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendEmailVerification, reload } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
@@ -782,19 +754,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ============================================================
-// 🔥 FIRESTORE REAL-TIME LISTENER
-// Properties collection ka naam: "properties"
-// Jab bhi admin koi property add/edit/delete kare,
-// yahan AUTOMATIC update hoga — page refresh ki zaroorat nahi!
-// ============================================================
-// orderBy hata diya — Firestore index ki zaroorat nahi ab
 onSnapshot(collection(db, 'properties'), (snapshot) => {
-  const data = snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  }));
-  // Dono variables sync karo — local aur window
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   window.allProps = data;
   allProps = data;
   renderListings();
@@ -803,7 +764,6 @@ onSnapshot(collection(db, 'properties'), (snapshot) => {
   renderListings();
 });
 
-// ---- Auth State ----
 onAuthStateChanged(auth, async user => {
   if(user){
     document.getElementById('nav-signin-btn').style.display='none';
@@ -818,7 +778,6 @@ onAuthStateChanged(auth, async user => {
   }
 });
 
-// ---- Sign In ----
 window.doSignIn = async function(){
   const email=document.getElementById('signin-email').value.trim();
   const pass=document.getElementById('signin-pass').value;
@@ -834,7 +793,6 @@ window.doSignIn = async function(){
   }
 };
 
-// ---- Sign Up ----
 window.doSignUp = async function(){
   const name=document.getElementById('signup-name').value.trim();
   const email=document.getElementById('signup-email').value.trim();
@@ -855,7 +813,6 @@ window.doSignUp = async function(){
   }
 };
 
-// ---- Sign Out ----
 window.signOutUser = async function(){
   await signOut(auth);
   document.getElementById('user-dd').classList.remove('open');
