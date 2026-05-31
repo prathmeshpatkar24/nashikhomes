@@ -174,15 +174,47 @@ body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text);mi
     <!-- ===== ADD / EDIT PROPERTY ===== -->
     <div id="tab-add">
       <div class="form-grid">
-        <div class="fg2 full"><label>Property Title *</label><input type="text" id="f-title" placeholder="e.g. Spacious 2BHK in Nashik Road"/></div>
-        <div class="fg2"><label>Type *</label>
+
+        <!-- Property Title -->
+        <div class="fg2 full">
+          <label>Property Title *</label>
+          <input type="text" id="f-title" placeholder="e.g. Road Front Shop for Rent in Nashik Road"/>
+        </div>
+
+        <!-- Category — Flat / Shop / Villa etc -->
+        <div class="fg2">
+          <label>Category *</label>
+          <select id="f-category" onchange="onCategoryChange()">
+            <option value="flat">🏢 Flat / Apartment</option>
+            <option value="bunglow">🏠 Bunglow</option>
+            <option value="rowhouse">🏘️ Row House</option>
+            <option value="villa">🏡 Villa</option>
+            <option value="plot">🌿 Plot / Land</option>
+            <option value="shop">🏪 Shop / Showroom</option>
+            <option value="office">🏬 Office Space</option>
+            <option value="warehouse">🏭 Warehouse / Godown</option>
+            <option value="other">📦 Other</option>
+          </select>
+        </div>
+
+        <!-- Rent / Sale -->
+        <div class="fg2">
+          <label>Type *</label>
           <select id="f-type">
             <option value="rent">For Rent</option>
             <option value="sale">For Sale</option>
           </select>
         </div>
-        <div class="fg2"><label>Price (₹) *</label><input type="number" id="f-price" placeholder="12000"/></div>
-        <div class="fg2"><label>BHK</label>
+
+        <!-- Price -->
+        <div class="fg2">
+          <label>Price (₹) *</label>
+          <input type="number" id="f-price" placeholder="12000"/>
+        </div>
+
+        <!-- BHK — sirf residential ke liye -->
+        <div class="fg2" id="bhk-wrap">
+          <label>BHK</label>
           <select id="f-bhk">
             <option value="1">1 BHK</option>
             <option value="2">2 BHK</option>
@@ -190,31 +222,62 @@ body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text);mi
             <option value="4">4+ BHK</option>
           </select>
         </div>
-        <div class="fg2"><label>Area (sq.ft)</label><input type="number" id="f-area" placeholder="850"/></div>
-        <div class="fg2 full"><label>Area / Location *</label><input type="text" id="f-location" placeholder="e.g. Nashik Road, Nashik (full address mat daalna!)"/></div>
-        <div class="fg2"><label>Bathrooms</label>
+
+        <!-- Area -->
+        <div class="fg2">
+          <label>Area (sq.ft)</label>
+          <input type="number" id="f-area" placeholder="850"/>
+        </div>
+
+        <!-- Location -->
+        <div class="fg2 full">
+          <label>Area / Location *</label>
+          <input type="text" id="f-location" placeholder="e.g. Nashik Road, Nashik (full address mat daalna!)"/>
+        </div>
+
+        <!-- Bathrooms — plot/warehouse ke liye hide -->
+        <div class="fg2" id="bath-wrap">
+          <label>Bathrooms</label>
           <select id="f-bath">
             <option>1</option><option>2</option><option>3</option><option>4</option>
           </select>
         </div>
-        <div class="fg2"><label>Parking</label>
+
+        <div class="fg2">
+          <label>Parking</label>
           <select id="f-parking"><option>Yes</option><option>No</option></select>
         </div>
-        <div class="fg2"><label>Furnishing</label>
+
+        <!-- Furnishing — plot ke liye hide -->
+        <div class="fg2" id="furnish-wrap">
+          <label>Furnishing</label>
           <select id="f-furnish">
             <option>Fully Furnished</option>
             <option>Semi Furnished</option>
             <option>Unfurnished</option>
           </select>
         </div>
-        <div class="fg2"><label>Contact (WhatsApp)</label><input type="text" id="f-contact" placeholder="919XXXXXXXXX"/></div>
+
+        <div class="fg2">
+          <label>Contact (WhatsApp)</label>
+          <input type="text" id="f-contact" placeholder="919XXXXXXXXX"/>
+        </div>
+
+        <!-- Image -->
         <div class="fg2 full">
           <label>Image URL</label>
-          <input type="text" id="f-img" placeholder="https://images.unsplash.com/..." oninput="previewImg()"/>
+          <input type="text" id="f-img" placeholder="https://..." oninput="previewImg()"/>
           <img id="img-preview" class="img-preview" alt="Preview"/>
-          <small style="color:var(--text3);font-size:.72rem;margin-top:4px;">💡 Unsplash se free image le sakte ho, ya apni photo Google Drive pe upload karke share link paste karo</small>
+          <small style="color:var(--text3);font-size:.72rem;margin-top:4px;">
+            💡 ImgBB.com pe apni photo upload karo aur "Direct link" paste karo
+          </small>
         </div>
-        <div class="fg2 full"><label>Description</label><textarea id="f-desc" placeholder="Flat ke baare mein likho — floor, society, nearby landmarks..."></textarea></div>
+
+        <div class="fg2 full">
+          <label>Description</label>
+          <textarea id="f-desc" placeholder="Property ke baare mein likho — nearby landmarks, special features..."></textarea>
+        </div>
+
       </div>
       <div style="display:flex;gap:.75rem;margin-top:.5rem;">
         <button class="btn-add" id="f-sub-btn" onclick="submitProp()">➕ Add Property</button>
@@ -353,16 +416,20 @@ window.submitProp = async function(){
   if(!title){ showToast('Property title zaroori hai!'); return; }
   if(!price){ showToast('Price zaroori hai!'); return; }
 
+  const category = document.getElementById('f-category').value;
+  const isRes = ['flat','bunglow','rowhouse','villa'].includes(category);
+  const isPlot = category==='plot';
   const data = {
     title,
+    category,
     type: document.getElementById('f-type').value,
     price,
-    bhk: document.getElementById('f-bhk').value,
+    bhk: isRes ? document.getElementById('f-bhk').value : null,
     area: parseInt(document.getElementById('f-area').value)||0,
     location: document.getElementById('f-location').value.trim(),
-    bath: parseInt(document.getElementById('f-bath').value)||1,
+    bath: isPlot ? 0 : parseInt(document.getElementById('f-bath').value)||1,
     parking: document.getElementById('f-parking').value,
-    furnish: document.getElementById('f-furnish').value,
+    furnish: isPlot ? null : document.getElementById('f-furnish').value,
     contact: document.getElementById('f-contact').value.trim() || window._defWA || '919999999999',
     img: document.getElementById('f-img').value.trim(),
     desc: document.getElementById('f-desc').value.trim(),
@@ -499,7 +566,7 @@ function renderList(){
         ? `<img class="prop-img" src="${p.img}" onerror="this.outerHTML='<div class=&quot;prop-img&quot;>🏠</div>'" alt="${p.title}"/>`
         : `<div class="prop-img">🏠</div>`}
       <div class="prop-info">
-        <div class="prop-title">${p.title}</div>
+        <div class="prop-title">${CAT_ICON[p.category]||'🏠'} ${p.title}</div>
         <div class="prop-sub">📍 ${p.location||'—'} · ${fp(p.price,p.type)}</div>
         <span class="prop-badge ${badgeClass}">${statusLabel}</span>
       </div>
@@ -512,11 +579,28 @@ function renderList(){
   }).join('');
 }
 
+// Category change hone par BHK/Bath/Furnish show/hide
+function onCategoryChange(){
+  const cat = document.getElementById('f-category').value;
+  const isRes = ['flat','bunglow','rowhouse','villa'].includes(cat);
+  const isPlot = cat==='plot';
+  document.getElementById('bhk-wrap').style.display = isRes ? 'flex' : 'none';
+  document.getElementById('bath-wrap').style.display = isPlot ? 'none' : 'flex';
+  document.getElementById('furnish-wrap').style.display = isPlot ? 'none' : 'flex';
+}
+
+// Category ke liye emoji
+const CAT_ICON = {
+  flat:'🏢', bunglow:'🏠', rowhouse:'🏘️', villa:'🏡',
+  plot:'🌿', shop:'🏪', office:'🏬', warehouse:'🏭', other:'📦'
+};
+
 function editProp(id){
   const p=allProps.find(x=>x.id===id);
   if(!p) return;
   window._editId=id;
   document.getElementById('f-title').value=p.title||'';
+  document.getElementById('f-category').value=p.category||'flat';
   document.getElementById('f-type').value=p.type||'rent';
   document.getElementById('f-price').value=p.price||'';
   document.getElementById('f-bhk').value=p.bhk||'2';
@@ -530,6 +614,7 @@ function editProp(id){
   document.getElementById('f-desc').value=p.desc||'';
   document.getElementById('f-sub-btn').textContent='💾 Update Property';
   document.getElementById('f-can-btn').style.display='inline-block';
+  onCategoryChange(); // BHK show/hide update karo
   previewImg();
   aTab('add');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -539,6 +624,8 @@ function resetForm(){
   ['f-title','f-price','f-area','f-location','f-contact','f-img','f-desc'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.value='';
   });
+  document.getElementById('f-category').value='flat';
+  onCategoryChange(); // reset to default (flat = BHK dikhega)
   window._editId=null;
   document.getElementById('f-sub-btn').textContent='➕ Add Property';
   document.getElementById('f-can-btn').style.display='none';
