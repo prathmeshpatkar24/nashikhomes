@@ -764,7 +764,7 @@ window.setLang = setLang;
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendEmailVerification, reload } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, collection, onSnapshot, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcC7bl2xSTYPgxGqeaA9p_LHN-jg_e-6s",
@@ -785,22 +785,15 @@ const db = getFirestore(app);
 // Jab bhi admin koi property add/edit/delete kare,
 // yahan AUTOMATIC update hoga — page refresh ki zaroorat nahi!
 // ============================================================
-const q = query(collection(db, 'properties'), orderBy('createdAt', 'desc'));
-onSnapshot(q, (snapshot) => {
-  // Firestore se fresh data lo
+// orderBy hata diya — Firestore index ki zaroorat nahi ab
+onSnapshot(collection(db, 'properties'), (snapshot) => {
   window.allProps = snapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
   }));
-  // Render karo
   window.renderListings();
 }, (error) => {
-  console.error('Firestore error:', error);
-  // Agar Firestore fail ho toh localStorage fallback
-  try {
-    const d = localStorage.getItem('nh2_props');
-    if(d) window.allProps = JSON.parse(d);
-  } catch(e) {}
+  console.error('Firestore error:', error.message);
   window.renderListings();
 });
 
