@@ -205,13 +205,43 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 .foot-links a{font-size:.76rem;color:var(--text3);cursor:pointer;text-decoration:none;transition:color .2s;}
 .foot-links a:hover{color:var(--gold);}
 
+/* INTENT SCREEN */
+#intent-screen{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.intent-bg{position:absolute;inset:0;z-index:0;}
+.intent-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(.8);}
+.intent-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,16,.92) 0%,rgba(8,8,16,.6) 100%);}
+.intent-content{position:relative;z-index:2;text-align:center;padding:2rem 1.5rem;max-width:700px;width:100%;}
+.intent-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--bdr);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:3px;padding:6px 16px 6px 10px;border-radius:30px;margin-bottom:1.5rem;text-transform:uppercase;background:rgba(201,168,76,.06);}
+.intent-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.1;}
+.intent-h1 span{color:var(--gold);font-style:italic;}
+.intent-sub{font-size:.95rem;color:var(--text2);margin-bottom:2.5rem;line-height:1.7;}
+.intent-question{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--text);margin-bottom:1.5rem;letter-spacing:.5px;}
+.intent-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.75rem;}
+.intent-card{background:rgba(26,26,40,.85);border:1px solid var(--bdr2);border-radius:var(--rlg);padding:2rem 1.5rem;cursor:pointer;transition:all .3s cubic-bezier(.22,.8,.25,1);text-align:left;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+.intent-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.08),transparent);opacity:0;transition:opacity .3s;}
+.intent-card:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.6);}
+.intent-card:hover::before{opacity:1;}
+.intent-card-icon{font-size:2.8rem;margin-bottom:1rem;display:block;}
+.intent-card-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
+.intent-card-sub{font-size:.78rem;color:var(--text2);line-height:1.5;margin-bottom:1rem;}
+.intent-card-arrow{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--dark);font-size:1rem;font-weight:700;transition:transform .2s;}
+.intent-card:hover .intent-card-arrow{transform:translateX(4px);}
+.intent-skip{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text2);font-family:'Outfit',sans-serif;font-size:.82rem;padding:8px 22px;border-radius:20px;cursor:pointer;transition:all .2s;margin-bottom:2rem;}
+.intent-skip:hover{border-color:var(--bdr);color:var(--text);}
+.intent-usps{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;}
+.intent-usps span{font-size:.72rem;color:var(--text3);letter-spacing:.5px;}
+
+@media(max-width:580px){
+  .intent-cards{grid-template-columns:1fr;}
+  .intent-card{padding:1.5rem 1.25rem;}
+}
+
 @media(max-width:680px){
   .mgrid{grid-template-columns:1fr;}
   .nav-links{display:none;}
   .search-wrap{flex-direction:column;}
   .search-wrap input,.search-wrap select{width:100%;min-width:unset;}
   .hero h1{font-size:2.6rem;}
-  .hero-nums{gap:1.75rem;}
   .foot-inner{flex-direction:column;text-align:center;}
 }
 </style>
@@ -282,7 +312,44 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 
 <!-- HOME PAGE -->
 <div id="page-home">
-<section class="hero">
+
+<!-- ===== INTENT SCREEN ===== -->
+<div id="intent-screen">
+  <div class="intent-bg">
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80&auto=format" alt="Nashik Homes"/>
+    <div class="intent-overlay"></div>
+  </div>
+  <div class="intent-content">
+    <div class="intent-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
+    <h1 class="intent-h1">Welcome to <span>NashikHomes</span></h1>
+    <p class="intent-sub">Nashik's most trusted property portal. Tell us what you're looking for.</p>
+    <div class="intent-question">What are you looking for?</div>
+    <div class="intent-cards">
+      <div class="intent-card" onclick="selectIntent('rent')">
+        <div class="intent-card-icon">🏠</div>
+        <div class="intent-card-title">I want to Rent</div>
+        <div class="intent-card-sub">Find flats, shops & offices on rent across Nashik</div>
+        <div class="intent-card-arrow">→</div>
+      </div>
+      <div class="intent-card" onclick="selectIntent('sale')">
+        <div class="intent-card-icon">🏢</div>
+        <div class="intent-card-title">I want to Buy</div>
+        <div class="intent-card-sub">Explore plots, bungalows & properties for sale</div>
+        <div class="intent-card-arrow">→</div>
+      </div>
+    </div>
+    <button class="intent-skip" onclick="selectIntent('all')">Browse all properties ↓</button>
+    <div class="intent-usps">
+      <span>✅ Verified Listings</span>
+      <span>⚡ Direct WhatsApp</span>
+      <span>🏆 Nashik's #1 Portal</span>
+      <span>📍 All Areas Covered</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LISTINGS SECTION (hidden until intent selected) ===== -->
+<section class="hero" id="listings-hero" style="display:none;">
   <div class="hero-bg">
     <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80&auto=format" alt="Luxury home Nashik"/>
     <div class="hero-grad"></div>
@@ -291,16 +358,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   <div class="hero-content">
     <div class="hero-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
     <h1>Find Your <span>Dream Home</span><br/>in Nashik</h1>
-    <p class="hero-sub">Browse verified properties for rent and sale across Nashik — from cozy flats to luxury villas.</p>
-
-    <!-- ✅ USP Badges — numbers ki jagah -->
-    <div class="hero-nums">
-      <div><span class="hnv">✅</span><span class="hnl">Verified Listings</span></div>
-      <div><span class="hnv">⚡</span><span class="hnl">Direct WhatsApp</span></div>
-      <div><span class="hnv">🏆</span><span class="hnl">Nashik's #1 Portal</span></div>
-      <div><span class="hnv">📍</span><span class="hnl">All Areas Covered</span></div>
-    </div>
-
+    <p class="hero-sub">Browse verified properties for rent and sale across Nashik.</p>
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="Search by location, title..." oninput="renderListings()"/>
       <select id="filter-type" onchange="renderListings()">
@@ -320,7 +378,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   </div>
 </section>
 
-<div class="loc-strip">
+<div class="loc-strip" id="listings-section">
   <div class="loc-inner">
     <span class="loc-label">Popular Areas</span>
     <div class="loc-sep"></div>
@@ -603,10 +661,35 @@ const fp = (p, type) => {
   }catch(e){}
 })();
 
+function selectIntent(type){
+  // Hide intent screen, show listings
+  document.getElementById('intent-screen').style.display='none';
+  document.getElementById('listings-hero').style.display='block';
+  // Set filter
+  if(type !== 'all'){
+    document.getElementById('filter-type').value = type;
+    currentFilter = type;
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    const el = document.getElementById('tab-'+type);
+    if(el) el.classList.add('active');
+  }
+  renderListings();
+  // Smooth scroll to listings
+  setTimeout(()=>{
+    document.getElementById('listings-section')?.scrollIntoView({behavior:'smooth'});
+  }, 100);
+}
+
 function showPage(pg){
   document.getElementById('page-home').style.display = pg==='home'?'block':'none';
   document.getElementById('page-contact').style.display = pg==='contact'?'block':'none';
   document.getElementById('nav-home').classList.toggle('active', pg==='home');
+  if(pg==='home'){
+    // If listings not yet shown, show intent screen
+    const intentShown = document.getElementById('listings-hero').style.display === 'block';
+    document.getElementById('intent-screen').style.display = intentShown ? 'none' : 'flex';
+    document.getElementById('listings-hero').style.display = intentShown ? 'block' : 'none';
+  }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function sa(area){
@@ -620,8 +703,16 @@ function filterTab(tab){
   const el=document.getElementById('tab-'+tab);
   if(el) el.classList.add('active');
   document.getElementById('filter-type').value=tab;
-  showPage('home');
+  // Show listings directly, hide intent screen
+  document.getElementById('intent-screen').style.display='none';
+  document.getElementById('listings-hero').style.display='block';
+  document.getElementById('page-home').style.display='block';
+  document.getElementById('page-contact').style.display='none';
+  document.getElementById('nav-home').classList.add('active');
   renderListings();
+  setTimeout(()=>{
+    document.getElementById('listings-section')?.scrollIntoView({behavior:'smooth'});
+  },100);
 }
 
 function renderListings(){
@@ -730,6 +821,7 @@ document.addEventListener('click',function(e){
   if(w&&!w.contains(e.target)) document.getElementById('user-dd').classList.remove('open');
 });
 
+window.selectIntent = selectIntent;
 window.renderListings = renderListings;
 window.showToast = showToast;
 window.setLang = setLang;
