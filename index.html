@@ -682,8 +682,8 @@ function renderListings(){
         <div class="ctitle">${p.title}</div>
         <div class="cloc">📍 ${p.location}</div>
         <div class="cfeats">
-          <span class="cfeat">🛏 ${p.bhk} BHK</span>
-          <span class="cfeat">🚿 ${p.bath} Bath</span>
+          ${p.bhk ? `<span class="cfeat">🛏 ${p.bhk} BHK</span>` : `<span class="cfeat">${{'shop':'🏪','office':'🏬','warehouse':'🏭','plot':'🌿','villa':'🏡','bunglow':'🏠','rowhouse':'🏘️'}[p.category]||'🏢'} ${p.category ? p.category.charAt(0).toUpperCase()+p.category.slice(1) : 'Property'}</span>`}
+          ${p.bath ? `<span class="cfeat">🚿 ${p.bath} Bath</span>` : ''}
           <span class="cfeat">📐 ${p.area} sq.ft</span>
         </div>
         <div class="cacts">
