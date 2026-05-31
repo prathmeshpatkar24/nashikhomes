@@ -787,14 +787,17 @@ const db = getFirestore(app);
 // ============================================================
 // orderBy hata diya — Firestore index ki zaroorat nahi ab
 onSnapshot(collection(db, 'properties'), (snapshot) => {
-  window.allProps = snapshot.docs.map(doc => ({
+  const data = snapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
   }));
-  window.renderListings();
+  // Dono variables sync karo — local aur window
+  window.allProps = data;
+  allProps = data;
+  renderListings();
 }, (error) => {
   console.error('Firestore error:', error.message);
-  window.renderListings();
+  renderListings();
 });
 
 // ---- Auth State ----
