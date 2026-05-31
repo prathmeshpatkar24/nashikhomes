@@ -188,6 +188,30 @@ nav{position:sticky;top:0;z-index:200;background:rgba(8,8,16,0.94);backdrop-filt
 .auth-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dk));color:var(--dark);font-family:'Outfit',sans-serif;font-size:.875rem;font-weight:700;border:none;padding:11px;border-radius:var(--rsm);cursor:pointer;width:100%;}
 .auth-btn:hover{filter:brightness(1.1);}
 
+/* ABOUT PAGE */
+.about-wrap{max-width:860px;margin:0 auto;padding:0 1.5rem 5rem;}
+.about-hero{background:linear-gradient(135deg,var(--surf),var(--surf2));border:1px solid var(--bdr2);border-radius:var(--rlg);padding:3rem 2rem;margin:2rem 0;text-align:center;}
+.about-h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--text);margin-bottom:.5rem;}
+.about-h1 span{color:var(--gold);font-style:italic;}
+.about-tagline{color:var(--text2);font-size:1rem;line-height:1.7;}
+.about-section{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.about-card{background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--r);padding:1.75rem;transition:border-color .2s;}
+.about-card:hover{border-color:var(--bdr);}
+.about-icon{font-size:1.75rem;margin-bottom:.75rem;}
+.about-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--gold);margin-bottom:.75rem;}
+.about-card p{color:var(--text2);font-size:.88rem;line-height:1.8;margin-bottom:.5rem;}
+.about-why{background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--r);padding:2rem;margin-bottom:1.5rem;}
+.about-why-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--text);margin-bottom:1.5rem;text-align:center;}
+.about-why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.about-why-item{display:flex;gap:.75rem;align-items:flex-start;}
+.about-why-item span{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.about-why-item strong{display:block;font-size:.88rem;color:var(--text);margin-bottom:2px;}
+.about-why-item p{font-size:.78rem;color:var(--text2);line-height:1.5;margin:0;}
+.about-cta{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));border:1px solid var(--bdr);border-radius:var(--r);padding:2.5rem;text-align:center;}
+.about-cta h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:.5rem;}
+.about-cta p{color:var(--text2);font-size:.88rem;}
+@media(max-width:580px){.about-why-grid{grid-template-columns:1fr;}}
+
 /* CONTACT */
 #page-contact{max-width:640px;margin:3rem auto;padding:0 1.5rem 5rem;}
 
@@ -266,6 +290,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
       <a id="nav-home" class="active" onclick="showPage('home')">Home</a>
       <a onclick="filterTab('rent')">For Rent</a>
       <a onclick="filterTab('sale')">For Sale</a>
+      <a onclick="showPage('about')">About Us</a>
       <a onclick="showPage('contact')">Contact</a>
     </div>
     <div style="display:flex;align-items:center;gap:.75rem;flex-shrink:0;">
@@ -436,6 +461,67 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 </div>
 </div><!-- end page-home -->
 
+<!-- ABOUT US PAGE -->
+<div id="page-about" style="display:none;">
+  <div class="about-wrap">
+
+    <!-- Hero banner -->
+    <div class="about-hero">
+      <div class="about-hero-content">
+        <div class="hero-badge" style="margin-bottom:1rem;"><span class="hero-dot"></span>Est. 2026 · Nashik</div>
+        <h2 class="about-h1">About <span>NashikHomes</span></h2>
+        <p class="about-tagline" id="ab-tagline">Nashik's most trusted property portal — connecting people with their perfect home.</p>
+      </div>
+    </div>
+
+    <!-- Story -->
+    <div class="about-section">
+      <div class="about-card">
+        <div class="about-icon">🏠</div>
+        <h3 id="ab-story-h">Our Story</h3>
+        <p id="ab-story-p1">NashikHomes was founded in 2026 with a simple mission — make finding a home in Nashik easier, faster, and more transparent. We saw how people struggled to find reliable property listings, had to deal with multiple middlemen, and wasted time on unverified information.</p>
+        <p id="ab-story-p2">So we built NashikHomes — a platform where every listing is personally verified, every contact is direct, and every experience is hassle-free.</p>
+      </div>
+
+      <div class="about-card">
+        <div class="about-icon">🎯</div>
+        <h3 id="ab-mission-h">Our Mission</h3>
+        <p id="ab-mission-p">To be Nashik's #1 real estate platform by providing verified, transparent, and easily accessible property listings — whether you're looking to rent a flat, buy a plot, or find commercial space anywhere across Nashik.</p>
+      </div>
+
+      <div class="about-card">
+        <div class="about-icon">📍</div>
+        <h3 id="ab-where-h">Where We Operate</h3>
+        <p id="ab-where-p">We cover all major areas across Nashik — Nashik Road, Gangapur Road, Satpur, Deolali, Dindori Road, Panchavati, Trimbak Road, Mahamarg, and more. If it's in Nashik, we've got it covered.</p>
+      </div>
+    </div>
+
+    <!-- Why choose us -->
+    <div class="about-why">
+      <h3 class="about-why-title" id="ab-why-h">Why People Choose Us</h3>
+      <div class="about-why-grid">
+        <div class="about-why-item"><span>✅</span><div><strong id="ab-w1h">Verified Listings</strong><p id="ab-w1p">Every property is personally checked before listing.</p></div></div>
+        <div class="about-why-item"><span>⚡</span><div><strong id="ab-w2h">Direct WhatsApp</strong><p id="ab-w2p">Connect instantly — no middlemen, no delays.</p></div></div>
+        <div class="about-why-item"><span>🏆</span><div><strong id="ab-w3h">All Property Types</strong><p id="ab-w3p">Flats, shops, plots, villas, offices — everything in one place.</p></div></div>
+        <div class="about-why-item"><span>🔒</span><div><strong id="ab-w4h">Trusted & Transparent</strong><p id="ab-w4p">Honest pricing, real photos, genuine listings.</p></div></div>
+        <div class="about-why-item"><span>📱</span><div><strong id="ab-w5h">Easy to Use</strong><p id="ab-w5p">Simple website, quick search, instant contact.</p></div></div>
+        <div class="about-why-item"><span>🌍</span><div><strong id="ab-w6h">All of Nashik</strong><p id="ab-w6p">Covering every area and neighbourhood in Nashik.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="about-cta">
+      <h3 id="ab-cta-h">Ready to find your perfect property?</h3>
+      <p id="ab-cta-p">Browse our verified listings today or reach out on WhatsApp — we're here to help!</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
+        <button class="srch-btn" id="ab-cta-btn1" onclick="selectIntent('all')">Browse Properties</button>
+        <button class="btn-wa" style="padding:10px 24px;font-size:.875rem;" onclick="openWA('Hi! I found NashikHomes and would like to know more.')">💬 WhatsApp Us</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- CONTACT PAGE -->
 <div id="page-contact" style="display:none;">
   <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:.5rem;">Get In Touch</h2>
@@ -486,6 +572,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
       <a onclick="showPage('home')">Home</a>
       <a onclick="filterTab('rent')">Rent</a>
       <a onclick="filterTab('sale')">Buy</a>
+      <a onclick="showPage('about')">About</a>
       <a onclick="showPage('contact')">Contact</a>
     </div>
   </div>
@@ -528,7 +615,19 @@ const LANG = {
     err_invalid:'Incorrect email or password.',
     err_email_used:'This email is already registered.',
     err_weak_pass:'Password must be at least 6 characters.',
-    fill_fields:'Please fill all fields.'
+    fill_fields:'Please fill all fields.',
+    ab_tagline:"Nashik's most trusted property portal — connecting people with their perfect home.",
+    ab_story_h:'Our Story', ab_story_p1:'NashikHomes was founded in 2026 with a simple mission — make finding a home in Nashik easier, faster, and more transparent. We saw how people struggled to find reliable property listings, had to deal with multiple middlemen, and wasted time on unverified information.', ab_story_p2:'So we built NashikHomes — a platform where every listing is personally verified, every contact is direct, and every experience is hassle-free.',
+    ab_mission_h:'Our Mission', ab_mission_p:"To be Nashik's #1 real estate platform by providing verified, transparent, and easily accessible property listings — whether you're looking to rent a flat, buy a plot, or find commercial space anywhere across Nashik.",
+    ab_where_h:'Where We Operate', ab_where_p:'We cover all major areas across Nashik — Nashik Road, Gangapur Road, Satpur, Deolali, Dindori Road, Panchavati, Trimbak Road, Mahamarg, and more. If it\'s in Nashik, we\'ve got it covered.',
+    ab_why_h:'Why People Choose Us',
+    ab_w1h:'Verified Listings', ab_w1p:'Every property is personally checked before listing.',
+    ab_w2h:'Direct WhatsApp', ab_w2p:'Connect instantly — no middlemen, no delays.',
+    ab_w3h:'All Property Types', ab_w3p:'Flats, shops, plots, villas, offices — everything in one place.',
+    ab_w4h:'Trusted & Transparent', ab_w4p:'Honest pricing, real photos, genuine listings.',
+    ab_w5h:'Easy to Use', ab_w5p:'Simple website, quick search, instant contact.',
+    ab_w6h:'All of Nashik', ab_w6p:'Covering every area and neighbourhood in Nashik.',
+    ab_cta_h:'Ready to find your perfect property?', ab_cta_p:'Browse our verified listings today or reach out on WhatsApp — we\'re here to help!', ab_cta_btn1:'Browse Properties'
   },
   hi:{
     hero_badge:'प्रीमियम रियल एस्टेट · नाशिक',
@@ -559,7 +658,19 @@ const LANG = {
     err_invalid:'गलत ईमेल या पासवर्ड।',
     err_email_used:'यह ईमेल पहले से रजिस्टर है।',
     err_weak_pass:'पासवर्ड कम से कम 6 अक्षर का होना चाहिए।',
-    fill_fields:'कृपया सभी फील्ड भरें।'
+    fill_fields:'कृपया सभी फील्ड भरें।',
+    ab_tagline:'नाशिक का सबसे भरोसेमंद प्रॉपर्टी पोर्टल — लोगों को उनका सपनों का घर दिलाना।',
+    ab_story_h:'हमारी कहानी', ab_story_p1:'NashikHomes की स्थापना 2026 में एक सरल मिशन के साथ की गई — नाशिक में घर ढूंढना आसान, तेज़ और पारदर्शी बनाना। हमने देखा कि लोग विश्वसनीय प्रॉपर्टी लिस्टिंग ढूंढने में कितना संघर्ष करते हैं।', ab_story_p2:'इसलिए हमने NashikHomes बनाया — एक ऐसा प्लेटफॉर्म जहाँ हर लिस्टिंग सत्यापित है, हर संपर्क सीधा है, और हर अनुभव परेशानी मुक्त है।',
+    ab_mission_h:'हमारा मिशन', ab_mission_p:'नाशिक का #1 रियल एस्टेट प्लेटफॉर्म बनना — चाहे आप फ्लैट किराये पर लेना चाहते हों, प्लॉट खरीदना हो, या पूरे नाशिक में कोई भी प्रॉपर्टी ढूंढनी हो।',
+    ab_where_h:'हम कहाँ काम करते हैं', ab_where_p:'हम नाशिक के सभी प्रमुख क्षेत्रों को कवर करते हैं — नाशिक रोड, गंगापुर रोड, सातपुर, देवलाली, दिंडोरी रोड, पंचवटी, त्रिंबक रोड, महामार्ग, और भी बहुत कुछ।',
+    ab_why_h:'लोग हमें क्यों चुनते हैं',
+    ab_w1h:'सत्यापित लिस्टिंग', ab_w1p:'हर प्रॉपर्टी को लिस्ट करने से पहले व्यक्तिगत रूप से जांचा जाता है।',
+    ab_w2h:'डायरेक्ट WhatsApp', ab_w2p:'तुरंत जुड़ें — कोई बिचौलिया नहीं, कोई देरी नहीं।',
+    ab_w3h:'सभी प्रकार की प्रॉपर्टी', ab_w3p:'फ्लैट, दुकान, प्लॉट, विला, ऑफिस — सब एक जगह।',
+    ab_w4h:'विश्वसनीय और पारदर्शी', ab_w4p:'सही कीमत, असली फोटो, genuine लिस्टिंग।',
+    ab_w5h:'उपयोग में आसान', ab_w5p:'सरल वेबसाइट, तेज़ खोज, तुरंत संपर्क।',
+    ab_w6h:'पूरा नाशिक', ab_w6p:'नाशिक के हर क्षेत्र और मोहल्ले को कवर करते हैं।',
+    ab_cta_h:'अपनी सपनों की प्रॉपर्टी ढूंढने के लिए तैयार हैं?', ab_cta_p:'आज हमारी सत्यापित लिस्टिंग देखें या WhatsApp पर संपर्क करें।', ab_cta_btn1:'प्रॉपर्टी देखें'
   },
   mr:{
     hero_badge:'प्रीमियम रिअल इस्टेट · नाशिक',
@@ -590,7 +701,19 @@ const LANG = {
     err_invalid:'चुकीची ईमेल किंवा पासवर्ड.',
     err_email_used:'ही ईमेल आधीच नोंदणीकृत आहे.',
     err_weak_pass:'पासवर्ड किमान 6 अक्षरे असणे आवश्यक आहे.',
-    fill_fields:'कृपया सर्व फील्ड भरा.'
+    fill_fields:'कृपया सर्व फील्ड भरा.',
+    ab_tagline:'नाशिकचा सर्वात विश्वासू प्रॉपर्टी पोर्टल — लोकांना त्यांचे स्वप्नातील घर मिळवून देणे।',
+    ab_story_h:'आमची कहाणी', ab_story_p1:'NashikHomes ची स्थापना 2026 मध्ये एका साध्या ध्येयाने झाली — नाशिकमध्ये घर शोधणे सोपे, जलद आणि पारदर्शक बनवणे. लोकांना विश्वासार्ह मालमत्ता यादी शोधताना किती अडचणी येतात हे आम्ही पाहिले.', ab_story_p2:'म्हणून आम्ही NashikHomes बनवले — एक असे व्यासपीठ जिथे प्रत्येक यादी सत्यापित आहे, प्रत्येक संपर्क थेट आहे आणि प्रत्येक अनुभव त्रासमुक्त आहे.',
+    ab_mission_h:'आमचे ध्येय', ab_mission_p:'नाशिकचे #1 रिअल इस्टेट व्यासपीठ बनणे — मग तुम्हाला फ्लॅट भाड्याने हवा असो, प्लॉट विकत घ्यायचा असो किंवा संपूर्ण नाशिकमध्ये कोणतीही मालमत्ता शोधायची असो.',
+    ab_where_h:'आम्ही कुठे काम करतो', ab_where_p:'आम्ही नाशिकच्या सर्व प्रमुख भागांना कव्हर करतो — नाशिक रोड, गंगापूर रोड, सातपूर, देवळाली, दिंडोरी रोड, पंचवटी, त्र्यंबक रोड, महामार्ग आणि बरेच काही.',
+    ab_why_h:'लोक आम्हाला का निवडतात',
+    ab_w1h:'सत्यापित यादी', ab_w1p:'प्रत्येक मालमत्ता यादी करण्यापूर्वी वैयक्तिकरित्या तपासली जाते.',
+    ab_w2h:'थेट WhatsApp', ab_w2p:'त्वरित जोडा — कोणताही मध्यस्थ नाही, कोणताही विलंब नाही.',
+    ab_w3h:'सर्व प्रकारच्या मालमत्ता', ab_w3p:'फ्लॅट, दुकान, प्लॉट, व्हिला, ऑफिस — सर्व एकाच ठिकाणी.',
+    ab_w4h:'विश्वासू आणि पारदर्शक', ab_w4p:'योग्य किंमत, खरे फोटो, genuine यादी.',
+    ab_w5h:'वापरण्यास सोपे', ab_w5p:'सोपी वेबसाइट, जलद शोध, त्वरित संपर्क.',
+    ab_w6h:'संपूर्ण नाशिक', ab_w6p:'नाशिकच्या प्रत्येक भागाला आणि परिसराला कव्हर करतो.',
+    ab_cta_h:'तुमची स्वप्नातील मालमत्ता शोधण्यास तयार आहात?', ab_cta_p:'आजच आमची सत्यापित यादी पहा किंवा WhatsApp वर संपर्क करा.', ab_cta_btn1:'मालमत्ता पहा'
   }
 };
 const t = k => (LANG[lang]&&LANG[lang][k]) ? LANG[lang][k] : (LANG.en[k]||k);
@@ -657,6 +780,10 @@ function applyLang(){
   const cm=document.getElementById('c-msg'); if(cm) cm.placeholder=t('contact_msg');
   const ft2=document.querySelector('.foot-txt'); if(ft2) ft2.textContent=t('foot_txt');
   const sib=document.getElementById('nav-signin-btn'); if(sib) sib.textContent=t('signin');
+  // About page
+  const abIds = ['ab-tagline','ab-story-h','ab-story-p1','ab-story-p2','ab-mission-h','ab-mission-p','ab-where-h','ab-where-p','ab-why-h','ab-w1h','ab-w1p','ab-w2h','ab-w2p','ab-w3h','ab-w3p','ab-w4h','ab-w4p','ab-w5h','ab-w5p','ab-w6h','ab-w6p','ab-cta-h','ab-cta-p','ab-cta-btn1'];
+  const abKeys = ['ab_tagline','ab_story_h','ab_story_p1','ab_story_p2','ab_mission_h','ab_mission_p','ab_where_h','ab_where_p','ab_why_h','ab_w1h','ab_w1p','ab_w2h','ab_w2p','ab_w3h','ab_w3p','ab_w4h','ab_w4p','ab_w5h','ab_w5p','ab_w6h','ab_w6p','ab_cta_h','ab_cta_p','ab_cta_btn1'];
+  abIds.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=t(abKeys[i]); });
 }
 
 const fp = (p, type) => {
@@ -695,6 +822,7 @@ function selectIntent(type){
 function showPage(pg){
   document.getElementById('page-home').style.display = pg==='home'?'block':'none';
   document.getElementById('page-contact').style.display = pg==='contact'?'block':'none';
+  document.getElementById('page-about').style.display = pg==='about'?'block':'none';
   document.getElementById('nav-home').classList.toggle('active', pg==='home');
   if(pg==='home'){
     // If listings not yet shown, show intent screen
