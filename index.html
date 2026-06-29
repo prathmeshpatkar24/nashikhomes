@@ -442,32 +442,32 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     <div class="intent-overlay"></div>
   </div>
   <div class="intent-content">
-    <div class="intent-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
-    <h1 class="intent-h1">Welcome to <span>Nashik<em style="font-style:normal;font-weight:300;color:var(--text)">Homes</em></span></h1>
-    <p class="intent-sub">Nashik's most trusted property portal. Tell us what you're looking for.</p>
-    <div class="intent-question">What are you looking for?</div>
+    <div class="intent-badge" id="intent-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
+    <h1 class="intent-h1" id="intent-h1">Welcome to <span>Nashik<em style="font-style:normal;font-weight:300;color:var(--text)">Homes</em></span></h1>
+    <p class="intent-sub" id="intent-sub">Nashik's most trusted property portal. Tell us what you're looking for.</p>
+    <div class="intent-question" id="intent-q">What are you looking for?</div>
     <div class="intent-cards">
       <div class="intent-card" onclick="selectIntent('rent')">
         <div class="intent-card-icon">🏠</div>
-        <div class="intent-card-title">I want to Rent</div>
-        <div class="intent-card-sub">Find flats, shops & offices on rent across Nashik</div>
+        <div class="intent-card-title" id="intent-rent-title">I want to Rent</div>
+        <div class="intent-card-sub" id="intent-rent-sub">Find flats, shops & offices on rent across Nashik</div>
         <div class="intent-card-count" id="intent-rent-count">Loading...</div><br/>
         <div class="intent-card-arrow">→</div>
       </div>
       <div class="intent-card" onclick="selectIntent('sale')">
         <div class="intent-card-icon">🏢</div>
-        <div class="intent-card-title">I want to Buy</div>
-        <div class="intent-card-sub">Explore plots, bungalows & properties for sale</div>
+        <div class="intent-card-title" id="intent-sale-title">I want to Buy</div>
+        <div class="intent-card-sub" id="intent-sale-sub">Explore plots, bungalows & properties for sale</div>
         <div class="intent-card-count" id="intent-sale-count">Loading...</div><br/>
         <div class="intent-card-arrow">→</div>
       </div>
     </div>
-    <button class="intent-skip" onclick="selectIntent('all')">Browse all properties ↓</button>
+    <button class="intent-skip" id="intent-skip" onclick="selectIntent('all')">Browse all properties ↓</button>
     <div class="intent-usps">
-      <span>✅ Verified Listings</span>
-      <span>⚡ Direct WhatsApp</span>
-      <span>🏆 Nashik's #1 Portal</span>
-      <span>📍 All Areas Covered</span>
+      <span id="usp1">✅ Verified Listings</span>
+      <span id="usp2">⚡ Direct WhatsApp</span>
+      <span id="usp3">🏆 Nashik's #1 Portal</span>
+      <span id="usp4">📍 All Areas Covered</span>
     </div>
   </div>
 </div>
@@ -480,9 +480,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   </div>
   <div class="hero-fade"></div>
   <div class="hero-content">
-    <div class="hero-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
-    <h1>Find Your <span>Dream Home</span><br/>in Nashik</h1>
-    <p class="hero-sub">Browse verified properties for rent and sale across Nashik.</p>
+    <div class="hero-badge" id="hero-badge"><span class="hero-dot"></span>Premium Real Estate · Nashik</div>
+    <h1 id="hero-h1">Find Your <span>Dream Home</span><br/>in Nashik</h1>
+    <p class="hero-sub" id="hero-sub">Browse verified properties for rent and sale across Nashik.</p>
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="Search by location, title..." oninput="renderListings()"/>
       <select id="filter-type" onchange="renderListings()">
@@ -497,14 +497,14 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
         <option value="3">3 BHK</option>
         <option value="4">4+ BHK</option>
       </select>
-      <button class="srch-btn" onclick="renderListings()">🔍 Search</button>
+      <button id="srch-btn" class="srch-btn" onclick="renderListings()">🔍 Search</button>
     </div>
   </div>
 </section>
 
 <div class="loc-strip" id="listings-section">
   <div class="loc-inner">
-    <span class="loc-label">Popular Areas</span>
+    <span class="loc-label" id="loc-label">Popular Areas</span>
     <div class="loc-sep"></div>
     <span class="loc-chip" onclick="sa('Nashik Road')">📍 Nashik Road</span>
     <span class="loc-chip" onclick="sa('Gangapur')">📍 Gangapur Road</span>
@@ -530,7 +530,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 </div>
 
 <div class="stats-bar" id="stats-bar"></div>
-<div class="sec-head"><h2>Available <span>Properties</span></h2></div>
+<div class="sec-head"><h2 id="sec-head-h2">Available <span>Properties</span></h2></div>
 <div class="tabs">
   <button class="tab active" id="tab-all" onclick="filterTab('all')">All <span class="cnt" id="cnt-all">0</span></button>
   <button class="tab" id="tab-rent" onclick="filterTab('rent')">For Rent <span class="cnt" id="cnt-rent">0</span></button>
@@ -551,14 +551,14 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 <div class="why">
   <div class="why-inner">
     <div class="why-hd">
-      <h2>Why Choose <em>NashikHomes?</em></h2>
-      <p>Trusted by thousands of families across Nashik</p>
+      <h2 id="why-h">Why Choose <em>NashikHomes?</em></h2>
+      <p id="why-sub">Trusted by thousands of families across Nashik</p>
     </div>
     <div class="why-grid">
-      <div class="why-card"><span class="why-icon">✅</span><h3>Verified Listings</h3><p>Every property personally verified before listing.</p></div>
-      <div class="why-card"><span class="why-icon">⚡</span><h3>Instant Connect</h3><p>Direct WhatsApp — zero middlemen.</p></div>
-      <div class="why-card"><span class="why-icon">🏆</span><h3>Best Prices</h3><p>Competitive pricing across all areas of Nashik.</p></div>
-      <div class="why-card"><span class="why-icon">🔒</span><h3>Safe & Secure</h3><p>Your privacy protected. We never share your data.</p></div>
+      <div class="why-card"><span class="why-icon">✅</span><h3 id="why1-h">Verified Listings</h3><p id="why1-p">Every property personally verified before listing.</p></div>
+      <div class="why-card"><span class="why-icon">⚡</span><h3 id="why2-h">Instant Connect</h3><p id="why2-p">Direct WhatsApp — zero middlemen.</p></div>
+      <div class="why-card"><span class="why-icon">🏆</span><h3 id="why3-h">Best Prices</h3><p id="why3-p">Competitive pricing across all areas of Nashik.</p></div>
+      <div class="why-card"><span class="why-icon">🔒</span><h3 id="why4-h">Safe & Secure</h3><p id="why4-p">Your privacy protected. We never share your data.</p></div>
     </div>
   </div>
 </div>
@@ -568,8 +568,8 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 <div id="page-about" style="display:none;">
   <div class="about-wrap">
     <div class="about-hero">
-      <div class="hero-badge" style="margin-bottom:1rem;"><span class="hero-dot"></span>Est. 2026 · Nashik</div>
-      <h2 class="about-h1">About <span>NashikHomes</span></h2>
+      <div class="hero-badge" id="ab-badge-el" style="margin-bottom:1rem;"><span class="hero-dot"></span>Est. 2026 · Nashik</div>
+      <h2 class="about-h1" id="about-h1">About <span>NashikHomes</span></h2>
       <p class="about-tagline" id="ab-tagline">Nashik's most trusted property portal — connecting people with their perfect home.</p>
     </div>
     <div class="about-section">
@@ -614,20 +614,20 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 
 <!-- CONTACT PAGE -->
 <div id="page-contact" style="display:none;">
-  <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:.5rem;">Get In Touch</h2>
-  <p style="color:var(--text2);margin-bottom:1.75rem;">We'll get back to you as soon as possible.</p>
+  <h2 id="contact-h" style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-bottom:.5rem;">Get In Touch</h2>
+  <p id="contact-sub" style="color:var(--text2);margin-bottom:1.75rem;">We'll get back to you as soon as possible.</p>
   <div style="background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--rlg);padding:1.75rem;display:flex;flex-direction:column;gap:.85rem;">
     <input type="text" id="c-name" placeholder="Your Name" style="background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:10px 13px;border-radius:var(--rsm);outline:none;"/>
     <input type="tel" id="c-phone" placeholder="Phone Number" style="background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:10px 13px;border-radius:var(--rsm);outline:none;"/>
     <textarea id="c-msg" rows="4" placeholder="Your message..." style="background:var(--surf2);border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:'Outfit',sans-serif;font-size:.875rem;padding:10px 13px;border-radius:var(--rsm);outline:none;resize:vertical;"></textarea>
-    <button class="srch-btn" onclick="sendContact()" style="align-self:flex-start;">Send Message</button>
+    <button id="contact-send-btn" class="srch-btn" onclick="sendContact()" style="align-self:flex-start;">Send Message</button>
   </div>
   <div style="margin-top:1.25rem;background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--rlg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
     <span style="font-size:1.75rem;">💬</span>
     <div>
-      <div style="font-weight:600;font-size:.9rem;margin-bottom:2px;" class="wa-title">WhatsApp Us</div>
-      <div style="font-size:.78rem;color:var(--text2);margin-bottom:.5rem;" class="wa-sub">Quick response on WhatsApp</div>
-      <button class="btn-wa" onclick="openWA('Hello, I am interested in a property on NashikHomes!')">Open WhatsApp</button>
+      <div id="wa-title" style="font-weight:600;font-size:.9rem;margin-bottom:2px;">WhatsApp Us</div>
+      <div id="wa-sub" style="font-size:.78rem;color:var(--text2);margin-bottom:.5rem;">Quick response on WhatsApp</div>
+      <button id="wa-open-btn" class="btn-wa" onclick="openWA('Hello, I am interested in a property on NashikHomes!')">Open WhatsApp</button>
     </div>
   </div>
 </div>
@@ -667,7 +667,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
       <svg width="32" height="32" viewBox="0 0 80 80"><rect width="80" height="80" rx="16" fill="#1A1A28" stroke="#C9A84C" stroke-width="2" stroke-opacity="0.5"/><polygon points="12,38 40,10 68,38" fill="#C9A84C" opacity="0.15"/><polyline points="12,38 40,10 68,38" fill="none" stroke="#C9A84C" stroke-width="3.5" stroke-linejoin="round"/><rect x="18" y="37" width="44" height="34" rx="2" fill="#1A1A28"/><text x="40" y="62" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#C9A84C" text-anchor="middle" letter-spacing="-1">NH</text></svg>
       <div>
         <div class="foot-brand" id="foot-brand">NashikHomes</div>
-        <div class="foot-txt">Premium Real Estate Platform · Nashik, Maharashtra</div>
+        <div class="foot-txt" id="foot-txt">Premium Real Estate Platform · Nashik, Maharashtra</div>
       </div>
     </div>
     <div class="foot-links">
@@ -1196,41 +1196,35 @@ function applyLang(){
   if(bnavContact) bnavContact.innerHTML=`<span class="bnav-icon">📞</span>${t('bnav_contact')}`;
 
   // ---- INTENT SCREEN ----
-  const intentBadge=document.querySelector('#intent-screen .intent-badge');
-  if(intentBadge) intentBadge.innerHTML=`<span class="hero-dot"></span>${t('intent_badge')}`;
-  const intentH1=document.querySelector('.intent-h1');
-  if(intentH1) intentH1.innerHTML=t('intent_h1');
-  const intentSub=document.querySelector('.intent-sub');
-  if(intentSub) intentSub.textContent=t('intent_sub');
-  const intentQ=document.querySelector('.intent-question');
-  if(intentQ) intentQ.textContent=t('intent_q');
-  // Intent cards
-  const intentCards=document.querySelectorAll('.intent-card');
-  if(intentCards[0]){
-    intentCards[0].querySelector('.intent-card-title').textContent=t('intent_rent_title');
-    intentCards[0].querySelector('.intent-card-sub').textContent=t('intent_rent_sub');
-  }
-  if(intentCards[1]){
-    intentCards[1].querySelector('.intent-card-title').textContent=t('intent_sale_title');
-    intentCards[1].querySelector('.intent-card-sub').textContent=t('intent_sale_sub');
-  }
-  const intentSkip=document.querySelector('.intent-skip');
-  if(intentSkip) intentSkip.textContent=t('intent_skip');
-  // USPs
-  const usps=document.querySelectorAll('.intent-usps span');
-  const uspKeys=['usp1','usp2','usp3','usp4'];
-  usps.forEach((el,i)=>{ if(uspKeys[i]) el.textContent=t(uspKeys[i]); });
+  const intentBadgeEl = document.getElementById('intent-badge');
+  if(intentBadgeEl) intentBadgeEl.innerHTML = `<span class="hero-dot"></span>${t('intent_badge')}`;
+  s('intent-h1', t('intent_h1'));
+  s('intent-sub', t('intent_sub'));
+  s('intent-q', t('intent_q'));
+  s('intent-rent-title', t('intent_rent_title'));
+  s('intent-rent-sub', t('intent_rent_sub'));
+  s('intent-sale-title', t('intent_sale_title'));
+  s('intent-sale-sub', t('intent_sale_sub'));
+  s('intent-skip', t('intent_skip'));
+  s('usp1', t('usp1'));
+  s('usp2', t('usp2'));
+  s('usp3', t('usp3'));
+  s('usp4', t('usp4'));
 
   // ---- HERO SECTION ----
-  const heroBadge=document.querySelector('.hero .hero-badge');
-  if(heroBadge) heroBadge.innerHTML=`<span class="hero-dot"></span>${t('hero_badge')}`;
-  const heroH1=document.querySelector('.hero h1');
-  if(heroH1) heroH1.innerHTML=t('hero_h1');
-  const heroSub=document.querySelector('.hero-sub');
-  if(heroSub) heroSub.textContent=t('hero_sub');
+  const heroBadgeEl = document.getElementById('hero-badge');
+  if(heroBadgeEl) heroBadgeEl.innerHTML = `<span class="hero-dot"></span>${t('hero_badge')}`;
+  sh('hero-h1', t('hero_h1'));
+  s('hero-sub', t('hero_sub'));
 
-  // ---- SEARCH INPUTS ----
-  sp('search-input', t('search_ph'));
+  // ---- SEARCH BUTTON ----
+  s('srch-btn', t('srch_btn'));
+
+  // ---- LOCATION STRIP ----
+  s('loc-label', t('pop_areas'));
+
+  // ---- SECTION HEADING ----
+  sh('sec-head-h2', `${t('avail')} <span>${t('properties')}</span>`);
   sp('sticky-search', t('search_ph'));
   const ft=document.getElementById('filter-type');
   if(ft){ ft.options[0].text=t('all_types'); ft.options[1].text=t('for_rent'); ft.options[2].text=t('for_sale'); }
@@ -1240,16 +1234,6 @@ function applyLang(){
   if(fb) fb.options[0].text=t('any_bhk');
   const sb=document.getElementById('sticky-bhk');
   if(sb) sb.options[0].text=t('any_bhk');
-  const srchBtn=document.querySelector('.srch-btn');
-  if(srchBtn) srchBtn.textContent=t('srch_btn');
-
-  // ---- LOCATION STRIP ----
-  const ll=document.querySelector('.loc-label');
-  if(ll) ll.textContent=t('pop_areas');
-
-  // ---- SECTION HEADING ----
-  const secH=document.querySelector('.sec-head h2');
-  if(secH) secH.innerHTML=`${t('avail')} <span>${t('properties')}</span>`;
 
   // ---- TABS ----
   const cntAll=document.getElementById('cnt-all')?.textContent||'0';
@@ -1266,48 +1250,34 @@ function applyLang(){
   if(tabSaved) tabSaved.innerHTML=`${t('tab_saved')} <span class="cnt" id="cnt-saved">${cntSaved}</span>`;
 
   // ---- WHY SECTION ----
-  const wh=document.querySelector('.why-hd h2');
-  if(wh) wh.innerHTML=`${t('why_h')} <em>NashikHomes?</em>`;
-  const wp=document.querySelector('.why-hd p');
-  if(wp) wp.textContent=t('why_sub');
-  const whyCards=document.querySelectorAll('.why-card');
-  const whyData=[['why1_h','why1_p'],['why2_h','why2_p'],['why3_h','why3_p'],['why4_h','why4_p']];
-  whyCards.forEach((c,i)=>{
-    const h=c.querySelector('h3'), p=c.querySelector('p');
-    if(h&&whyData[i]) h.textContent=t(whyData[i][0]);
-    if(p&&whyData[i]) p.textContent=t(whyData[i][1]);
-  });
+  sh('why-h', `${t('why_h')} <em>NashikHomes?</em>`);
+  s('why-sub', t('why_sub'));
+  s('why1-h', t('why1_h')); s('why1-p', t('why1_p'));
+  s('why2-h', t('why2_h')); s('why2-p', t('why2_p'));
+  s('why3-h', t('why3_h')); s('why3-p', t('why3_p'));
+  s('why4-h', t('why4_h')); s('why4-p', t('why4_p'));
 
   // ---- CONTACT PAGE ----
-  const contH=document.querySelector('#page-contact h2');
-  if(contH) contH.textContent=t('contact_h');
-  const contSub=document.querySelector('#page-contact > p');
-  if(contSub) contSub.textContent=t('contact_sub');
+  s('contact-h', t('contact_h'));
+  s('contact-sub', t('contact_sub'));
   sp('c-name', t('contact_name'));
   sp('c-phone', t('contact_phone'));
   sp('c-msg', t('contact_msg'));
-  const sendBtn=document.querySelector('#page-contact .srch-btn');
-  if(sendBtn) sendBtn.textContent=t('send_msg');
-  // WA card inside contact
-  const waTitle=document.querySelector('#page-contact .wa-title');
-  const waSub=document.querySelector('#page-contact .wa-sub');
-  const waBtn=document.querySelector('#page-contact .btn-wa');
-  if(waTitle) waTitle.textContent=t('wa_us');
-  if(waSub) waSub.textContent=t('wa_quick');
-  if(waBtn) waBtn.textContent=t('open_wa');
+  s('contact-send-btn', t('send_msg'));
+  s('wa-title', t('wa_us'));
+  s('wa-sub', t('wa_quick'));
+  s('wa-open-btn', t('open_wa'));
 
   // ---- ABOUT PAGE ----
   const abIds  =['ab-tagline','ab-story-h','ab-story-p1','ab-story-p2','ab-mission-h','ab-mission-p','ab-where-h','ab-where-p','ab-why-h','ab-w1h','ab-w1p','ab-w2h','ab-w2p','ab-w3h','ab-w3p','ab-w4h','ab-w4p','ab-w5h','ab-w5p','ab-w6h','ab-w6p','ab-cta-h','ab-cta-p','ab-cta-btn1','ab-cta-btn2'];
   const abKeys =['ab_tagline','ab_story_h','ab_story_p1','ab_story_p2','ab_mission_h','ab_mission_p','ab_where_h','ab_where_p','ab_why_h','ab_w1h','ab_w1p','ab_w2h','ab_w2p','ab_w3h','ab_w3p','ab_w4h','ab_w4p','ab_w5h','ab_w5p','ab_w6h','ab_w6p','ab_cta_h','ab_cta_p','ab_cta_btn1','ab_cta_btn2'];
   abIds.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=t(abKeys[i]); });
-  const abBadge=document.querySelector('#page-about .hero-badge');
-  if(abBadge) abBadge.innerHTML=`<span class="hero-dot"></span>${t('ab_badge')}`;
-  const abH1=document.querySelector('.about-h1');
-  if(abH1) abH1.innerHTML=`About <span>NashikHomes</span>`;
+  const abBadgeEl = document.getElementById('ab-badge-el');
+  if(abBadgeEl) abBadgeEl.innerHTML=`<span class="hero-dot"></span>${t('ab_badge')}`;
+  sh('about-h1', `About <span>NashikHomes</span>`);
 
   // ---- FOOTER ----
-  const ft2=document.querySelector('.foot-txt');
-  if(ft2) ft2.textContent=t('foot_txt');
+  s('foot-txt', t('foot_txt'));
 }
 
 window.selectIntent=selectIntent; window.renderListings=renderListings; window.showToast=showToast;
