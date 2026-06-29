@@ -343,9 +343,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </div>
     <div style="display:flex;align-items:center;gap:.75rem;flex-shrink:0;">
       <div class="lang-sw">
-        <button class="lang-b active" onclick="setLang('en')">EN</button>
-        <button class="lang-b" onclick="setLang('hi')">HI</button>
-        <button class="lang-b" onclick="setLang('mr')">MR</button>
+        <button class="lang-b active" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-b" data-lang="hi" onclick="setLang('hi')">HI</button>
+        <button class="lang-b" data-lang="mr" onclick="setLang('mr')">MR</button>
       </div>
       <button id="nav-signin-btn" class="signin-btn" onclick="showAuth()">Sign In</button>
       <div class="user-wrap" id="user-wrap" style="display:none;">
@@ -373,9 +373,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   <a id="mnav-contact" onclick="showPage('contact');closeMobileNav()">📞 Contact</a>
   <div class="mobile-nav-divider"></div>
   <div class="mobile-lang">
-    <button class="lang-b active" id="mlang-en" onclick="setLang('en');closeMobileNav()">EN</button>
-    <button class="lang-b" id="mlang-hi" onclick="setLang('hi');closeMobileNav()">HI</button>
-    <button class="lang-b" id="mlang-mr" onclick="setLang('mr');closeMobileNav()">MR</button>
+    <button class="lang-b active" data-lang="en" id="mlang-en" onclick="setLang('en');closeMobileNav()">EN</button>
+    <button class="lang-b" data-lang="hi" id="mlang-hi" onclick="setLang('hi');closeMobileNav()">HI</button>
+    <button class="lang-b" data-lang="mr" id="mlang-mr" onclick="setLang('mr');closeMobileNav()">MR</button>
   </div>
   <div style="margin-top:.5rem;padding:0 14px;">
     <button id="mobile-signin-btn" class="signin-btn" style="width:100%;text-align:center;" onclick="showAuth();closeMobileNav()">Sign In</button>
@@ -758,8 +758,6 @@ const ppsf = (price, area, type) => {
     const d=localStorage.getItem('nh2_settings');
     if(d){ const s=JSON.parse(d); if(s.wa) defWA=s.wa; if(s.brand) document.getElementById('foot-brand').textContent='🏠 '+s.brand; }
   }catch(e){}
-  // Restore language
-  setLang(lang);
 })();
 
 function updateIntentCounts(){
@@ -1151,11 +1149,9 @@ window.t = t;
 function setLang(l){
   lang = l;
   localStorage.setItem('nh_lang', l);
-  // Update all lang buttons (desktop + mobile)
-  document.querySelectorAll('.lang-b').forEach(b => b.classList.remove('active'));
+  // Update all lang buttons using data-lang attribute
   document.querySelectorAll('.lang-b').forEach(b => {
-    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(`setLang('${l}')`))
-      b.classList.add('active');
+    b.classList.toggle('active', b.dataset.lang === l);
   });
   applyLang();
   renderListings();
@@ -1288,6 +1284,11 @@ window.closeAuthOv=closeAuthOv; window.switchAuthTab=switchAuthTab; window.toggl
 window.toggleMobileNav=toggleMobileNav; window.closeMobileNav=closeMobileNav;
 window.toggleFav=toggleFav; window.updateBottomNav=updateBottomNav;
 window.syncSearch=syncSearch; window.syncType=syncType; window.syncBhk=syncBhk;
+
+// ---- Init language AFTER all functions are defined ----
+document.addEventListener('DOMContentLoaded', function(){
+  setLang(lang);
+});
 </script>
 
 <!-- FIREBASE -->
