@@ -336,10 +336,10 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
     </a>
     <div class="nav-links">
       <a id="nav-home" class="active" onclick="showPage('home')">Home</a>
-      <a onclick="filterTab('rent')">For Rent</a>
-      <a onclick="filterTab('sale')">For Sale</a>
-      <a onclick="showPage('about')">About Us</a>
-      <a onclick="showPage('contact')">Contact</a>
+      <a id="nav-rent" onclick="filterTab('rent')">For Rent</a>
+      <a id="nav-sale" onclick="filterTab('sale')">For Sale</a>
+      <a id="nav-about" onclick="showPage('about')">About Us</a>
+      <a id="nav-contact" onclick="showPage('contact')">Contact</a>
     </div>
     <div style="display:flex;align-items:center;gap:.75rem;flex-shrink:0;">
       <div class="lang-sw">
@@ -366,11 +366,11 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
 
 <!-- MOBILE NAV DRAWER -->
 <div class="mobile-nav" id="mobile-nav">
-  <a onclick="showPage('home');closeMobileNav()">🏠 Home</a>
-  <a onclick="filterTab('rent');closeMobileNav()">🔑 For Rent</a>
-  <a onclick="filterTab('sale');closeMobileNav()">🏢 For Sale</a>
-  <a onclick="showPage('about');closeMobileNav()">ℹ️ About Us</a>
-  <a onclick="showPage('contact');closeMobileNav()">📞 Contact</a>
+  <a id="mnav-home" onclick="showPage('home');closeMobileNav()">🏠 Home</a>
+  <a id="mnav-rent" onclick="filterTab('rent');closeMobileNav()">🔑 For Rent</a>
+  <a id="mnav-sale" onclick="filterTab('sale');closeMobileNav()">🏢 For Sale</a>
+  <a id="mnav-about" onclick="showPage('about');closeMobileNav()">ℹ️ About Us</a>
+  <a id="mnav-contact" onclick="showPage('contact');closeMobileNav()">📞 Contact</a>
   <div class="mobile-nav-divider"></div>
   <div class="mobile-lang">
     <button class="lang-b active" id="mlang-en" onclick="setLang('en');closeMobileNav()">EN</button>
@@ -606,7 +606,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
       <p id="ab-cta-p">Browse our verified listings today or reach out on WhatsApp — we're here to help!</p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
         <button class="srch-btn" id="ab-cta-btn1" onclick="selectIntent('all')">Browse Properties</button>
-        <button class="btn-wa" style="padding:10px 24px;font-size:.875rem;" onclick="openWA('Hi! I found NashikHomes and would like to know more.')">💬 WhatsApp Us</button>
+        <button class="btn-wa" id="ab-cta-btn2" style="padding:10px 24px;font-size:.875rem;" onclick="openWA('Hi! I found NashikHomes and would like to know more.')">💬 WhatsApp Us</button>
       </div>
     </div>
   </div>
@@ -625,8 +625,8 @@ footer{background:var(--dark2);border-top:1px solid var(--bdr2);padding:2.5rem 1
   <div style="margin-top:1.25rem;background:var(--surf);border:1px solid var(--bdr2);border-radius:var(--rlg);padding:1.25rem;display:flex;gap:1rem;align-items:center;">
     <span style="font-size:1.75rem;">💬</span>
     <div>
-      <div style="font-weight:600;font-size:.9rem;margin-bottom:2px;">WhatsApp Us</div>
-      <div style="font-size:.78rem;color:var(--text2);margin-bottom:.5rem;">Quick response on WhatsApp</div>
+      <div style="font-weight:600;font-size:.9rem;margin-bottom:2px;" class="wa-title">WhatsApp Us</div>
+      <div style="font-size:.78rem;color:var(--text2);margin-bottom:.5rem;" class="wa-sub">Quick response on WhatsApp</div>
       <button class="btn-wa" onclick="openWA('Hello, I am interested in a property on NashikHomes!')">Open WhatsApp</button>
     </div>
   </div>
@@ -959,68 +959,355 @@ document.addEventListener('click',function(e){
   if(mn&&hb&&!mn.contains(e.target)&&!hb.contains(e.target)) closeMobileNav();
 });
 
-// Language
+// ===================== LANGUAGE SYSTEM =====================
 const LANG={
-  en:{hero_badge:'Premium Real Estate · Nashik',hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',hero_sub:'Browse verified properties for rent and sale across Nashik.',nav_home:'Home',search_ph:'Search by location, title...',all_types:'All Types',for_rent:'For Rent',for_sale:'For Sale',any_bhk:'Any BHK',srch_btn:'🔍 Search',pop_areas:'Popular Areas',avail:'Available',properties:'Properties',tab_all:'All',tab_rent:'For Rent',tab_sale:'For Sale',why_h:'Why Choose',why_sub:'Trusted by thousands of families across Nashik',why1_h:'Verified Listings',why1_p:'Every property personally verified before listing.',why2_h:'Instant Connect',why2_p:'Direct WhatsApp — zero middlemen.',why3_h:'Best Prices',why3_p:'Competitive pricing across all areas of Nashik.',why4_h:'Safe & Secure',why4_p:"Your privacy protected. We never share your data.",contact_h:'Get In Touch',contact_sub:"We'll get back to you as soon as possible.",contact_name:'Your Name',contact_phone:'Phone Number',contact_msg:'Your message...',send_msg:'Send Message',wa_us:'WhatsApp Us',wa_quick:'Quick response on WhatsApp',open_wa:'Open WhatsApp',fill_fields:'Please fill all fields.',signin:'Sign In',foot_txt:'Premium Real Estate Platform · Nashik, Maharashtra'},
-  hi:{hero_badge:'प्रीमियम रियल एस्टेट · नाशिक',hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',nav_home:'होम',search_ph:'लोकेशन या नाम से खोजें...',all_types:'सभी प्रकार',for_rent:'किराये पर',for_sale:'बिक्री हेतु',any_bhk:'कोई BHK',srch_btn:'🔍 खोजें',pop_areas:'लोकप्रिय क्षेत्र',avail:'उपलब्ध',properties:'प्रॉपर्टी',tab_all:'सभी',tab_rent:'किराये पर',tab_sale:'बिक्री हेतु',why_h:'क्यों चुनें',why_sub:'नाशिक के हजारों परिवारों का भरोसा',why1_h:'वेरिफाइड लिस्टिंग',why1_p:'हर प्रॉपर्टी लिस्ट करने से पहले जांची जाती है।',why2_h:'तुरंत संपर्क',why2_p:'सीधे WhatsApp — कोई बिचौलिया नहीं।',why3_h:'सर्वोत्तम कीमत',why3_p:'नाशिक के सभी क्षेत्रों में प्रतिस्पर्धी कीमतें।',why4_h:'सुरक्षित',why4_p:'आपकी प्राइवेसी सुरक्षित।',contact_h:'संपर्क करें',contact_sub:'हम जल्द से जल्द आपसे संपर्क करेंगे।',contact_name:'आपका नाम',contact_phone:'फोन नंबर',contact_msg:'आपका संदेश...',send_msg:'संदेश भेजें',wa_us:'WhatsApp करें',wa_quick:'WhatsApp पर त्वरित जवाब',open_wa:'WhatsApp खोलें',fill_fields:'कृपया सभी फील्ड भरें।',signin:'साइन इन',foot_txt:'प्रीमियम रियल एस्टेट प्लेटफॉर्म · नाशिक, महाराष्ट्र'},
-  mr:{hero_badge:'प्रीमियम रिअल इस्टेट · नाशिक',hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',nav_home:'मुखपृष्ठ',search_ph:'स्थान किंवा नावाने शोधा...',all_types:'सर्व प्रकार',for_rent:'भाड्याने',for_sale:'विक्रीसाठी',any_bhk:'कोणताही BHK',srch_btn:'🔍 शोधा',pop_areas:'लोकप्रिय भाग',avail:'उपलब्ध',properties:'मालमत्ता',tab_all:'सर्व',tab_rent:'भाड्याने',tab_sale:'विक्रीसाठी',why_h:'का निवडावे',why_sub:'नाशिकमधील हजारो कुटुंबांचा विश्वास',why1_h:'सत्यापित यादी',why1_p:'प्रत्येक मालमत्ता यादी करण्यापूर्वी तपासली जाते.',why2_h:'त्वरित संपर्क',why2_p:'थेट WhatsApp — कोणताही मध्यस्थ नाही.',why3_h:'सर्वोत्तम किंमती',why3_p:'नाशिकच्या सर्व भागात स्पर्धात्मक किंमती.',why4_h:'सुरक्षित',why4_p:'तुमची गोपनीयता सुरक्षित.',contact_h:'संपर्क करा',contact_sub:'आम्ही लवकरात लवकर तुमच्याशी संपर्क साधू.',contact_name:'तुमचे नाव',contact_phone:'फोन नंबर',contact_msg:'तुमचा संदेश...',send_msg:'संदेश पाठवा',wa_us:'WhatsApp करा',wa_quick:'WhatsApp वर त्वरित प्रतिसाद',open_wa:'WhatsApp उघडा',fill_fields:'कृपया सर्व फील्ड भरा.',signin:'साइन इन',foot_txt:'प्रीमियम रिअल इस्टेट प्लॅटफॉर्म · नाशिक, महाराष्ट्र'}
+  en:{
+    // NAV
+    nav_home:'Home', nav_rent:'For Rent', nav_sale:'For Sale', nav_about:'About Us', nav_contact:'Contact',
+    mnav_home:'🏠 Home', mnav_rent:'🔑 For Rent', mnav_sale:'🏢 For Sale', mnav_about:'ℹ️ About Us', mnav_contact:'📞 Contact',
+    signin:'Sign In', signout:'Sign Out',
+    // HERO
+    hero_badge:'Premium Real Estate · Nashik',
+    hero_h1:'Find Your <span>Dream Home</span><br/>in Nashik',
+    hero_sub:'Browse verified properties for rent and sale across Nashik.',
+    // SEARCH
+    search_ph:'Search by location, title...',
+    all_types:'All Types', for_rent:'For Rent', for_sale:'For Sale', any_bhk:'Any BHK',
+    srch_btn:'🔍 Search',
+    // INTENT SCREEN
+    intent_badge:'Premium Real Estate · Nashik',
+    intent_h1:'Welcome to NashikHomes',
+    intent_sub:"Nashik's most trusted property portal. Tell us what you're looking for.",
+    intent_q:'What are you looking for?',
+    intent_rent_title:'I want to Rent', intent_rent_sub:'Find flats, shops & offices on rent across Nashik',
+    intent_sale_title:'I want to Buy', intent_sale_sub:'Explore plots, bungalows & properties for sale',
+    intent_skip:'Browse all properties ↓',
+    usp1:'✅ Verified Listings', usp2:'⚡ Direct WhatsApp', usp3:"🏆 Nashik's #1 Portal", usp4:'📍 All Areas Covered',
+    // LISTINGS
+    pop_areas:'Popular Areas',
+    avail:'Available', properties:'Properties',
+    tab_all:'All', tab_rent:'For Rent', tab_sale:'For Sale', tab_saved:'❤️ Saved',
+    // CARDS
+    badge_rent:'For Rent', badge_sale:'For Sale', badge_rented:'Rented', badge_sold:'Sold',
+    view_det:'View Details', wa_btn:'WhatsApp',
+    no_results:'No properties found',
+    no_saved:'No saved properties yet. Tap ❤️ on any listing.',
+    // WHY SECTION
+    why_h:'Why Choose', why_sub:'Trusted by thousands of families across Nashik',
+    why1_h:'Verified Listings', why1_p:'Every property personally verified before listing.',
+    why2_h:'Instant Connect', why2_p:'Direct WhatsApp — zero middlemen.',
+    why3_h:'Best Prices', why3_p:'Competitive pricing across all areas of Nashik.',
+    why4_h:'Safe & Secure', why4_p:"Your privacy protected. We never share your data.",
+    // CONTACT PAGE
+    contact_h:'Get In Touch', contact_sub:"We'll get back to you as soon as possible.",
+    contact_name:'Your Name', contact_phone:'Phone Number', contact_msg:'Your message...',
+    send_msg:'Send Message', wa_us:'WhatsApp Us', wa_quick:'Quick response on WhatsApp', open_wa:'Open WhatsApp',
+    fill_fields:'Please fill all fields.',
+    // ABOUT PAGE
+    ab_badge:'Est. 2026 · Nashik',
+    ab_h1:'About NashikHomes',
+    ab_tagline:"Nashik's most trusted property portal — connecting people with their perfect home.",
+    ab_story_h:'Our Story',
+    ab_story_p1:'NashikHomes was founded in 2026 with a simple mission — make finding a home in Nashik easier, faster, and more transparent.',
+    ab_story_p2:'So we built NashikHomes — a platform where every listing is personally verified, every contact is direct, and every experience is hassle-free.',
+    ab_mission_h:'Our Mission',
+    ab_mission_p:"To be Nashik's #1 real estate platform by providing verified, transparent, and easily accessible property listings.",
+    ab_where_h:'Where We Operate',
+    ab_where_p:"We cover all major areas across Nashik — Nashik Road, Gangapur Road, Satpur, Deolali, Dindori Road, Panchavati, Trimbak Road, Mahamarg, and more.",
+    ab_why_h:'Why People Choose Us',
+    ab_w1h:'Verified Listings', ab_w1p:'Every property is personally checked before listing.',
+    ab_w2h:'Direct WhatsApp', ab_w2p:'Connect instantly — no middlemen, no delays.',
+    ab_w3h:'All Property Types', ab_w3p:'Flats, shops, plots, villas, offices — everything in one place.',
+    ab_w4h:'Trusted & Transparent', ab_w4p:'Honest pricing, real photos, genuine listings.',
+    ab_w5h:'Easy to Use', ab_w5p:'Simple website, quick search, instant contact.',
+    ab_w6h:'All of Nashik', ab_w6p:'Covering every area and neighbourhood in Nashik.',
+    ab_cta_h:'Ready to find your perfect property?',
+    ab_cta_p:"Browse our verified listings today or reach out on WhatsApp — we're here to help!",
+    ab_cta_btn1:'Browse Properties', ab_cta_btn2:'💬 WhatsApp Us',
+    // FOOTER
+    foot_txt:'Premium Real Estate Platform · Nashik, Maharashtra',
+    // BOTTOM NAV
+    bnav_home:'Home', bnav_rent:'Rent', bnav_buy:'Buy', bnav_saved:'Saved', bnav_contact:'Contact',
+  },
+  hi:{
+    nav_home:'होम', nav_rent:'किराये पर', nav_sale:'बिक्री हेतु', nav_about:'हमारे बारे में', nav_contact:'संपर्क',
+    mnav_home:'🏠 होम', mnav_rent:'🔑 किराये पर', mnav_sale:'🏢 बिक्री हेतु', mnav_about:'ℹ️ हमारे बारे में', mnav_contact:'📞 संपर्क',
+    signin:'साइन इन', signout:'साइन आउट',
+    hero_badge:'प्रीमियम रियल एस्टेट · नाशिक',
+    hero_h1:'नाशिक में अपना <span>सपनों का घर</span> खोजें',
+    hero_sub:'नाशिक में किराये और बिक्री के लिए हजारों वेरिफाइड प्रॉपर्टी देखें।',
+    search_ph:'लोकेशन या नाम से खोजें...',
+    all_types:'सभी प्रकार', for_rent:'किराये पर', for_sale:'बिक्री हेतु', any_bhk:'कोई BHK',
+    srch_btn:'🔍 खोजें',
+    intent_badge:'प्रीमियम रियल एस्टेट · नाशिक',
+    intent_h1:'NashikHomes में आपका स्वागत है',
+    intent_sub:'नाशिक का सबसे भरोसेमंद प्रॉपर्टी पोर्टल। बताइए आप क्या ढूंढ रहे हैं।',
+    intent_q:'आप क्या ढूंढ रहे हैं?',
+    intent_rent_title:'मुझे किराये पर चाहिए', intent_rent_sub:'नाशिक में किराये पर फ्लैट, दुकान और ऑफिस खोजें',
+    intent_sale_title:'मुझे खरीदना है', intent_sale_sub:'बिक्री के लिए प्लॉट, बंगले और प्रॉपर्टी देखें',
+    intent_skip:'सभी प्रॉपर्टी देखें ↓',
+    usp1:'✅ वेरिफाइड लिस्टिंग', usp2:'⚡ डायरेक्ट WhatsApp', usp3:'🏆 नाशिक का #1 पोर्टल', usp4:'📍 सभी क्षेत्र कवर',
+    pop_areas:'लोकप्रिय क्षेत्र',
+    avail:'उपलब्ध', properties:'प्रॉपर्टी',
+    tab_all:'सभी', tab_rent:'किराये पर', tab_sale:'बिक्री हेतु', tab_saved:'❤️ सेव किए',
+    badge_rent:'किराये पर', badge_sale:'बिक्री हेतु', badge_rented:'किराया हो गया', badge_sold:'बिक गया',
+    view_det:'विवरण देखें', wa_btn:'WhatsApp',
+    no_results:'कोई प्रॉपर्टी नहीं मिली',
+    no_saved:'अभी कोई सेव नहीं। किसी भी लिस्टिंग पर ❤️ दबाएं।',
+    why_h:'क्यों चुनें', why_sub:'नाशिक के हजारों परिवारों का भरोसा',
+    why1_h:'वेरिफाइड लिस्टिंग', why1_p:'हर प्रॉपर्टी लिस्ट करने से पहले जांची जाती है।',
+    why2_h:'तुरंत संपर्क', why2_p:'सीधे WhatsApp — कोई बिचौलिया नहीं।',
+    why3_h:'सर्वोत्तम कीमत', why3_p:'नाशिक के सभी क्षेत्रों में प्रतिस्पर्धी कीमतें।',
+    why4_h:'सुरक्षित', why4_p:'आपकी प्राइवेसी सुरक्षित। हम कभी डेटा साझा नहीं करते।',
+    contact_h:'संपर्क करें', contact_sub:'हम जल्द से जल्द आपसे संपर्क करेंगे।',
+    contact_name:'आपका नाम', contact_phone:'फोन नंबर', contact_msg:'आपका संदेश...',
+    send_msg:'संदेश भेजें', wa_us:'WhatsApp करें', wa_quick:'WhatsApp पर त्वरित जवाब', open_wa:'WhatsApp खोलें',
+    fill_fields:'कृपया सभी फील्ड भरें।',
+    ab_badge:'स्थापना 2026 · नाशिक',
+    ab_h1:'NashikHomes के बारे में',
+    ab_tagline:'नाशिक का सबसे भरोसेमंद प्रॉपर्टी पोर्टल — लोगों को उनका सपनों का घर दिलाना।',
+    ab_story_h:'हमारी कहानी',
+    ab_story_p1:'NashikHomes की स्थापना 2026 में एक सरल मिशन के साथ की गई — नाशिक में घर ढूंढना आसान, तेज़ और पारदर्शी बनाना।',
+    ab_story_p2:'इसलिए हमने NashikHomes बनाया — एक ऐसा प्लेटफॉर्म जहाँ हर लिस्टिंग सत्यापित है, हर संपर्क सीधा है।',
+    ab_mission_h:'हमारा मिशन',
+    ab_mission_p:'नाशिक का #1 रियल एस्टेट प्लेटफॉर्म बनना — चाहे आप फ्लैट किराये पर लेना चाहते हों या प्लॉट खरीदना हो।',
+    ab_where_h:'हम कहाँ काम करते हैं',
+    ab_where_p:'हम नाशिक के सभी प्रमुख क्षेत्रों को कवर करते हैं — नाशिक रोड, गंगापुर रोड, सातपुर, देवलाली, दिंडोरी रोड, पंचवटी, त्रिंबक रोड, महामार्ग और भी बहुत कुछ।',
+    ab_why_h:'लोग हमें क्यों चुनते हैं',
+    ab_w1h:'सत्यापित लिस्टिंग', ab_w1p:'हर प्रॉपर्टी को लिस्ट करने से पहले व्यक्तिगत रूप से जांचा जाता है।',
+    ab_w2h:'डायरेक्ट WhatsApp', ab_w2p:'तुरंत जुड़ें — कोई बिचौलिया नहीं, कोई देरी नहीं।',
+    ab_w3h:'सभी प्रकार की प्रॉपर्टी', ab_w3p:'फ्लैट, दुकान, प्लॉट, विला, ऑफिस — सब एक जगह।',
+    ab_w4h:'विश्वसनीय और पारदर्शी', ab_w4p:'सही कीमत, असली फोटो, genuine लिस्टिंग।',
+    ab_w5h:'उपयोग में आसान', ab_w5p:'सरल वेबसाइट, तेज़ खोज, तुरंत संपर्क।',
+    ab_w6h:'पूरा नाशिक', ab_w6p:'नाशिक के हर क्षेत्र और मोहल्ले को कवर करते हैं।',
+    ab_cta_h:'अपनी सपनों की प्रॉपर्टी ढूंढने के लिए तैयार हैं?',
+    ab_cta_p:'आज हमारी सत्यापित लिस्टिंग देखें या WhatsApp पर संपर्क करें।',
+    ab_cta_btn1:'प्रॉपर्टी देखें', ab_cta_btn2:'💬 WhatsApp करें',
+    foot_txt:'प्रीमियम रियल एस्टेट प्लेटफॉर्म · नाशिक, महाराष्ट्र',
+    bnav_home:'होम', bnav_rent:'किराया', bnav_buy:'खरीदें', bnav_saved:'सेव', bnav_contact:'संपर्क',
+  },
+  mr:{
+    nav_home:'मुखपृष्ठ', nav_rent:'भाड्याने', nav_sale:'विक्रीसाठी', nav_about:'आमच्याबद्दल', nav_contact:'संपर्क',
+    mnav_home:'🏠 मुखपृष्ठ', mnav_rent:'🔑 भाड्याने', mnav_sale:'🏢 विक्रीसाठी', mnav_about:'ℹ️ आमच्याबद्दल', mnav_contact:'📞 संपर्क',
+    signin:'साइन इन', signout:'साइन आउट',
+    hero_badge:'प्रीमियम रिअल इस्टेट · नाशिक',
+    hero_h1:'नाशिकमध्ये तुमचे <span>स्वप्नातील घर</span> शोधा',
+    hero_sub:'नाशिकमध्ये भाडे आणि विक्रीसाठी हजारो सत्यापित मालमत्ता पहा.',
+    search_ph:'स्थान किंवा नावाने शोधा...',
+    all_types:'सर्व प्रकार', for_rent:'भाड्याने', for_sale:'विक्रीसाठी', any_bhk:'कोणताही BHK',
+    srch_btn:'🔍 शोधा',
+    intent_badge:'प्रीमियम रिअल इस्टेट · नाशिक',
+    intent_h1:'NashikHomes मध्ये आपले स्वागत आहे',
+    intent_sub:'नाशिकचा सर्वात विश्वासू प्रॉपर्टी पोर्टल. तुम्हाला काय हवे आहे ते सांगा.',
+    intent_q:'तुम्ही काय शोधत आहात?',
+    intent_rent_title:'मला भाड्याने हवे आहे', intent_rent_sub:'नाशिकमध्ये भाड्याने फ्लॅट, दुकान आणि ऑफिस शोधा',
+    intent_sale_title:'मला विकत घ्यायचे आहे', intent_sale_sub:'विक्रीसाठी प्लॉट, बंगले आणि मालमत्ता पहा',
+    intent_skip:'सर्व मालमत्ता पहा ↓',
+    usp1:'✅ सत्यापित यादी', usp2:'⚡ थेट WhatsApp', usp3:'🏆 नाशिकचा #1 पोर्टल', usp4:'📍 सर्व भाग कव्हर',
+    pop_areas:'लोकप्रिय भाग',
+    avail:'उपलब्ध', properties:'मालमत्ता',
+    tab_all:'सर्व', tab_rent:'भाड्याने', tab_sale:'विक्रीसाठी', tab_saved:'❤️ जतन केलेले',
+    badge_rent:'भाड्याने', badge_sale:'विक्रीसाठी', badge_rented:'भाडे झाले', badge_sold:'विकले',
+    view_det:'तपशील पहा', wa_btn:'WhatsApp',
+    no_results:'कोणतीही मालमत्ता सापडली नाही',
+    no_saved:'अद्याप काहीही जतन केले नाही. कोणत्याही लिस्टिंगवर ❤️ दाबा.',
+    why_h:'का निवडावे', why_sub:'नाशिकमधील हजारो कुटुंबांचा विश्वास',
+    why1_h:'सत्यापित यादी', why1_p:'प्रत्येक मालमत्ता यादी करण्यापूर्वी तपासली जाते.',
+    why2_h:'त्वरित संपर्क', why2_p:'थेट WhatsApp — कोणताही मध्यस्थ नाही.',
+    why3_h:'सर्वोत्तम किंमती', why3_p:'नाशिकच्या सर्व भागात स्पर्धात्मक किंमती.',
+    why4_h:'सुरक्षित', why4_p:'तुमची गोपनीयता सुरक्षित. आम्ही कधीही डेटा शेअर करत नाही.',
+    contact_h:'संपर्क करा', contact_sub:'आम्ही लवकरात लवकर तुमच्याशी संपर्क साधू.',
+    contact_name:'तुमचे नाव', contact_phone:'फोन नंबर', contact_msg:'तुमचा संदेश...',
+    send_msg:'संदेश पाठवा', wa_us:'WhatsApp करा', wa_quick:'WhatsApp वर त्वरित प्रतिसाद', open_wa:'WhatsApp उघडा',
+    fill_fields:'कृपया सर्व फील्ड भरा.',
+    ab_badge:'स्थापना 2026 · नाशिक',
+    ab_h1:'NashikHomes बद्दल',
+    ab_tagline:'नाशिकचा सर्वात विश्वासू प्रॉपर्टी पोर्टल — लोकांना त्यांचे स्वप्नातील घर मिळवून देणे.',
+    ab_story_h:'आमची कहाणी',
+    ab_story_p1:'NashikHomes ची स्थापना 2026 मध्ये एका साध्या ध्येयाने झाली — नाशिकमध्ये घर शोधणे सोपे, जलद आणि पारदर्शक बनवणे.',
+    ab_story_p2:'म्हणून आम्ही NashikHomes बनवले — एक असे व्यासपीठ जिथे प्रत्येक यादी सत्यापित आहे, प्रत्येक संपर्क थेट आहे.',
+    ab_mission_h:'आमचे ध्येय',
+    ab_mission_p:'नाशिकचे #1 रिअल इस्टेट व्यासपीठ बनणे — मग तुम्हाला फ्लॅट भाड्याने हवा असो किंवा प्लॉट विकत घ्यायचा असो.',
+    ab_where_h:'आम्ही कुठे काम करतो',
+    ab_where_p:'आम्ही नाशिकच्या सर्व प्रमुख भागांना कव्हर करतो — नाशिक रोड, गंगापूर रोड, सातपूर, देवळाली, दिंडोरी रोड, पंचवटी, त्र्यंबक रोड, महामार्ग आणि बरेच काही.',
+    ab_why_h:'लोक आम्हाला का निवडतात',
+    ab_w1h:'सत्यापित यादी', ab_w1p:'प्रत्येक मालमत्ता यादी करण्यापूर्वी वैयक्तिकरित्या तपासली जाते.',
+    ab_w2h:'थेट WhatsApp', ab_w2p:'त्वरित जोडा — कोणताही मध्यस्थ नाही, कोणताही विलंब नाही.',
+    ab_w3h:'सर्व प्रकारच्या मालमत्ता', ab_w3p:'फ्लॅट, दुकान, प्लॉट, व्हिला, ऑफिस — सर्व एकाच ठिकाणी.',
+    ab_w4h:'विश्वासू आणि पारदर्शक', ab_w4p:'योग्य किंमत, खरे फोटो, genuine यादी.',
+    ab_w5h:'वापरण्यास सोपे', ab_w5p:'सोपी वेबसाइट, जलद शोध, त्वरित संपर्क.',
+    ab_w6h:'संपूर्ण नाशिक', ab_w6p:'नाशिकच्या प्रत्येक भागाला आणि परिसराला कव्हर करतो.',
+    ab_cta_h:'तुमची स्वप्नातील मालमत्ता शोधण्यास तयार आहात?',
+    ab_cta_p:'आजच आमची सत्यापित यादी पहा किंवा WhatsApp वर संपर्क करा.',
+    ab_cta_btn1:'मालमत्ता पहा', ab_cta_btn2:'💬 WhatsApp करा',
+    foot_txt:'प्रीमियम रिअल इस्टेट प्लॅटफॉर्म · नाशिक, महाराष्ट्र',
+    bnav_home:'मुख्यपृष्ठ', bnav_rent:'भाडे', bnav_buy:'खरेदी', bnav_saved:'जतन', bnav_contact:'संपर्क',
+  }
 };
-const t = k => (LANG[lang]&&LANG[lang][k]) ? LANG[lang][k] : (LANG.en[k]||k);
+
+const t = k => (LANG[lang]&&LANG[lang][k]!==undefined) ? LANG[lang][k] : (LANG.en[k]||k);
 window.t = t;
 
 function setLang(l){
   lang = l;
   localStorage.setItem('nh_lang', l);
-  document.querySelectorAll('.lang-b').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll(`.lang-b[onclick*="setLang('${l}')"]`).forEach(b=>b.classList.add('active'));
+  // Update all lang buttons (desktop + mobile)
+  document.querySelectorAll('.lang-b').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-b').forEach(b => {
+    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(`setLang('${l}')`))
+      b.classList.add('active');
+  });
   applyLang();
   renderListings();
 }
 
 function applyLang(){
-  const badge = document.querySelector('.hero-badge');
-  if(badge) badge.innerHTML = `<span class="hero-dot"></span>${t('hero_badge')}`;
-  const h1 = document.querySelector('.hero h1');
-  if(h1) h1.innerHTML = t('hero_h1');
-  const sub = document.querySelector('.hero-sub');
-  if(sub) sub.textContent = t('hero_sub');
-  const navHome = document.getElementById('nav-home');
-  if(navHome) navHome.textContent = t('nav_home');
-  const si = document.getElementById('search-input');
-  if(si) si.placeholder = t('search_ph');
-  const ss = document.getElementById('sticky-search');
-  if(ss) ss.placeholder = t('search_ph');
-  const ft = document.getElementById('filter-type');
+  // Helper to set text safely
+  const s = (id, text) => { const el=document.getElementById(id); if(el) el.textContent=text; };
+  const sh = (id, html) => { const el=document.getElementById(id); if(el) el.innerHTML=html; };
+  const sp = (id, val) => { const el=document.getElementById(id); if(el) el.placeholder=val; };
+
+  // ---- DESKTOP NAV ----
+  s('nav-home', t('nav_home'));
+  s('nav-rent', t('nav_rent'));
+  s('nav-sale', t('nav_sale'));
+  s('nav-about', t('nav_about'));
+  s('nav-contact', t('nav_contact'));
+  s('nav-signin-btn', t('signin'));
+
+  // ---- MOBILE NAV ----
+  s('mnav-home', t('mnav_home'));
+  s('mnav-rent', t('mnav_rent'));
+  s('mnav-sale', t('mnav_sale'));
+  s('mnav-about', t('mnav_about'));
+  s('mnav-contact', t('mnav_contact'));
+  s('mobile-signin-btn', t('signin'));
+
+  // ---- BOTTOM NAV ----
+  const bnavHome=document.getElementById('bnav-home');
+  const bnavRent=document.getElementById('bnav-rent');
+  const bnavSale=document.getElementById('bnav-sale');
+  const bnavSaved=document.getElementById('bnav-saved');
+  const bnavContact=document.getElementById('bnav-contact');
+  if(bnavHome) bnavHome.innerHTML=`<span class="bnav-icon">🏠</span>${t('bnav_home')}`;
+  if(bnavRent) bnavRent.innerHTML=`<span class="bnav-icon">🔑</span>${t('bnav_rent')}`;
+  if(bnavSale) bnavSale.innerHTML=`<span class="bnav-icon">🏢</span>${t('bnav_buy')}`;
+  if(bnavSaved) bnavSaved.innerHTML=`<span class="bnav-icon">❤️</span>${t('bnav_saved')}`;
+  if(bnavContact) bnavContact.innerHTML=`<span class="bnav-icon">📞</span>${t('bnav_contact')}`;
+
+  // ---- INTENT SCREEN ----
+  const intentBadge=document.querySelector('#intent-screen .intent-badge');
+  if(intentBadge) intentBadge.innerHTML=`<span class="hero-dot"></span>${t('intent_badge')}`;
+  const intentH1=document.querySelector('.intent-h1');
+  if(intentH1) intentH1.innerHTML=t('intent_h1');
+  const intentSub=document.querySelector('.intent-sub');
+  if(intentSub) intentSub.textContent=t('intent_sub');
+  const intentQ=document.querySelector('.intent-question');
+  if(intentQ) intentQ.textContent=t('intent_q');
+  // Intent cards
+  const intentCards=document.querySelectorAll('.intent-card');
+  if(intentCards[0]){
+    intentCards[0].querySelector('.intent-card-title').textContent=t('intent_rent_title');
+    intentCards[0].querySelector('.intent-card-sub').textContent=t('intent_rent_sub');
+  }
+  if(intentCards[1]){
+    intentCards[1].querySelector('.intent-card-title').textContent=t('intent_sale_title');
+    intentCards[1].querySelector('.intent-card-sub').textContent=t('intent_sale_sub');
+  }
+  const intentSkip=document.querySelector('.intent-skip');
+  if(intentSkip) intentSkip.textContent=t('intent_skip');
+  // USPs
+  const usps=document.querySelectorAll('.intent-usps span');
+  const uspKeys=['usp1','usp2','usp3','usp4'];
+  usps.forEach((el,i)=>{ if(uspKeys[i]) el.textContent=t(uspKeys[i]); });
+
+  // ---- HERO SECTION ----
+  const heroBadge=document.querySelector('.hero .hero-badge');
+  if(heroBadge) heroBadge.innerHTML=`<span class="hero-dot"></span>${t('hero_badge')}`;
+  const heroH1=document.querySelector('.hero h1');
+  if(heroH1) heroH1.innerHTML=t('hero_h1');
+  const heroSub=document.querySelector('.hero-sub');
+  if(heroSub) heroSub.textContent=t('hero_sub');
+
+  // ---- SEARCH INPUTS ----
+  sp('search-input', t('search_ph'));
+  sp('sticky-search', t('search_ph'));
+  const ft=document.getElementById('filter-type');
   if(ft){ ft.options[0].text=t('all_types'); ft.options[1].text=t('for_rent'); ft.options[2].text=t('for_sale'); }
-  const st = document.getElementById('sticky-type');
+  const st=document.getElementById('sticky-type');
   if(st){ st.options[0].text=t('all_types'); st.options[1].text=t('for_rent'); st.options[2].text=t('for_sale'); }
-  const fb = document.getElementById('filter-bhk');
+  const fb=document.getElementById('filter-bhk');
   if(fb) fb.options[0].text=t('any_bhk');
-  const sb = document.getElementById('sticky-bhk');
+  const sb=document.getElementById('sticky-bhk');
   if(sb) sb.options[0].text=t('any_bhk');
-  const ll = document.querySelector('.loc-label');
-  if(ll) ll.textContent = t('pop_areas');
-  const sh = document.querySelector('.sec-head h2');
-  if(sh) sh.innerHTML = `${t('avail')} <span>${t('properties')}</span>`;
-  const ta=document.getElementById('tab-all');
-  const tr=document.getElementById('tab-rent');
-  const ts=document.getElementById('tab-sale');
+  const srchBtn=document.querySelector('.srch-btn');
+  if(srchBtn) srchBtn.textContent=t('srch_btn');
+
+  // ---- LOCATION STRIP ----
+  const ll=document.querySelector('.loc-label');
+  if(ll) ll.textContent=t('pop_areas');
+
+  // ---- SECTION HEADING ----
+  const secH=document.querySelector('.sec-head h2');
+  if(secH) secH.innerHTML=`${t('avail')} <span>${t('properties')}</span>`;
+
+  // ---- TABS ----
   const cntAll=document.getElementById('cnt-all')?.textContent||'0';
   const cntRent=document.getElementById('cnt-rent')?.textContent||'0';
   const cntSale=document.getElementById('cnt-sale')?.textContent||'0';
-  if(ta) ta.innerHTML=`${t('tab_all')} <span class="cnt" id="cnt-all">${cntAll}</span>`;
-  if(tr) tr.innerHTML=`${t('tab_rent')} <span class="cnt" id="cnt-rent">${cntRent}</span>`;
-  if(ts) ts.innerHTML=`${t('tab_sale')} <span class="cnt" id="cnt-sale">${cntSale}</span>`;
+  const cntSaved=document.getElementById('cnt-saved')?.textContent||'0';
+  const tabAll=document.getElementById('tab-all');
+  const tabRent=document.getElementById('tab-rent');
+  const tabSale=document.getElementById('tab-sale');
+  const tabSaved=document.getElementById('tab-saved');
+  if(tabAll) tabAll.innerHTML=`${t('tab_all')} <span class="cnt" id="cnt-all">${cntAll}</span>`;
+  if(tabRent) tabRent.innerHTML=`${t('tab_rent')} <span class="cnt" id="cnt-rent">${cntRent}</span>`;
+  if(tabSale) tabSale.innerHTML=`${t('tab_sale')} <span class="cnt" id="cnt-sale">${cntSale}</span>`;
+  if(tabSaved) tabSaved.innerHTML=`${t('tab_saved')} <span class="cnt" id="cnt-saved">${cntSaved}</span>`;
+
+  // ---- WHY SECTION ----
   const wh=document.querySelector('.why-hd h2');
   if(wh) wh.innerHTML=`${t('why_h')} <em>NashikHomes?</em>`;
   const wp=document.querySelector('.why-hd p');
   if(wp) wp.textContent=t('why_sub');
   const whyCards=document.querySelectorAll('.why-card');
   const whyData=[['why1_h','why1_p'],['why2_h','why2_p'],['why3_h','why3_p'],['why4_h','why4_p']];
-  whyCards.forEach((c,i)=>{const h=c.querySelector('h3'),p=c.querySelector('p');if(h&&whyData[i])h.textContent=t(whyData[i][0]);if(p&&whyData[i])p.textContent=t(whyData[i][1]);});
-  const ft2=document.querySelector('.foot-txt'); if(ft2) ft2.textContent=t('foot_txt');
-  const sib=document.getElementById('nav-signin-btn'); if(sib) sib.textContent=t('signin');
-  const msib=document.getElementById('mobile-signin-btn'); if(msib) msib.textContent=t('signin');
+  whyCards.forEach((c,i)=>{
+    const h=c.querySelector('h3'), p=c.querySelector('p');
+    if(h&&whyData[i]) h.textContent=t(whyData[i][0]);
+    if(p&&whyData[i]) p.textContent=t(whyData[i][1]);
+  });
+
+  // ---- CONTACT PAGE ----
+  const contH=document.querySelector('#page-contact h2');
+  if(contH) contH.textContent=t('contact_h');
+  const contSub=document.querySelector('#page-contact > p');
+  if(contSub) contSub.textContent=t('contact_sub');
+  sp('c-name', t('contact_name'));
+  sp('c-phone', t('contact_phone'));
+  sp('c-msg', t('contact_msg'));
+  const sendBtn=document.querySelector('#page-contact .srch-btn');
+  if(sendBtn) sendBtn.textContent=t('send_msg');
+  // WA card inside contact
+  const waTitle=document.querySelector('#page-contact .wa-title');
+  const waSub=document.querySelector('#page-contact .wa-sub');
+  const waBtn=document.querySelector('#page-contact .btn-wa');
+  if(waTitle) waTitle.textContent=t('wa_us');
+  if(waSub) waSub.textContent=t('wa_quick');
+  if(waBtn) waBtn.textContent=t('open_wa');
+
+  // ---- ABOUT PAGE ----
+  const abIds  =['ab-tagline','ab-story-h','ab-story-p1','ab-story-p2','ab-mission-h','ab-mission-p','ab-where-h','ab-where-p','ab-why-h','ab-w1h','ab-w1p','ab-w2h','ab-w2p','ab-w3h','ab-w3p','ab-w4h','ab-w4p','ab-w5h','ab-w5p','ab-w6h','ab-w6p','ab-cta-h','ab-cta-p','ab-cta-btn1','ab-cta-btn2'];
+  const abKeys =['ab_tagline','ab_story_h','ab_story_p1','ab_story_p2','ab_mission_h','ab_mission_p','ab_where_h','ab_where_p','ab_why_h','ab_w1h','ab_w1p','ab_w2h','ab_w2p','ab_w3h','ab_w3p','ab_w4h','ab_w4p','ab_w5h','ab_w5p','ab_w6h','ab_w6p','ab_cta_h','ab_cta_p','ab_cta_btn1','ab_cta_btn2'];
+  abIds.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=t(abKeys[i]); });
+  const abBadge=document.querySelector('#page-about .hero-badge');
+  if(abBadge) abBadge.innerHTML=`<span class="hero-dot"></span>${t('ab_badge')}`;
+  const abH1=document.querySelector('.about-h1');
+  if(abH1) abH1.innerHTML=`About <span>NashikHomes</span>`;
+
+  // ---- FOOTER ----
+  const ft2=document.querySelector('.foot-txt');
+  if(ft2) ft2.textContent=t('foot_txt');
 }
 
 window.selectIntent=selectIntent; window.renderListings=renderListings; window.showToast=showToast;
